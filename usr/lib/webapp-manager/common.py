@@ -283,6 +283,7 @@ class WebAppManager:
             desktop_file.write("Terminal=false\n")
             desktop_file.write("X-MultipleArgs=false\n")
             desktop_file.write("Type=Application\n")
+            desktop_file.write("NoDisplay=false\n")
             desktop_file.write("Icon=%s\n" % icon)
             desktop_file.write("Categories=GTK;%s;\n" % category)
             desktop_file.write("MimeType=text/html;text/xml;application/xhtml_xml;\n")
