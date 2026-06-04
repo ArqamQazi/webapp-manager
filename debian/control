@@ -15,6 +15,8 @@ Depends: gir1.2-xapp-1.0 (>= 1.4),
          python3-pil,
          python3-setproctitle,
          python3-tldextract,
+         python3-gi-cairo,
+         xapp-symbolic-icons,
          xapps-common,
          ${misc:Depends},
 Description: Web Application Manager
