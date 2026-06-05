@@ -448,7 +448,7 @@ class WebAppManager:
         config.set("Desktop Entry", "Name", name)
         config.set("Desktop Entry", "Icon", icon)
         config.set("Desktop Entry", "Comment", desc)
-        config.set("Desktop Entry", "Categories", "GTK;%s;" % category)
+        config.set("Desktop Entry", "Categories", "GTK;WebApps;%s;" % category)
 
         try:
             # This will raise an exception on legacy apps which
