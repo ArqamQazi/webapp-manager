@@ -64,6 +64,40 @@ ZEN_FLATPAK_PROFILES_DIR = os.path.expanduser("~/.var/app/app.zen_browser.zen/da
 ICONS_DIR = os.path.join(ICE_DIR, "icons")
 BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_LIBREWOLF_FLATPAK, BROWSER_TYPE_WATERFOX_FLATPAK, BROWSER_TYPE_FLOORP_FLATPAK, BROWSER_TYPE_CHROMIUM, BROWSER_TYPE_EPIPHANY, BROWSER_TYPE_FALKON, BROWSER_TYPE_ZEN_FLATPAK = range(10)
 
+def get_chromium_class(url, codename=None, mode="codename"):
+    """
+    Generate the correct StartupWMClass for Chromium.
+    Modes:
+        'wayland':  chrome-{domain}__{path}-{profile}
+        'x11':      {domain}__{path} (without trailing underscores)
+        'codename': WebApp-{codename}
+    """
+    if mode == "codename":
+        if not codename:
+            raise ValueError("codename must be provided when mode is 'codename'")
+        return f"WebApp-{codename}"
+
+    parsed = urllib.parse.urlparse(url)
+    domain = parsed.netloc
+    if ':' in domain:
+        domain = domain.split(':')[0]
+
+    path = parsed.path
+    if path.startswith('/'):
+        path = path[1:]
+    
+    path = path.replace('/', '_')
+
+    if mode == "x11":
+        if path:
+            if path.endswith('_'):
+                path = path[:-1]
+            return f"{domain}__{path}"
+        else:
+            return domain
+
+    return f"chrome-{domain}__{path}-Default"
+
 class Browser:
 
     def __init__(self, browser_type, name, exec_path, test_path):
@@ -165,6 +199,8 @@ class WebAppManager:
         webapps = []
         for filename in os.listdir(APPS_DIR):
             if filename.lower().startswith("webapp-") and filename.endswith(".desktop"):
+                if filename.endswith("-x11.desktop") or filename.endswith("-wayland.desktop"):
+                    continue
                 path = os.path.join(APPS_DIR, filename)
                 codename = filename.replace("webapp-", "").replace("WebApp-", "").replace(".desktop", "")
                 if not os.path.isdir(path):
@@ -252,6 +288,11 @@ class WebAppManager:
         # first remove symlinks then others
         if os.path.exists(webapp.path):
             os.remove(webapp.path)
+        base_path = webapp.path.replace(".desktop", "")
+        for mode in ["x11", "wayland"]:
+            hidden_path = f"{base_path}-{mode}.desktop"
+            if os.path.exists(hidden_path):
+                os.remove(hidden_path)
         epiphany_orig_prof_dir=os.path.join(os.path.expanduser("~/.local/share"), "org.gnome.Epiphany.WebApp-" + webapp.codename)
         if os.path.exists(epiphany_orig_prof_dir):
             os.remove(epiphany_orig_prof_dir)
@@ -261,14 +302,14 @@ class WebAppManager:
             os.remove(falkon_orig_prof_dir)
         shutil.rmtree(os.path.join(FALKON_PROFILES_DIR, webapp.codename), ignore_errors=True)
 
-    def create_webapp(self, name, desc, url, icon, category, browser, custom_parameters, isolate_profile=True, navbar=False, privatewindow=False):
-        # Generate a 4 digit random code (to prevent name collisions, so we can define multiple launchers with the same name)
-        random_code =  ''.join(choice(string.digits) for _ in range(4))
-        codename = "".join(filter(str.isalpha, name)) + random_code
+    def create_webapp(self, name, desc, url, icon, category, browser, custom_parameters, codename, isolate_profile=True, navbar=False, privatewindow=False, wm_mode="codename"):
         path = os.path.join(APPS_DIR, "WebApp-%s.desktop" % codename)
 
         if not desc:
             desc = _("Web App")
+
+        if wm_mode != "codename":
+            path = os.path.join(APPS_DIR, "WebApp-%s-%s.desktop" % (codename, wm_mode))
 
         with open(path, 'w') as desktop_file:
             desktop_file.write("[Desktop Entry]\n")
@@ -284,10 +325,17 @@ class WebAppManager:
             desktop_file.write("X-MultipleArgs=false\n")
             desktop_file.write("Type=Application\n")
             desktop_file.write("Icon=%s\n" % icon)
-            desktop_file.write("NoDisplay=false\n")
             desktop_file.write("Categories=GTK;WebApps;%s;\n" % category)
             desktop_file.write("MimeType=text/html;text/xml;application/xhtml_xml;\n")
-            desktop_file.write("StartupWMClass=WebApp-%s\n" % codename)
+            no_display = "false" if wm_mode == "codename" else "true"
+            desktop_file.write("NoDisplay=%s\n" % no_display)
+
+            if browser.browser_type == BROWSER_TYPE_CHROMIUM:
+                wm_class = get_chromium_class(url=url, codename=codename, mode=wm_mode)
+            else:
+                wm_class = "WebApp-%s" % codename
+
+            desktop_file.write("StartupWMClass=%s\n" % wm_class)
             desktop_file.write("StartupNotify=true\n")
             desktop_file.write("X-WebApp-Browser=%s\n" % browser.name)
             desktop_file.write("X-WebApp-URL=%s\n" % url)
@@ -410,6 +458,8 @@ class WebAppManager:
             exec_string += " --no-remote " + url
         else:
             # Chromium based
+            # TODO: only use --class if it is x11 (if chrome is launch after unisolated chrome webapp then chrome will be affected by --class variable on wayland)
+            # As for X11, WM_CLASS has two parts so the same problem won't occur
             if isolate_profile:
                 profile_path = os.path.join(PROFILES_DIR, codename)
                 exec_string = (browser.exec_path +
@@ -438,7 +488,7 @@ class WebAppManager:
 
         return exec_string
 
-    def edit_webapp(self, path, name, desc, browser, url, icon, category, custom_parameters, codename, isolate_profile, navbar, privatewindow):
+    def edit_webapp(self, path, name, desc, browser, url, icon, category, custom_parameters, codename, isolate_profile, navbar, privatewindow, wm_mode="codename"):
         if not desc:
             desc = _("Web App")
 
@@ -449,6 +499,9 @@ class WebAppManager:
         config.set("Desktop Entry", "Icon", icon)
         config.set("Desktop Entry", "Comment", desc)
         config.set("Desktop Entry", "Categories", "GTK;WebApps;%s;" % category)
+        no_display = "false" if wm_mode == "codename" else "true"
+        config.set("Desktop Entry", "NoDisplay", no_display)
+ 
 
         try:
             # This will raise an exception on legacy apps which
@@ -463,6 +516,13 @@ class WebAppManager:
             config.set("Desktop Entry", "X-WebApp-Isolated", bool_to_string(isolate_profile))
             config.set("Desktop Entry", "X-WebApp-Navbar", bool_to_string(navbar))
             config.set("Desktop Entry", "X-WebApp-PrivateWindow", bool_to_string(privatewindow))
+
+            if browser.browser_type == BROWSER_TYPE_CHROMIUM:
+                wm_class = get_chromium_class(url=url, codename=codename, mode=wm_mode)
+            else:
+                wm_class = "WebApp-%s" % codename
+
+            config.set("Desktop Entry", "StartupWMClass", wm_class)
 
         except:
             print("This WebApp was created with an old version of WebApp Manager. Its URL cannot be edited.")

@@ -313,12 +313,32 @@ class WebAppManagerWindow:
             new_path = os.path.join(ICONS_DIR, filename)
             shutil.copyfile(icon, new_path)
             icon = new_path
+
+        modes = ["codename", "x11", "wayland"]
+
         if self.edit_mode:
-            self.manager.edit_webapp(self.selected_webapp.path, name, desc, browser, url, icon, category, custom_parameters, self.selected_webapp.codename, isolate_profile, navbar, privatewindow)
+            self.manager.edit_webapp(self.selected_webapp.path, name, desc, browser, url, icon, category, custom_parameters, self.selected_webapp.codename, isolate_profile, navbar, privatewindow, wm_mode="codename")
+            base_path = self.selected_webapp.path.replace(".desktop", "")
+            
+            for hidden_mode in ["x11", "wayland"]:
+                target_path = f"{base_path}-{hidden_mode}.desktop"
+                
+                # Edit them if they exist, create them if they don't (for backwards compatibility)
+                if os.path.exists(target_path):
+                    self.manager.edit_webapp(target_path, name, desc, browser, url, icon, category, custom_parameters, self.selected_webapp.codename, isolate_profile, navbar, privatewindow, wm_mode=hidden_mode)
+                else:
+                    self.manager.create_webapp(name, desc, url, icon, category, browser, custom_parameters, codename=self.selected_webapp.codename, isolate_profile=isolate_profile, navbar=navbar, privatewindow=privatewindow, wm_mode=hidden_mode)
+
             self.load_webapps()
         else:
-            self.manager.create_webapp(name, desc, url, icon, category, browser, custom_parameters, isolate_profile, navbar,
-                                       privatewindow)
+            import string
+            from random import choice
+            random_code = ''.join(choice(string.digits) for _ in range(4))
+            base_codename = "".join(filter(str.isalpha, name)) + random_code
+            
+            for mode in modes:
+                self.manager.create_webapp(name, desc, url, icon, category, browser, custom_parameters, codename=base_codename, isolate_profile=isolate_profile, navbar=navbar, privatewindow=privatewindow, wm_mode=mode)
+           
             self.load_webapps()
 
     def on_add_button(self, widget):
