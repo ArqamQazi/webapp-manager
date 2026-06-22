@@ -1,0 +1,1623 @@
+Package: bulky
+Version: 2.10
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 452
+Depends: python3, python3-gi, python3-setproctitle, python3-magic, dconf-gsettings-backend | gsettings-backend
+Priority: optional
+Section: misc
+Filename: pool/main/b/bulky/bulky_2.10_all.deb
+Size: 47920
+SHA256: cfd5d020fbfacfb8f298d9e84966b7a11fd4e4ca59413751b2e50f8de3585eb3
+SHA1: e2e0724238aa35493c6d5d72d3d6a049f8d5317c
+MD5sum: e90cf0fe1f2e97866fbe3014f5200f00
+Description: Bulk Renamer
+ Utility application used to rename multiple files.
+
+Package: cinnamon-core
+Source: mint-meta
+Version: 2023.08.28+mint21.2
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 11
+Depends: cinnamon, cinnamon-control-center, cinnamon-screensaver, cinnamon-session, cinnamon-settings-daemon, nemo, cinnamon-l10n
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-meta/cinnamon-core_2023.08.28+mint21.2_all.deb
+Size: 5528
+SHA256: fc7ec72c87ebf1c56a8421f6e661d894a981b27ecbb615cd9f0e6f915d6711c6
+SHA1: 0f37eb36d3cc5150e907ca2a34bb4815ebc05d90
+MD5sum: f2d1472bd2eed44ec21662e576a1917e
+Description: Cinnamon desktop environment - essential components
+ These are the core components of Cinnamon, a desktop environment which
+ provides advanced innovative features and a traditional user experience.
+ .
+ This metapackage depends on basic components needed to use the desktop
+ environment. Install this if you want a minimal cinnamon desktop.
+
+Package: cinnamon-desktop-environment
+Source: mint-meta
+Version: 2023.08.28+mint21.2
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 11
+Depends: mint-meta-cinnamon, cinnamon-core, gnome-calculator, gnome-screenshot, gnome-terminal
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-meta/cinnamon-desktop-environment_2023.08.28+mint21.2_all.deb
+Size: 5608
+SHA256: e10e3d021fb8396cfa3fdafb1772679a199a0635865b95a66b8e27aa0541c991
+SHA1: 84323eca98bf9f124cccd8824f87bb50062e0fa4
+MD5sum: b70e197014083a85578e992206ae76bf
+Description: Cinnamon desktop environment - full desktop with extra components
+ These are the extended components of Cinnamon, a desktop environment which
+ provides advanced innovative features and a traditional user experience.
+ .
+ This metapackage depends on all programs needed to have a fully fledged
+ desktop environment. Install this if you want a complete cinnamon desktop,
+ including graphical apps that allow users to perform almost all everyday tasks.
+
+Package: circle-flags-svg
+Source: circle-flags
+Version: 2.7.0
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 730
+Priority: optional
+Section: universe/misc
+Filename: pool/main/c/circle-flags/circle-flags-svg_2.7.0_all.deb
+Size: 74832
+SHA256: 69eb7cd284ab229b004a36a01404ff9dd4536c30fa4207f453eeebaa545bfade
+SHA1: 049a185cc5d40de1708c8a0f41647b4f016ca64c
+MD5sum: 6aaf7ea891b276d36819d159435fc233
+Description: Circle flags in SVG format
+ A collection of circular flags in SVG format.
+
+Package: folder-color-switcher
+Version: 1.5.9
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 435
+Breaks: caja-folder-color-switcher, nemo-folder-color-switcher
+Replaces: caja-folder-color-switcher, nemo-folder-color-switcher
+Priority: extra
+Section: utils
+Filename: pool/main/f/folder-color-switcher/folder-color-switcher_1.5.9_all.deb
+Size: 36688
+SHA256: 985f43b1b7c51e23f1056b49582e807922b7afa3a456ed4912220259ff28d918
+SHA1: 640b6a88567d004b92d3a1e02c842d13064c678b
+MD5sum: 0382509ef1f71f6bc1767de917ab838f
+Description: Change a folder color
+ Change folder colors
+
+Package: grub2-theme-mint
+Version: 1.2.2
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 324
+Priority: optional
+Section: misc
+Filename: pool/main/g/grub2-theme-mint/grub2-theme-mint_1.2.2_all.deb
+Size: 246464
+SHA256: 81308635f77c3a439fe92bb257488614cd5d4029dc13ff4cc77d5889ca13f89f
+SHA1: b853f727894d5a49ffc4da51082fecd6b8924024
+MD5sum: 5bfe99e2001fde67be5f5ae96cb43d2e
+Description: Grub2 theme for Linux Mint
+ Grub2 theme for Linux Mint
+
+Package: grub2-theme-mint-2k
+Source: grub2-theme-mint
+Version: 1.2.2
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 381
+Priority: optional
+Section: misc
+Filename: pool/main/g/grub2-theme-mint/grub2-theme-mint-2k_1.2.2_all.deb
+Size: 277736
+SHA256: 6ae74717ef96aa92ef8f3a4c903e8f18c9367f9c22f32db22b23a5ffca432572
+SHA1: 0843b56a5d8a69ef240266c6f78f1ce86df2fc77
+MD5sum: e0bcfa30d2e024c9c02427a43e71aa06
+Description: Grub2 theme for Linux Mint
+ Grub2 theme for Linux Mint for 2k displays
+
+Package: hypnotix
+Version: 3.5
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 981
+Depends: gir1.2-xapp-1.0 (>= 2.6.0), python3, python3-gi, python3-requests, python3-setproctitle, python3-unidecode, xapps-common, dconf-gsettings-backend | gsettings-backend, libmpv1, python3-imdbpy, python3-gi-cairo
+Recommends: youtube-dl
+Priority: optional
+Section: video
+Filename: pool/main/h/hypnotix/hypnotix_3.5_all.deb
+Size: 134388
+SHA256: 858a059f643192acee697b6121336a0b3b56d3500865025cf59b867f5a43401f
+SHA1: e2b521bf7db8fe558ea6bac022175d5e9f47ddfc
+MD5sum: f9725a470be140d905017ac29119c24d
+Description: IPTV Player
+ Watch TV by streaming from M3U sources.
+
+Package: ia32-libs
+Version: 2020.05.27
+Architecture: amd64
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 8
+Depends: gtk2-engines-murrine:i386, gtk2-engines-oxygen:i386, gtk2-engines-pixbuf:i386, gtk2-engines:i386, gvfs:i386, ibus-gtk:i386, libacl1:i386, libaio1:i386, libao4:i386, libasound2-plugins:i386, libasound2:i386, libasyncns0:i386, libattr1:i386, libaudio2:i386, libcanberra-gtk-module:i386, libcap2:i386, libcapi20-3:i386, libcups2:i386, libcupsimage2:i386, libdbus-glib-1-2:i386, libfontconfig1:i386, libfreetype6:i386, libgail-common:i386, libgettextpo0:i386, libgl1-mesa-dri:i386, libgl1-mesa-glx:i386, libglapi-mesa:i386, libglu1-mesa:i386, libgphoto2-6:i386, libgphoto2-port10:i386 | libgphoto2-port12:i386, libgtk2.0-0:i386, libmpg123-0:i386, libncursesw5:i386, libnspr4:i386, libnss3:i386, libodbc1:i386, libopenal1:i386, libpulse-mainloop-glib0:i386, libpulsedsp:i386, librsvg2-common:i386, libsane:i386, libsdl-image1.2:i386, libsdl-mixer1.2:i386, libsdl-net1.2:i386, libsdl-ttf2.0-0:i386, libsdl1.2debian:i386, libsqlite3-0:i386, libstdc++5:i386, libstdc++6:i386, libxaw7:i386, libxml2:i386, libxslt1.1:i386, libxss1:i386, libxtst6:i386, odbcinst1debian2:i386, xaw3dg:i386
+Provides: ia32-libs-gtk, ia32-libs-multiarch, ia32-libs-sdl, lib32asound2, lib32v4l-0
+Priority: optional
+Section: admin
+Filename: pool/main/i/ia32-libs/ia32-libs_2020.05.27_amd64.deb
+Size: 2128
+SHA256: be8a5ea531540d1ba672d7359ababa3d03a9470dba631781912aac318f946055
+SHA1: d04c28ab9e75f1d5ff9b160665798a3adac4260b
+MD5sum: b658c11dc3d6f9b2bddb955b8f0a0bed
+Description:
+ Meta-package which depends on all common 32bit libs
+
+Package: iso-flag-png
+Source: flags
+Version: 1.0.3
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 5532
+Priority: optional
+Section: universe/misc
+Filename: pool/main/f/flags/iso-flag-png_1.0.3_all.deb
+Size: 5286848
+SHA256: 6afae84248e7cf175324cf0ca5ccfe406e3edd14a6b0c2c9243493c2d99b6acb
+SHA1: f7f1a8b0a54d83d95000220a6caad7a9e87c3212
+MD5sum: 718a020d474562daf5bbb6678e2a016b
+Description: ISO country flags in PNG format
+ A 4x3 flag collection in PNG format.
+
+Package: lightdm-settings
+Version: 1.8.2
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 696
+Depends: python3-setproctitle, lsb-release, python3, python3-xapp
+Priority: optional
+Section: gnome
+Filename: pool/main/l/lightdm-settings/lightdm-settings_1.8.2_all.deb
+Size: 101768
+SHA256: ef530287e9f2580b1f79994f404c5465f3e82af358780c89d9ba91a05005d1fa
+SHA1: 2c048be03cb81bb2796eb1641bee7d5dc2fc83a2
+MD5sum: 7d645b6b449129bdc015e99f2073152e
+Description: LightDM configuration tool
+ A configuration tool for the LightDM display manager.
+
+Package: linuxmint-keyring
+Version: 2022.06.21
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 21
+Depends: gnupg (>= 1.0.6-4)
+Priority: important
+Section: misc
+Filename: pool/main/l/linuxmint-keyring/linuxmint-keyring_2022.06.21_all.deb
+Size: 6904
+SHA256: b71be690c543112ea7b65f43e9bbce9a3f17dd5cc784074858f0824154942a99
+SHA1: f7aae9dd29af337462c33e191b4247d08d2a4a28
+MD5sum: 7c03f7877f8907d27dc2f2ae45499de2
+Description: GnuPG key of the Linux Mint repository
+ The Linux Mint repository digitally signs its Release files. This package
+ contains the repository keys used for that.
+
+Package: mate-desktop-environment
+Source: mint-meta
+Version: 2023.08.28+mint21.2
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 11
+Depends: mint-meta-mate, mate-desktop-environment-core
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-meta/mate-desktop-environment_2023.08.28+mint21.2_all.deb
+Size: 5672
+SHA256: 9178f0b33c43d3e79c2e4d49f216b0f2b96ebcfc80fd6d46de220cfd658d550c
+SHA1: e3c36975bb9bccafa259d65a16cf91e68966ccac
+MD5sum: eefe9e44f0b2ba1526cc5c75a157233f
+Description: MATE desktop environment - full desktop with extra components
+ The MATE Desktop Environment is the continuation of GNOME 2. It provides an
+ intuitive and attractive desktop environment using traditional metaphors for
+ Linux and other Unix-like operating systems.
+ .
+ MATE is under active development to add support for new technologies while
+ preserving a traditional desktop experience.
+ .
+ This package installs the standard set of applications that are
+ part of the official MATE release.
+ .
+ It also suggests a few non-MATE standard desktop applications like an
+ internet browser, a mail reader and a network management applet.
+
+Package: mate-desktop-environment-core
+Source: mint-meta
+Version: 2023.08.28+mint21.2
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 11
+Depends: caja, marco, mate-control-center, mate-desktop, mate-icon-theme, mate-menus, mate-notification-daemon, mate-panel, mate-polkit, mate-session-manager, mate-settings-daemon, mate-terminal
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-meta/mate-desktop-environment-core_2023.08.28+mint21.2_all.deb
+Size: 5768
+SHA256: 2880b784cbcf7e3e9d611d44c54a46ae447a7b182018170d8f254559dd99d5e0
+SHA1: 00c528b7e28e10ae41568bdd2f0f12cebae07f25
+MD5sum: a51f47b3fe8ab70dc21bfefa8023a861
+Description: MATE Desktop Environment (essential components, metapackage)
+ The MATE Desktop Environment is the continuation of GNOME 2. It provides an
+ intuitive and attractive desktop environment using traditional metaphors for
+ Linux and other Unix-like operating systems.
+ .
+ MATE is under active development to add support for new technologies while
+ preserving a traditional desktop experience.
+ .
+ This package depends on a very basic set of programs that are necessary to
+ start a MATE desktop environment session. The set of programs includes the
+ MATE window manager (Marco), the MATE file manager (Caja), the MATE
+ control center and a limited set of other obligatory MATE desktop components.
+
+Package: mint-artwork
+Version: 1.7.5
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 14727
+Depends: mint-backgrounds-victoria, mint-themes | mint-themes-legacy, mint-x-icons, mint-y-icons, mint-cursor-themes
+Conflicts: ldm-mint-theme, mint-artwork-cinnamon, mint-artwork-common, mint-artwork-debian, mint-artwork-debian-cinnamon, mint-artwork-debian-mate, mint-artwork-gnome, mint-artwork-mate, mint-artwork-xfce, mint-backgrounds-xfce
+Replaces: ldm-mint-theme, mint-artwork-cinnamon, mint-artwork-common, mint-artwork-debian, mint-artwork-debian-cinnamon, mint-artwork-debian-mate, mint-artwork-gnome, mint-artwork-mate, mint-artwork-xfce, mint-backgrounds-xfce
+Provides: mint-mate-default-settings
+Priority: optional
+Section: gnome
+Filename: pool/main/m/mint-artwork/mint-artwork_1.7.5_all.deb
+Size: 12572996
+SHA256: 7521525c127017cb7fd9e81ed610c558d551ad1a589419ba43a94b3cff7afd6f
+SHA1: 542c187528c4bfcaccc5d4f8895bff7cdceb8d02
+MD5sum: 0c7fee742a4520ec078782302de70332
+Description: Linux Mint Artwork and Resources
+ Linux Mint Artwork and Resources.
+
+Package: mint-backgrounds-maya
+Version: 1.5
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 16874
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-maya/mint-backgrounds-maya_1.5_all.deb
+Size: 16022844
+SHA256: c473f50f23e347864992ad7eab6a3d667cc4a1a78d7f6c3a8bb6324eb4babdc2
+SHA1: 7e7ecf70155ede41f62d0d652f91e2450af17d03
+MD5sum: da136aec3956c8fb98c4f9e3cb0ab6e0
+Description: The desktop backgrounds for Linux Mint 13 Maya
+ This package contains quality desktop backgrounds for Linux Mint 13 Maya.
+
+Package: mint-backgrounds-nadia
+Version: 1.4
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 16462
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-nadia/mint-backgrounds-nadia_1.4_all.deb
+Size: 16430996
+SHA256: 4f84deb81f03bf3fd7e3593c8888f79e8cf5e2f61e30cd374a35f7334078bd28
+SHA1: cea259fe7fbb529f2368d418fefb3a276d8f726f
+MD5sum: bfb79846efb4eb8f967652c23af068fb
+Description: The desktop backgrounds for Linux Mint 14 Nadia
+ This package contains quality desktop backgrounds for Linux Mint 14 Nadia.
+
+Package: mint-backgrounds-olivia
+Version: 1.7
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 13864
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-olivia/mint-backgrounds-olivia_1.7_all.deb
+Size: 13801042
+SHA256: ecc3f900b34bd5a527bb590a2fef38ad93fce2ab3c449d4b75b954131589013d
+SHA1: ec0b0144a2614f8e9470dc02d362a157528320a8
+MD5sum: 73ac3283f9fec6a1e63a26f9899da591
+Description: The desktop backgrounds for Linux Mint 15 Olivia
+ This package contains quality desktop backgrounds for Linux Mint 15 Olivia.
+
+Package: mint-backgrounds-petra
+Version: 1.7
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 16112
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-petra/mint-backgrounds-petra_1.7_all.deb
+Size: 16030058
+SHA256: 8036ca4abde264057e5a362fa0e06268d4d81e303a6f2d413622faf7e8632d2d
+SHA1: 1ce5f57d6b081a04eaae95a800749cf0ccea5546
+MD5sum: 451e668ca985865cb657f3586496d56b
+Description: The desktop backgrounds for Linux Mint 16 Petra
+ This package contains quality desktop backgrounds for Linux Mint 16 Petra.
+
+Package: mint-backgrounds-qiana
+Version: 1.5
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 24535
+Breaks: mint-backgrounds-xfce (<= 2014.06.21)
+Replaces: mint-backgrounds-xfce (<= 2014.06.21)
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-qiana/mint-backgrounds-qiana_1.5_all.deb
+Size: 24229754
+SHA256: 019d76e4e5dbe475d725c6ae419925effc0f80a069c4fbaa3f38f04d82c7edc5
+SHA1: 132bcf0f5e05f50d07199a5fd06f66b3909b0805
+MD5sum: 4df22c09d36a9bf4c890fcf9d868ce79
+Description: The desktop backgrounds for Linux Mint 17 Qiana
+ This package contains quality desktop backgrounds for Linux Mint 17 Qiana.
+
+Package: mint-backgrounds-rafaela
+Version: 1.2
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 25994
+Breaks: mint-artwork-kde (= 2.0.11)
+Replaces: mint-artwork-kde (= 2.0.11)
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-rafaela/mint-backgrounds-rafaela_1.2_all.deb
+Size: 25898666
+SHA256: b1b15ab904972ed3d4516987ed6aa22536965f418696f0e6be214b755f82d398
+SHA1: 0896ecfa95f4517b151c88a2fa79041ab9ff96ba
+MD5sum: 767fe49f08c55e755bcc5299a2b85a85
+Description: The desktop backgrounds for Linux Mint 17.2 Rafaela
+ This package contains quality desktop backgrounds for Linux Mint 17.2 Rafaela.
+
+Package: mint-backgrounds-rebecca
+Version: 1.5
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 28026
+Breaks: mint-artwork-kde (= 2.0.11)
+Replaces: mint-artwork-kde (= 2.0.11)
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-rebecca/mint-backgrounds-rebecca_1.5_all.deb
+Size: 27492156
+SHA256: 516f8965d62524d4d4b2f45961dbdbca5925cd96c157b7e6778f0198baa52ec3
+SHA1: 22b01e7cf8acbadb42c674451ec246a993ba778d
+MD5sum: 14affcbb1ab1b8bfd6a422086ffe896e
+Description: The desktop backgrounds for Linux Mint 17.1 Rebecca
+ This package contains quality desktop backgrounds for Linux Mint 17.1 Rebecca.
+
+Package: mint-backgrounds-retro
+Version: 1.3
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 21631
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-retro/mint-backgrounds-retro_1.3_all.deb
+Size: 21008556
+SHA256: 091f25950a8ad6e8ca9fc9b652e03295b5791cff3e3f3c24436c2e3a798da53f
+SHA1: 40c4dc7301f9303e39f917856d3f3c4ffd41d86a
+MD5sum: 99d2877698183355d4c9040cec9b8761
+Description: Backgrounds from early versions of Linux Mint
+ This package contains desktop backgrounds from earlier releases of Linux Mint.
+
+Package: mint-backgrounds-rosa
+Version: 1.2
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 29029
+Breaks: mint-artwork-kde (= 2.0.11)
+Replaces: mint-artwork-kde (= 2.0.11)
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-rosa/mint-backgrounds-rosa_1.2_all.deb
+Size: 28567292
+SHA256: b9c4321c774dbcb8fae59fa755292383f6fc3f1aa25a7cfb646330933092bf49
+SHA1: 00964184a0efb40a004d8a49b36dedb2948dc7ae
+MD5sum: 011409d7d218f8c9dc5d3eabd6c9df36
+Description: The desktop backgrounds for Linux Mint 17.3 Rosa
+ This package contains quality desktop backgrounds for Linux Mint 17.3 Rosa.
+
+Package: mint-backgrounds-sarah
+Version: 1.1
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 31162
+Breaks: mint-artwork-kde (= 2.0.11)
+Replaces: mint-artwork-kde (= 2.0.11)
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-sarah/mint-backgrounds-sarah_1.1_all.deb
+Size: 30842792
+SHA256: 5f9d3991aa1ce22b2c47286d536ef6d67d5df577cc3f092dd4d87f6a5176097c
+SHA1: 612237833e5d546d50092146e6f42fe69af0a465
+MD5sum: 877cfcccee6739a398a0392c72e2b144
+Description: The desktop backgrounds for Linux Mint 18 Sarah
+ This package contains quality desktop backgrounds for Linux Mint 18 Sarah.
+
+Package: mint-backgrounds-serena
+Version: 1.1
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 39401
+Breaks: mint-artwork-kde (= 2.0.11)
+Replaces: mint-artwork-kde (= 2.0.11)
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-serena/mint-backgrounds-serena_1.1_all.deb
+Size: 39050800
+SHA256: b3d7c58e32770fbb25b40a015d1e0b81f762bb1444cc6913c62658ce68ad43b3
+SHA1: 4f79954c7bcc83c505424b3c45f24bbdb9976476
+MD5sum: 462eb8526e9424e4bd7dbcf93767c4e9
+Description: The desktop backgrounds for Linux Mint 18.1 Serena
+ This package contains quality desktop backgrounds for Linux Mint 18.1 Serena.
+
+Package: mint-backgrounds-sonya
+Version: 1.1
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 31280
+Breaks: mint-artwork-kde (= 2.0.11)
+Replaces: mint-artwork-kde (= 2.0.11)
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-sonya/mint-backgrounds-sonya_1.1_all.deb
+Size: 31308500
+SHA256: 4779024dd856a43b3e3adf2351c723873a4516b59f5806f568fcc4c143d73648
+SHA1: 7277156e0173f83b28ee322f526a9d408a3976d1
+MD5sum: b443393c838d4ecd286c408963096724
+Description: The desktop backgrounds for Linux Mint 18.2 Sonya
+ This package contains quality desktop backgrounds for Linux Mint 18.2 Sonya.
+
+Package: mint-backgrounds-sylvia
+Version: 1.2
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 41019
+Breaks: mint-artwork-kde (= 2.0.11)
+Replaces: mint-artwork-kde (= 2.0.11)
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-sylvia/mint-backgrounds-sylvia_1.2_all.deb
+Size: 41345428
+SHA256: 180944d47ec95436a82a59f8704ce4dacc6ef082f158aafe02f8b9a6d40677c2
+SHA1: ae0c78b286c8a717acd75148901476b031054daa
+MD5sum: d6f1e73fa0d9905033cc6043adac2299
+Description: The desktop backgrounds for Linux Mint 18.3 Sylvia
+ This package contains quality desktop backgrounds for Linux Mint 18.3 Sylvia.
+
+Package: mint-backgrounds-tara
+Version: 1.1
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 41001
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-tara/mint-backgrounds-tara_1.1_all.deb
+Size: 40994012
+SHA256: 7e653d79aad2cd548649c2b4b1f4a2848eb797510ee071d392d11cf94f00fc95
+SHA1: cd2f3e3ec5461faed5d0cc848d7f6fb97de57652
+MD5sum: 09709c24fa17055558e08de37c3b1388
+Description: The desktop backgrounds for Linux Mint 19 Tara
+ This package contains quality desktop backgrounds for Linux Mint 19 Tara.
+
+Package: mint-backgrounds-tessa
+Version: 1.1
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 57923
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-tessa/mint-backgrounds-tessa_1.1_all.deb
+Size: 58614252
+SHA256: 2850c6e0a0a6c5d2946719542ded179fd494d9fc4c174f4b744d69ff9c2b301c
+SHA1: 553a15c4db66928d31f529f53f8f8e383e078772
+MD5sum: 5e0d16181aabed30fc3513374461c0b2
+Description: The desktop backgrounds for Linux Mint 19.1 Tessa
+ This package contains quality desktop backgrounds for Linux Mint 19.1 Tessa.
+
+Package: mint-backgrounds-tina
+Version: 1.2
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 48762
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-tina/mint-backgrounds-tina_1.2_all.deb
+Size: 49425856
+SHA256: e39e5c5cce9c0773d23262b88aa503939ef568481b954be09394fd884bafc800
+SHA1: d7ae6f03146b780e4d6574c9a24949d83afc1808
+MD5sum: e2fc71b540a371f9df6298d51909eb63
+Description: The desktop backgrounds for Linux Mint 19.2 Tina
+ This package contains quality desktop backgrounds for Linux Mint 19.2 Tina.
+
+Package: mint-backgrounds-tricia
+Version: 1.1
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 55897
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-tricia/mint-backgrounds-tricia_1.1_all.deb
+Size: 56677148
+SHA256: 531356c165b41a60ec63128a7e9685ff23108a723c80733e42de1aad43fc3f67
+SHA1: 4f5beda9c85bb850deacba75aade7987465568dd
+MD5sum: 4190cdfe49200a218d020978f83dc6fe
+Description: The desktop backgrounds for Linux Mint 19.3 Tricia
+ This package contains quality desktop backgrounds for Linux Mint 19.3 Tricia.
+
+Package: mint-backgrounds-ulyana
+Version: 1.1
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 46200
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-ulyana/mint-backgrounds-ulyana_1.1_all.deb
+Size: 46834596
+SHA256: a8ad3051b020f9c9c6d4ed955999a0009e34b5538a88b74d7a3e6f57dcfb8eaf
+SHA1: e77e101b1e4866a14bb92b949e41712f3fc3f005
+MD5sum: 207cb6ac7b7ece4df5990e2d381d76fc
+Description: The desktop backgrounds for Linux Mint 20 Ulyana
+ This package contains quality desktop backgrounds for Linux Mint 20 Ulyana.
+
+Package: mint-backgrounds-ulyssa
+Version: 1.1
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 46923
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-ulyssa/mint-backgrounds-ulyssa_1.1_all.deb
+Size: 47406092
+SHA256: 1b08dbac68e6c9a6cac02e82ed1b82b648273e09f93f44cd63eb8e67b80f21c2
+SHA1: b2692c13398fb7a6b9f12721368e8e1b0e8e2e75
+MD5sum: 0e5b89cf99c9b174495c376d3edbdf80
+Description: The desktop backgrounds for Linux Mint 20.1 Ulyssa
+ This package contains quality desktop backgrounds for Linux Mint 20.1 Ulyssa.
+
+Package: mint-backgrounds-uma
+Version: 1.2
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 52997
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-uma/mint-backgrounds-uma_1.2_all.deb
+Size: 53661780
+SHA256: 2ea22bc2a51990f58211b3e498c264d8616394d2702bde6361bab8ee46e2724b
+SHA1: 271c04a056f7bd3c5441706625268522ed41bf7d
+MD5sum: 573d3b9dd6ef809cda6fa567182886d0
+Description: The desktop backgrounds for Linux Mint 20.2 Uma
+ This package contains quality desktop backgrounds for Linux Mint 20.2 Uma.
+
+Package: mint-backgrounds-una
+Version: 1.1
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 46750
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-una/mint-backgrounds-una_1.1_all.deb
+Size: 47339768
+SHA256: f83a6a3750c5cf6fc20106d165f34a9d29a75e1c9b29d90a177d3c6932f4e9fc
+SHA1: b7336f89eea590e47f6819a0bf8b824b97fd8552
+MD5sum: ee2682bfb408facc264a270ea679b783
+Description: The desktop backgrounds for Linux Mint 20.3 Una
+ This package contains quality desktop backgrounds for Linux Mint 20.3 Una.
+
+Package: mint-backgrounds-vanessa
+Version: 1.1
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 46163
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-vanessa/mint-backgrounds-vanessa_1.1_all.deb
+Size: 46603336
+SHA256: a2bc5ef802ae1c4604cd3ef36e5441165ee8ea331c1e50805af170d273e666c5
+SHA1: 8774527715d3b1dbbfce111346e0f6c2b2be8529
+MD5sum: 51dc2df0223e594d4ce2b3506f3acaa3
+Description: The desktop backgrounds for Linux Mint 21 Vanessa
+ This package contains quality desktop backgrounds for Linux Mint 21 Vanessa.
+
+Package: mint-backgrounds-vera
+Version: 1.0
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 43329
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-vera/mint-backgrounds-vera_1.0_all.deb
+Size: 43718736
+SHA256: d63d7bd1b3a93597adc0128b4503e1f747f62cf82aa9ad896b76dae8edc4b0ba
+SHA1: 97afdce14e314564f5591218111de10ebd9ad582
+MD5sum: 7535bb77764fa60fab1d30bb6c437433
+Description: The desktop backgrounds for Linux Mint 21.1 Vera
+ This package contains quality desktop backgrounds for Linux Mint 21.1 Vera.
+
+Package: mint-backgrounds-victoria
+Version: 1.2
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 58022
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-backgrounds-victoria/mint-backgrounds-victoria_1.2_all.deb
+Size: 58794164
+SHA256: 6cc7e09fa395c2f9f59769081209e59daf63f538b01de79c9e8e7bc8039ebef7
+SHA1: 97771a6c63d518d8475d41a063fef62faaba94eb
+MD5sum: 7b3729335bcbc170ccff7bb4b9bdd6dc
+Description: The desktop backgrounds for Linux Mint 21.2 Victoria
+ This package contains quality desktop backgrounds for Linux Mint 21.2 Victoria.
+
+Package: mint-common
+Version: 2.3.0
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 428
+Depends: python3, python3-aptdaemon, python3-aptdaemon.gtk3widgets, python3-gi, gir1.2-gtk-3.0, gir1.2-xapp-1.0, gir1.2-appstreamglib-1.0, mint-translations, libgtk3-perl
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-common/mint-common_2.3.0_all.deb
+Size: 241436
+SHA256: 29f21ea4cf27928ee06613420a66ade7a021e4b87ec584f85bbc4ba1f29ca62d
+SHA1: ef857feb3cb4b7b2169fdea8a6ee06310c02227e
+MD5sum: 4126f65cd39240d22ec6ea21a6d17dfd
+Description: Common scripts and resources for Linux Mint
+ A collection of scripts and resources used by other Linux Mint packages
+
+Package: mint-cursor-themes
+Version: 1.0.2
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 381156
+Priority: optional
+Section: gnome
+Filename: pool/main/m/mint-cursor-themes/mint-cursor-themes_1.0.2_all.deb
+Size: 20341220
+SHA256: a0058085cdf5bcedf9698c91efa82a36179b95ef83af2a64b67639a5066cf020
+SHA1: 7a551960f3b4baeaababe4e3dc7005aee44db2ce
+MD5sum: 80aafd725549d96340fd051c341066b3
+Description: Linux Mint Cursor themes
+ Modern Cursor themes for Linux Mint.
+
+Package: mint-dev-pkg
+Version: 1.0
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 8
+Depends: mint-dev-pkg-dep
+Recommends: mint-dev-pkg-rec
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-dev-pkg/mint-dev-pkg_1.0_all.deb
+Size: 1676
+SHA256: 18d47bbe240f76e29cf4271edc7be21c3aef94d2ec5eaada91ccf8037b7ca1d6
+SHA1: 288274317b271aa4bde74b6a9531680ab12f4335
+MD5sum: 0fd99a19b3403daccb9ffac3bf0e4a2e
+Description: A dummy package for testing purpose
+ This package depends/recommends/suggests other packages.
+
+Package: mint-dev-pkg-debconf
+Source: mint-dev-pkg
+Version: 1.0
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 12
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-dev-pkg/mint-dev-pkg-debconf_1.0_all.deb
+Size: 2084
+SHA256: cc1acbe36c614f86ddb5bffc6d0f17e4cc36bc9cc332d67ba43152a120c342d8
+SHA1: e4f83f2acf60d9553fbf40d24bd61d73284f1a65
+MD5sum: b27cbe34d18988afef75d4926a6585c5
+Description: A dummy package for testing purpose
+ This package uses debconf.
+
+Package: mint-dev-pkg-dep
+Source: mint-dev-pkg
+Version: 1.0
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 8
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-dev-pkg/mint-dev-pkg-dep_1.0_all.deb
+Size: 1656
+SHA256: 924fabab14a4963978704e9f19c85475021d86c3b1f49dc7c78512b01241bdfb
+SHA1: 4500a02944e0e41fd2a6852605c88122348b1ca7
+MD5sum: dc5ddfe51cf57125da1e7d85d4c709c7
+Description: A dummy package for testing purpose
+ This package is a dependency of mint-dev-pkg.
+
+Package: mint-dev-pkg-rec
+Source: mint-dev-pkg
+Version: 1.0
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 8
+Recommends: mint-dev-pkg-rec2
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-dev-pkg/mint-dev-pkg-rec_1.0_all.deb
+Size: 1668
+SHA256: 113eefae45dc25c8377215edab4dec566d92f91f419380e43756feea2c31a544
+SHA1: 517ef3d3c2a707fae3255b543bb821d19e6c7ddc
+MD5sum: 55ecf8827fe6499fccee9c5364e2f18d
+Description: A dummy package for testing purpose
+ This package is recommended by mint-dev-pkg.
+
+Package: mint-dev-pkg-rec2
+Source: mint-dev-pkg
+Version: 1.0
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 8
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-dev-pkg/mint-dev-pkg-rec2_1.0_all.deb
+Size: 1660
+SHA256: 0e0068a54625833cb2a07ec74529953d328770b19b2c21689cb9d45ad2a705c3
+SHA1: 045e4028e993360dc337266f3a53ae1cd800bc74
+MD5sum: 86fd80ab9e961652175aa173a2d13bbd
+Description: A dummy package for testing purpose
+ This package is recommended by mint-dev-pkg-rec2.
+
+Package: mint-dev-tools
+Version: 1.4.2
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 6894
+Depends: python3 (>= 3.3), python3-dbg, python3-polib, python3-psutil, python3-pkg-resources, gir1.2-xapp-1.0, git, dpkg-dev, debhelper, dconf-gsettings-backend | gsettings-backend, equivs, devscripts
+Recommends: git-buildpackage, meld, meson, sublime-text, sublime-merge, devhelp, glade, regexxer, pyrenamer, d-feet, gdb, awf, gconf-editor, dconf-editor, gnome-dbg, gnome-api-docs, valgrind, ccache, wininfo, perf, debuginfod, libxapp-dev
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-dev-tools/mint-dev-tools_1.4.2_all.deb
+Size: 333428
+SHA256: dc8c67bfe2f3a1f35f9a90c4feda1962d4e4a2d2d450d4df8cb09cfab65b4e4d
+SHA1: d736a4c985b55b0df7c05903a1b4ec73ea4561e8
+MD5sum: b74a5717558ba8fe2815714732eb5479
+Description: A collection of tools to develop/compile Linux Mint projects
+ All you need to develop/compile Linux Mint projects.
+
+Package: mint-info-cinnamon
+Source: mint-info
+Version: 2023.05.31
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 16
+Provides: mint-info
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-info/mint-info-cinnamon_2023.05.31_all.deb
+Size: 3084
+SHA256: 0f37424db4af304bd654f4399353459d8d8980978c57ef716c641f01760c36fa
+SHA1: 295af639afe7d05cf9db1a7e893d8197e57b53d2
+MD5sum: 4ce79ee7f1e2b041d39173fd3153202c
+Description: Necessary information about the Linux Mint release and edition.
+ Base package. This package is needed by the Mint tools and the system to uniquely identify the edition and release of Linux Mint you're using and to get information related to it.
+
+Package: mint-info-mate
+Source: mint-info
+Version: 2023.05.31
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 16
+Provides: mint-info
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-info/mint-info-mate_2023.05.31_all.deb
+Size: 3080
+SHA256: 65a79139a7b25e98bd0536194e661818ca5b39ce407eab5e4eed979f0cb0719f
+SHA1: 7dee9a407c14890d8c2eef2d884cb65bb246d91a
+MD5sum: 3539c36555f177b7c7ba90033730de85
+Description: Necessary information about the Linux Mint release and edition.
+ Base package. This package is needed by the Mint tools and the system to uniquely identify the edition and release of Linux Mint you're using and to get information related to it.
+
+Package: mint-info-xfce
+Source: mint-info
+Version: 2023.05.31
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 16
+Provides: mint-info
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-info/mint-info-xfce_2023.05.31_all.deb
+Size: 3088
+SHA256: 22eb89e5697dba5deb7b802ed5ea7fb2273f73c4473bb0c79e7d9492957b187f
+SHA1: c21ff4df52f371186d057e647e8a51b749731381
+MD5sum: c0f2e011d013848c0b3621b72e9bcc3a
+Description: Necessary information about the Linux Mint release and edition.
+ Base package. This package is needed by the Mint tools and the system to uniquely identify the edition and release of Linux Mint you're using and to get information related to it.
+
+Package: mint-l-icons
+Version: 1.6.5
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 100013
+Breaks: mint-y-icons-legacy
+Replaces: mint-y-icons-legacy
+Homepage: https://github.com/linuxmint/mint-l-icons
+Priority: optional
+Section: gnome
+Filename: pool/main/m/mint-l-icons/mint-l-icons_1.6.5_all.deb
+Size: 57542520
+SHA256: d3d30651c04593ce528de306718010d4db27e8f9363e2a6db61069b484f3e284
+SHA1: 1fbce1686ec0a297b0b4ff533ffdc4bf3387d518
+MD5sum: f72e779f425cdd32380f61aaef4a8495
+Description: Mint-L icon theme
+ A flat, colorful, and modern theme based on
+ Paper and Moka.
+
+Package: mint-l-theme
+Version: 1.9.5
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 31724
+Depends: mint-l-icons
+Breaks: mint-themes-legacy
+Replaces: mint-themes-legacy
+Priority: optional
+Section: gnome
+Filename: pool/main/m/mint-l-theme/mint-l-theme_1.9.5_all.deb
+Size: 1256468
+SHA256: 94fbc33b45ebc2b938b069193aaa1ef08e7ae363adaa7468756f2f4b045a4a9d
+SHA1: 86f6735abbb29ade52a85e8546010474b54740ad
+MD5sum: 279beb20b865a872e0fe31eea7a318a4
+Description: Mint-L theme
+ The Mint-L theme.
+
+Package: mint-live-session
+Version: 1.0.3
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 17
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-live-session/mint-live-session_1.0.3_all.deb
+Size: 2816
+SHA256: 40623c4ad024693bf0ccb4155d9ca90ac93dcf8c2da951f9cb8ecb95373f8fd1
+SHA1: 4ce705f3bcaecc46c1b005eb8e2c48d2c38871c2
+MD5sum: 77909b5010af3bd1ff87859bb0fc2a6c
+Description: A collection of files used in the live session
+ Live session files.
+
+Package: mint-meta-cinnamon
+Source: mint-meta
+Version: 2023.08.28+mint21.2
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 11
+Depends: mint-meta-core, cinnamon, gir1.2-gnomedesktop-3.0, gir1.2-nemo-3.0, nemo, nemo-fileroller, folder-color-switcher, cinnamon-control-center, cinnamon-screensaver, bulky, xdg-desktop-portal-xapp
+Conflicts: mint-meta-cinnamon-dvd, mint-meta-gnome, mint-meta-main, mint-meta-x64
+Replaces: mint-meta-cinnamon-dvd, mint-meta-gnome, mint-meta-main, mint-meta-x64
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-meta/mint-meta-cinnamon_2023.08.28+mint21.2_all.deb
+Size: 5492
+SHA256: bf0c3110b448d56dfe4e8bccc2368cd42580d7fd8120120ce8288dcdca271c76
+SHA1: 2a9def0f5ea78f2f895ed2c5b43137029df3a667
+MD5sum: 5df5f704f77c241dfb5101fc45034fad
+Description: Set of packages installed by default in the Cinnamon edition of Linux Mint
+ Set of packages installed by default in the Cinnamon edition of Linux Mint.
+
+Package: mint-meta-codecs
+Source: mint-meta
+Version: 2023.08.28+mint21.2
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 13
+Depends: cabextract, gstreamer1.0-libav, gstreamer1.0-plugins-bad, gstreamer1.0-plugins-ugly, gstreamer1.0-vaapi, libavcodec-extra, libdvdcss2, libdvdnav4, libdvdread8, unshield
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-meta/mint-meta-codecs_2023.08.28+mint21.2_all.deb
+Size: 5932
+SHA256: 8739594a629b3df64c2b1b7885cc2791ed0f8f94ea33346010da6843e91436f5
+SHA1: aebd5d29013223e97c7dc52cd3814700a457cba5
+MD5sum: d8716f68f0356912d7132fa309cd7e87
+Description: All the packages required for multimedia support in Linux Mint.
+ All the packages required for multimedia support in Linux Mint.
+
+Package: mint-meta-core
+Source: mint-meta
+Version: 2023.08.28+mint21.2
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 11
+Depends: linuxmint-keyring, mint-info, mint-artwork, mintsystem, ubuntu-system-adjustments, plymouth-theme-ubuntu-text, mintbackup, mintinstall, mintupdate, mintwelcome, mintsources, mintdrivers, mintreport, mintstick, ubuntu-dbgsym-keyring
+Recommends: thingy
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-meta/mint-meta-core_2023.08.28+mint21.2_all.deb
+Size: 5452
+SHA256: 06bc880a9bc9fc36aba480d9d9150b2868a6b15fdb6d7f1b400f19b0981d7895
+SHA1: dc3d14e8c4c8d83242656c90c0af4d3f1447988d
+MD5sum: 1f87c9a2865a3b63568822ce63f47b16
+Description: Core Linux Mint packages
+ Core Linux Mint packages.
+
+Package: mint-meta-mate
+Source: mint-meta
+Version: 2023.08.28+mint21.2
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 11
+Depends: mint-meta-core, caja, folder-color-switcher, libmatedesktop, libmatekbd, mate-control-center, mate-desktop, mate-icon-theme, mate-menus, mate-notification-daemon, mate-panel, mate-session-manager, mate-settings-daemon, marco, mate-terminal, mate-media, mintmenu, mintdesktop, engrampa, mate-applets, mate-power-manager, mate-screensaver, mate-system-monitor, mate-utils, mate-indicator-applet, mate-polkit, mate-sensors-applet, gnome-system-tools, mate-user-guide, bulky, xdg-desktop-portal-xapp
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-meta/mint-meta-mate_2023.08.28+mint21.2_all.deb
+Size: 5580
+SHA256: 5038b89f63a9eb9e62c7c868e40e5bd150d97e6108d9755b4d3fe88a4ddb1e81
+SHA1: 28d60fc6efae0323846d319238d37d9c25e32af3
+MD5sum: 0e9ce86f6d75e3abd1d9704d7c4010d3
+Description: Set of packages installed by default in the MATE edition of Linux Mint
+ Set of packages installed by default in the MATE edition of Linux Mint.
+
+Package: mint-meta-xfce
+Source: mint-meta
+Version: 2023.08.28+mint21.2
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 11
+Depends: mint-meta-core, thunar, thunar-archive-plugin, thunar-media-tags-plugin, thunar-volman, xfce4-appfinder, xfce4-panel, xfce4-places-plugin, xfce4-session, xfce4-settings, xfconf, xfdesktop4, xfce4-screenshooter, xfwm4, mintdesktop, xfce4-cpufreq-plugin, xfce4-eyes-plugin, xfce4-mailwatch-plugin, xfce4-systemload-plugin, xfce4-timer-plugin, xfce4-time-out-plugin, xfce4-verve-plugin, mugshot, xfce4-whiskermenu-plugin, xfce4-xapp-status-plugin, xdg-desktop-portal-xapp
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-meta/mint-meta-xfce_2023.08.28+mint21.2_all.deb
+Size: 5540
+SHA256: d7c6cbbcfdccec6ee5b45cdca87754f2ea8de15e0ba1f0ff13c66e33219cfbbf
+SHA1: d265f5f7ab5a82287eec3433210374856dab5af2
+MD5sum: 70711e4395f1b354dad33ad50d6ed2eb
+Description: Set of packages installed by default in the Xfce edition of Linux Mint
+ Set of packages installed by default in the Xfce edition of Linux Mint.
+
+Package: mint-mirrors
+Version: 1.2.9
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 33
+Conflicts: mintupdate (<= 4.3.4)
+Replaces: mintupdate (<= 4.3.4), mintupdate-debian (<= 1.0.7)
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-mirrors/mint-mirrors_1.2.9_all.deb
+Size: 6156
+SHA256: 7639434041e3bc650a4319a4da79a2e7e55302d7df62aeef758b76a326fa4f24
+SHA1: ee96570a4c8970646f7c84297f3010dd76a44d1f
+MD5sum: ff486c8ab58fd4e76ca76813c5d2e032
+Description: Linux Mint Repository mirrors
+ List of Linux Mint Repository mirrors.
+
+Package: mint-themes
+Version: 2.1.5
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 46767
+Depends: mint-x-icons, mint-y-icons
+Conflicts: cinnamon-themes, mint-clearloox-theme, mint-themes-gtk3, mint-x-theme, mint-y-theme, mint-z-theme
+Replaces: cinnamon-themes, mint-clearloox-theme, mint-themes-gtk3, mint-x-theme, mint-y-theme, mint-z-theme
+Priority: optional
+Section: gnome
+Filename: pool/main/m/mint-themes/mint-themes_2.1.5_all.deb
+Size: 1642036
+SHA256: 0b3a3b89d784e9158236cb725948866e9d316d4d3ad219a5acf664cbbed8bc63
+SHA1: 9838360916fbcbac39a22d3c13df1fe4f516e08d
+MD5sum: 0d57cd43ac7df0c38665f9e8c861690b
+Description: Mint themes
+ A collection of mint themes.
+
+Package: mint-translations
+Version: 2023.07.07
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 6561
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-translations/mint-translations_2023.07.07_all.deb
+Size: 860684
+SHA256: 3ce1f9de9619f8f150e13cdfbaefdbcd8d847e4f1e545304b9c94745e6ed55bd
+SHA1: d99edfacebda6985e12a092f5c04a132ea1ed32b
+MD5sum: 4e383deaa9b21126016541f44e7cbc53
+Description: Translation files for Linux Mint
+ Translation files for Linux Mint
+
+Package: mint-upgrade-info
+Version: 1.2.6
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 711
+Priority: optional
+Section: admin
+Filename: pool/main/m/mint-upgrade-info/mint-upgrade-info_1.2.6_all.deb
+Size: 655628
+SHA256: 1b3d4af7ae1c1cc68d72556f4e96b1948c8bd24c2537e2bce5f29f073b2135cd
+SHA1: e2de819470fa0aeeedd6352a2e71d8b414bcd8ee
+MD5sum: 371c20c21bbda6f835d37ce377af4eec
+Description: Information about upgrade paths
+ Provides information to the Update Manager on how to perform distribution upgrades.
+
+Package: mint-x-icons
+Version: 1.6.5
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 120628
+Priority: optional
+Section: gnome
+Filename: pool/main/m/mint-x-icons/mint-x-icons_1.6.5_all.deb
+Size: 10966196
+SHA256: 829c8a2b1d2c4931684d69d042c179211001c9def85ec2a878f45a2616b23a91
+SHA1: d1758f62ac3ac9cf64d5a8a07a507182a92b20d6
+MD5sum: e1c040bef290ce372a8e3dceee494bd6
+Description: Mint-X icon theme
+ A mint/metal theme based on mintified versions of
+ Clearlooks Revamp, Elementary and Faenza.
+
+Package: mint-y-icons
+Version: 1.6.7
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 103509
+Homepage: https://github.com/linuxmint/mint-y-icons
+Priority: optional
+Section: gnome
+Filename: pool/main/m/mint-y-icons/mint-y-icons_1.6.7_all.deb
+Size: 59038240
+SHA256: f88402d8ac6b07c776fab47142c22071ce7b1d358cf352e9ebdd83d936772ced
+SHA1: 8391dcf6c14439f822ce8cbd262791d20b7b8cd2
+MD5sum: 149f3bd7f47279ebc79e32070fb0c981
+Description: Mint-Y icon theme
+ A flat, colorful, and modern theme based on
+ Paper and Moka.
+
+Package: mintbackup
+Version: 2.4.3
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 418
+Depends: python3 (>= 3), python3-gi, python3-apt, python3-setproctitle, aptitude, gir1.2-xapp-1.0, mint-common (>= 2), dconf-gsettings-backend | gsettings-backend
+Priority: optional
+Section: admin
+Filename: pool/main/m/mintbackup/mintbackup_2.4.3_all.deb
+Size: 36716
+SHA256: e0c0931ff951fd033dfdcd7c21c0813e6edd39a8cb3d6a19e10803669827d2b4
+SHA1: b782296afc8fe567978f401ec075e39120920a3f
+MD5sum: ab907ee9c0db0f1af9a930c9e948a961
+Description: Home Directory Backup Tool
+ Easily backup and restore your personal data and your software selection.
+
+Package: mintdesktop
+Version: 3.7.9
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 1095
+Depends: python3 (>= 3.3), python3-xapp (>= 1.6), gir1.2-gdkpixbuf-2.0, gir1.2-glib-2.0, gir1.2-gtk-3.0, mint-info, mintsystem, wmctrl, dconf-cli, xapps-common (>= 2.5.0)
+Priority: optional
+Section: admin
+Filename: pool/main/m/mintdesktop/mintdesktop_3.7.9_all.deb
+Size: 78904
+SHA256: d68a29c07e11e5c69a47cd93152e02add810d721b0b327bddcdee8956e7bba5d
+SHA1: c6190e2d597f52deab8fc13de94665c51beadffb
+MD5sum: babc244170ceedb6c084eeca2a039137
+Description: Desktop configuration tool
+ Configures some aspects of the desktop.
+
+Package: mintdrivers
+Version: 1.7.0
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 1215
+Depends: mintsystem (>= 8.4.8), python3 (>= 3.3), python3-gi, python3-psutil, ubuntu-drivers-common, gir1.2-xapp-1.0, gir1.2-packagekitglib-1.0, packagekit
+Priority: optional
+Section: admin
+Filename: pool/main/m/mintdrivers/mintdrivers_1.7.0_all.deb
+Size: 107900
+SHA256: 75dfd2b5791a71f9eb3258815eb6a970c8d5c93e06ff27e92d3e1949d2d1af99
+SHA1: 7a30a82e3a7f47e724522676f4dad00d60168a06
+MD5sum: 7d9eb09c81cdfefb75bd7c6e93309560
+Description: Driver Manager
+ Manage the drivers for your devices.
+
+Package: mintinstall
+Version: 8.2.8
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 1146
+Pre-Depends: ca-certificates (>= 20210101)
+Depends: python3 (>= 3.4), python3-bs4, python3-setproctitle, gir1.2-appstream-1.0, gir1.2-gdkpixbuf-2.0, gir1.2-glib-2.0, gir1.2-gtk-3.0, gir1.2-xapp-1.0, libgtk3-perl, mint-common (>= 2.2.4), app-install-data
+Recommends: gir1.2-flatpak-1.0, flatpak, xdg-desktop-portal-gtk
+Priority: optional
+Section: admin
+Filename: pool/main/m/mintinstall/mintinstall_8.2.8_all.deb
+Size: 205592
+SHA256: ce694f8ae3d743dc02d1d82f337b889c603b7834ec30dd08d0688cc39300bceb
+SHA1: 0bd51d7e54a026a8e8eb61168d8f8dc14abb07a0
+MD5sum: aa52cd9f0ee5fda6718c9464649f9c4e
+Description: Software Manager
+ A software manager to easily install new applications.
+
+Package: mintlocale
+Version: 1.5.9
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 347
+Depends: python3, python3-gi, gir1.2-accountsservice-1.0, gir1.2-gdkpixbuf-2.0, gir1.2-glib-2.0, gir1.2-gtk-3.0, gir1.2-xapp-1.0, im-config (>= 0.23-1), iso-flag-png, mint-common (>= 2)
+Priority: optional
+Section: admin
+Filename: pool/main/m/mintlocale/mintlocale_1.5.9_all.deb
+Size: 47504
+SHA256: c32f18db7d4478ee88c7e323c427bad2caf162d4c819db185ca00992108360c4
+SHA1: 5d626df8e6a08dc8214cb0abb81a881344dea036
+MD5sum: a13275e03280ba4644b6ffa7cce1afe8
+Description: Language selection tool
+ Locale selection.
+
+Package: mintmenu
+Version: 6.1.7
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 377
+Depends: dconf-gsettings-backend | gsettings-backend, python3, python3-apt, python3-configobj, python3-gi-cairo, python3-setproctitle, python3-unidecode, python3-xlib, python3-xdg, python3-xapp, xdg-utils, libglib2.0-bin, mate-menus, gir1.2-matemenu-2.0, gir1.2-matepanelapplet-4.0, gir1.2-gtk-3.0, gir1.2-matedesktop-2.0, gir1.2-xapp-1.0
+Priority: optional
+Section: admin
+Filename: pool/main/m/mintmenu/mintmenu_6.1.7_all.deb
+Size: 67980
+SHA256: c38819c9cb539e0c62554de1947e2e0f08d30574821703a6fe1fcae1278b3f08
+SHA1: 50ae32bcf3724572c73b187bbfce3df6710a4530
+MD5sum: e96a8d86653bc3c36f0ccea4a004880a
+Description: Advanced MATE menu
+ One of the most advanced menus under Linux. MintMenu supports filtering,
+ favorites, easy-uninstallation, autosession, and many other features.
+
+Package: mintnanny
+Version: 1.6.0
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 208
+Depends: python3 (>= 3.3), python3-gi, mint-common
+Conflicts: mintnanny-gnome, mintnanny-kde
+Replaces: mintnanny-gnome, mintnanny-kde
+Priority: optional
+Section: admin
+Filename: pool/main/m/mintnanny/mintnanny_1.6.0_all.deb
+Size: 29368
+SHA256: b7cc0bec27578fe5b19c0684fb35a6f649ed901c1d65c9acf02973ac2053df15
+SHA1: b0327f7528d6201e6fe166221f88c9a5760b9150
+MD5sum: 2b7b3f5191ca81cd3fea74d6e51d4045
+Description: Domain blocker for Linux Mint
+ Blocks outgoing traffic towards chosen domain names using /etc/hosts.
+
+Package: mintreport
+Version: 1.4.7
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 1468
+Depends: python3, python3-gi, python3-apt, python3-configobj, python3-setproctitle, gir1.2-gtksource-3.0, inxi, mint-common, xapps-common, dconf-gsettings-backend | gsettings-backend
+Priority: optional
+Section: admin
+Filename: pool/main/m/mintreport/mintreport_1.4.7_all.deb
+Size: 193376
+SHA256: 486dbe3760f8781a9028e4489625db1534b1056e1deae02a4347849d071fcdd7
+SHA1: 6c32adc71e3330df459003a2e94de0b935bbef25
+MD5sum: 636264008333f0e8bd75ff626e7b4b8f
+Description: Troubleshooting tool for Linux Mint
+ Reports issues and important information about the operating system.
+
+Package: mintstick
+Version: 1.6.3
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 287
+Depends: coreutils, genisoimage, gir1.2-glib-2.0, gir1.2-gtk-3.0, gir1.2-polkit-1.0, ntfs-3g, parted, policykit-1, procps, python3, python3-gi, python3-parted, python3-gnupg, python3-unidecode, gir1.2-udisks-2.0, gir1.2-xapp-1.0, util-linux, exfatprogs | exfat-utils
+Conflicts: usb-imagewriter
+Replaces: usb-imagewriter
+Priority: optional
+Section: misc
+Filename: pool/main/m/mintstick/mintstick_1.6.3_all.deb
+Size: 48780
+SHA256: 0564c44502eb1cd3f1b14550deb4642e22b0e629600429ab693d85a9160a1006
+SHA1: 3c65ddd19322f374460c27ca0c1ef4dfbcccf31a
+MD5sum: f5b15d9c0d125ebbcee6cb4c7c08c949
+Description: write .img and .iso files to USB sticks
+ A GUI to write .img or .iso files to a USB Key. It can also format them.
+
+Package: mintsystem
+Version: 8.5.6
+Architecture: all
+Maintainer: Clement Lefebvre <clem@linuxmint.com>
+Installed-Size: 102
+Depends: python3 (>= 3.3), perl, apt, aptitude, mint-common, mint-info, zenity, dconf-gsettings-backend | gsettings-backend
+Priority: optional
+Section: admin
+Filename: pool/main/m/mintsystem/mintsystem_8.5.6_all.deb
+Size: 20088
+SHA256: 613cb4b034239a404f733b8385dccc17fca1aac8ea8741af6735006477bd71ca
+SHA1: 634d0d2e26eb3b8843c5f5bae4077f3ad7204d86
+MD5sum: 1b0f043f209ede4c05aab6ed5732a298
+Description: Linux Mint System Base Package
+ Used by the desktop and other mint tools to gather
+ information and process common system tasks.
+
+Package: mintupdate
+Version: 6.0.9.1
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 5566
+Depends: dconf-gsettings-backend | gsettings-backend, lsb-release, apt, distro-info-data, psmisc, python3-apt, python3-pycurl, python3-setproctitle, python3-xapp (>= 1.6), synaptic, systemd, mint-common (>= 2.2.4), mint-mirrors, mint-upgrade-info, gir1.2-notify-0.7, gir1.2-xapp-1.0
+Priority: optional
+Section: admin
+Filename: pool/main/m/mintupdate/mintupdate_6.0.9.1_all.deb
+Size: 643692
+SHA256: c999bfeb01dc9cc88b632c15e0f0a8a644931c1e80b624874f499b11c1b2ee31
+SHA1: d4d25aa7d12072615a791f2fbb1dfdca731056c0
+MD5sum: 68de731b32bfeddd7355be4ee6ece585
+Description: The Linux Mint Update Manager
+ Helps installing security updates and new versions of packages.
+
+Package: mintupgrade
+Version: 2024.01.12
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 893
+Depends: gir1.2-xapp-1.0 (>= 1.4), python3, python3-apt, python3-gi, python3-setproctitle, xapps-common, mintsources, mintupdate, acpi, crudini, debian-system-adjustments | ubuntu-system-adjustments, inxi, dconf-gsettings-backend | gsettings-backend
+Priority: optional
+Section: gnome
+Filename: pool/main/m/mintupgrade/mintupgrade_2024.01.12_all.deb
+Size: 125632
+SHA256: b55abb7e4c424c933719fe3b4a0b178988e0392fcbc33bd19f382a57cd27a255
+SHA1: 99bdf9062d029fa2ddb77272675657e4d44cc4ac
+MD5sum: c4573ae1d33a15072aa6cb816f8d0283
+Description: Upgrade Tool
+ Upgrade your Operating System to a new version.
+
+Package: mintupload
+Version: 4.2.0
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 268
+Depends: python3, python3-paramiko (>= 1.7.4), python3-gi, python3-pexpect, python3-configobj, libnotify-bin, gir1.2-glib-2.0, gir1.2-gtk-3.0, gir1.2-notify-0.7, gir1.2-xapp-1.0
+Priority: optional
+Section: admin
+Filename: pool/main/m/mintupload/mintupload_4.2.0_all.deb
+Size: 43696
+SHA256: 4358dd0712eb5402349cbcb28ecac80b0a09c033f6c2c03bf9066ff1ff6ae648
+SHA1: e7fa8686bae04ffd4c36cf9874321b497ae382cb
+MD5sum: da796530fee481f390a84bf7b0432caf
+Description: Uploads files on the Internet
+ mintUpload allow you to upload files on the Internet.
+ This makes it easier to share or send big files which
+ would not fit in an email.
+
+Package: mintwelcome
+Version: 2.5.8
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 198
+Depends: python3 (>= 3.3), python3-gi, python3-xapp (>= 1.0.1), mint-info, mint-common, apturl | apturl-kde
+Conflicts: mintassistant, mintassistant-gnome, mintassistant-kde
+Replaces: mintassistant, mintassistant-gnome, mintassistant-kde
+Priority: optional
+Section: admin
+Filename: pool/main/m/mintwelcome/mintwelcome_2.5.8_all.deb
+Size: 24256
+SHA256: 7f631bb43a8d3ed339fd9ac3c2a7250cdf0c7f9de5e4b708fbe9f1d42fd44b2a
+SHA1: 14113a13ca0658485134d81bf26e078c275ad88c
+MD5sum: b1638675e615a92c8c9c39e6dda6954d
+Description: Welcome screen for Linux Mint
+ Shows important information about the release/edition of Linux Mint.
+
+Package: nvidia-prime-applet
+Version: 1.3.7
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 302
+Depends: python3, gir1.2-xapp-1.0, mesa-utils, python3-packaging
+Priority: optional
+Section: admin
+Filename: pool/main/n/nvidia-prime-applet/nvidia-prime-applet_1.3.7_all.deb
+Size: 38384
+SHA256: 9130d35eb190d8802478180c0ba5479d8875504de2e6233ca1557b4082389b7a
+SHA1: b86628ea0bf59c2697cdb69049b95842c008d98f
+MD5sum: 2123ac06cfae63ead0aa7b50dfe00aca
+Description: An applet for NVIDIA Prime
+ Displays the active GPU and lets you switch to the other one on NVIDIA Optimus cards.
+
+Package: python3-xapp
+Version: 2.4.1
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 56
+Depends: python3:any (>= 3.0~), python3-psutil
+Priority: optional
+Section: python
+Filename: pool/main/p/python3-xapp/python3-xapp_2.4.1_all.deb
+Size: 11908
+SHA256: e08614bf7b4ab55f19b56d717d9966af8ee3320989959e9340361020ecaa9a67
+SHA1: 6f2990b9a900c4a26bac05f66145ca5b02decfd0
+MD5sum: 9b068a69b487583c78861f5eb8748cd3
+Description: Python 3 XApp library
+ This package contains the Python 3 version of the library.
+
+Package: rhythmbox-plugin-tray-icon
+Version: 2020.05.21
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 23
+Depends: rhythmbox, gir1.2-xapp-1.0
+Priority: optional
+Section: universe/gnome
+Filename: pool/main/r/rhythmbox-plugin-tray-icon/rhythmbox-plugin-tray-icon_2020.05.21_all.deb
+Size: 4848
+SHA256: e9fd16910461b582bf8b74398934c11fc68976a862e11083d469942c2201d23f
+SHA1: 15aa3480ec4a9a99981c8d33360df08979f2b1e4
+MD5sum: 86a1ddd87708d79c9d770383c0014553
+Description: A tray icon plugin for rhythmbox music player
+ A tray icon plugin for rhythmbox music player.
+
+Package: sticky
+Version: 1.17
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 672
+Depends: gir1.2-glib-2.0, gir1.2-gtk-3.0 (>= 3.22.0), gir1.2-xapp-1.0 (>= 2.2.0), gir1.2-gspell-1, python3, python3-gi, python3-xapp (>= 2.2.0), dconf-gsettings-backend | gsettings-backend, python3:any
+Priority: optional
+Section: x11
+Filename: pool/main/s/sticky/sticky_1.17_all.deb
+Size: 98108
+SHA256: f2a941f25602abb3f1c45cf65a1b34aae0bb19abc0c8e0b500c4d393536caff4
+SHA1: 434d78137a485052d384adb30985d9cbbffd5135
+MD5sum: e7b43da1a38786bdb69e70fc2510bf4f
+Description: Sticky Notes app
+ This package contains the Sticky Notes app, which allows the quick creation of
+ notes through an xapp status icon.
+
+Package: syslinux-themes-linuxmint
+Version: 1.2.0
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 169
+Depends: isolinux, memtest86+, syslinux-common
+Enhances: extlinux
+Provides: syslinux-theme
+Priority: optional
+Section: misc
+Filename: pool/main/s/syslinux-themes-linuxmint/syslinux-themes-linuxmint_1.2.0_all.deb
+Size: 150704
+SHA256: d6069460677d043617777ccac6ae17856bdb91afbb413349e204a6b21c4d9f1b
+SHA1: 655d555c0bb4f87c68d72f13b9a52686d62f69e2
+MD5sum: 4bcbd361c389fc910acea8e314048681
+Description: collection of boot loaders
+ SYSLINUX is a collection of boot loaders which operates off Linux ext2/3/4 or
+ btrfs filesystems, MS-DOS FAT filesystems, network servers using PXE firmware,
+ or from CD-ROMs.
+ .
+ Graphical bootloader theme.
+
+Package: thingy
+Version: 1.1.4
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 387
+Depends: python3, python3-gi, python3-setproctitle, gir1.2-xapp-1.0 (>= 2.5.0), xreader, libgsf-bin, dconf-gsettings-backend | gsettings-backend
+Priority: optional
+Section: misc
+Filename: pool/main/t/thingy/thingy_1.1.4_all.deb
+Size: 35676
+SHA256: d1bc26e26134c8988835cc5e4e07d431daed48cdfc0a05d185de847d2e950482
+SHA1: 91b359baa56ae81ac1cc4c21914d8fc038c0d67c
+MD5sum: c86e4aa84e16bba00d843ce1584791cd
+Description: Document Manager
+ Utility application used to make collections and quickly access recent and favorite documents.
+
+Package: ubiquity-slideshow-mint
+Version: 70mint53
+Architecture: all
+Maintainer: Linux Mint
+Installed-Size: 2185
+Conflicts: ubiquity-slideshow
+Replaces: ubiquity-slideshow
+Provides: ubiquity-slideshow
+Priority: optional
+Section: x11
+Filename: pool/main/u/ubiquity-slideshow-mint/ubiquity-slideshow-mint_70mint53_all.deb
+Size: 853200
+SHA256: 3c1ade20b17b48c4d7126e45243a5ac15858a4ffc05f2af8603a5f716b61c525
+SHA1: d9e368d5277352c383302726dc1a669f0d976573
+MD5sum: 715c5fa08ae31bdc9373d68214c3d90f
+Description: Ubiquity slideshow for Linux Mint
+ A slideshow intended for the Ubiquity installer, designed as a quick
+ introduction to Linux Mint.
+
+Package: ubuntu-system-adjustments
+Version: 2023.06.08-victoria
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 672
+Depends: mintsystem, plymouth-theme-spinner
+Conflicts: mint-artwork-common
+Replaces: mint-artwork-common
+Priority: optional
+Section: admin
+Filename: pool/main/u/ubuntu-system-adjustments/ubuntu-system-adjustments_2023.06.08-victoria_all.deb
+Size: 444268
+SHA256: 39c566b333d83b141d11893f40bd6ead38530ed56c46ba2cc837c27b70c462b4
+SHA1: 268e978b31af9cd730417c34857d785c316c6c7b
+MD5sum: 7e07f86795db3a5c5342bb0e60c98edb
+Description: Adjustments to the Ubuntu package base
+ These adjustments modify some unwanted behaviors of the Ubuntu package base and are specific to this base.
+
+Package: webapp-manager
+Version: 1.4.0
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 5640
+Depends: gir1.2-xapp-1.0 (>= 1.4), python3, python3-gi, python3-bs4, python3-configobj, python3-pil, python3-setproctitle, python3-tldextract, xapps-common, dconf-gsettings-backend | gsettings-backend
+Priority: optional
+Section: admin
+Filename: pool/main/w/webapp-manager/webapp-manager_1.4.0_all.deb
+Size: 68756
+SHA256: be20eb22660c28d2527b9925e1edbc1baad150c8a19a182b679f19c0dd85685b
+SHA1: abc4c0b729966da7016999563a2106235647741f
+MD5sum: a58298eef1ae9a4f3ea5178279dba60c
+Description: Web Application Manager
+ Launch websites as if they were apps.
+
+Package: wine-desktop-files
+Source: wine-installer
+Version: 5.0.3
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 217
+Priority: optional
+Section: admin
+Filename: pool/main/w/wine-installer/wine-desktop-files_5.0.3_all.deb
+Size: 52588
+SHA256: 9b45ef0836144f643abef6a559c8ab45680984fbeca4b4d163401711fa33e003
+SHA1: 7219e29354f4a589dbfa00d5797c25ebb7bc7caa
+MD5sum: 9a6dd89706c8311f224fc9d61dd633ea
+Description: Microsoft Windows Compatibility Layer
+ Microsoft Windows Compatibility Layer (Desktop files)
+
+Package: wine-installer
+Version: 5.0.3
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 8
+Depends: wine, wine-desktop-files
+Recommends: wine64, wine32
+Priority: optional
+Section: admin
+Filename: pool/main/w/wine-installer/wine-installer_5.0.3_all.deb
+Size: 2132
+SHA256: e38ed2257b5581228229f1e7fbca3c86c4cc637cb9cfb1f0fa8b8b5ba4d9fb69
+SHA1: d428b2b9433f8086446329b1ee793012def5e5cc
+MD5sum: 51c3f16302608a99ab23c34645b0a2c6
+Description: Microsoft Windows Compatibility Layer
+ This package installs the stable version of WINE from WINEHQ, along with desktop files and libraries for WINE to work properly.
+ This is the recommended way to install WINE within Linux Mint.
+
+Package: xapp-appimage-thumbnailer
+Source: xapp-thumbnailers
+Version: 1.2.2
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 13
+Depends: xapp-thumbnailers-common, python3-pyelftools, squashfs-tools
+Priority: optional
+Section: gnome
+Filename: pool/main/x/xapp-thumbnailers/xapp-appimage-thumbnailer_1.2.2_all.deb
+Size: 3188
+SHA256: 80bbaddad2b8c9b3729ed932618816a4121ccd765da58e1b1f66ca5c679ed29f
+SHA1: f79efa7e87f8067c634b8a01a4791fbdd31740e4
+MD5sum: 526f67cea63ad05ff9a691f222e4f284
+Description: AppImage thumbnailer
+ Produces thumbnails for AppImage files.
+
+Package: xapp-epub-thumbnailer
+Source: xapp-thumbnailers
+Version: 1.2.2
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 13
+Depends: xapp-thumbnailers-common
+Priority: optional
+Section: gnome
+Filename: pool/main/x/xapp-thumbnailers/xapp-epub-thumbnailer_1.2.2_all.deb
+Size: 3044
+SHA256: 8f24dd530ae476d25db4a70a9d9e6b5997bd1da45dd8b3d7fa3d51562fe49f89
+SHA1: 6912ee226991beab264d978028d62aa7b108da5d
+MD5sum: cedba684f964774fbb0e12edfda77a3f
+Description: ePub thumbnailer
+ Produces thumbnails for ePub files.
+
+Package: xapp-mp3-thumbnailer
+Source: xapp-thumbnailers
+Version: 1.2.2
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 12
+Depends: xapp-thumbnailers-common, python3-eyed3
+Priority: optional
+Section: gnome
+Filename: pool/main/x/xapp-thumbnailers/xapp-mp3-thumbnailer_1.2.2_all.deb
+Size: 2692
+SHA256: 8e5e7a86477cd464721f97ecee4d471c89e020e2bcf06d953f36b01d2de107cb
+SHA1: 58dd0b9d29c87f75b1b1668404e60565ced82264
+MD5sum: 45ee21b087a3b7eaccfa76652883e75f
+Description: MP3 thumbnailer
+ Produces thumbnails for MP3 files.
+
+Package: xapp-raw-thumbnailer
+Source: xapp-thumbnailers
+Version: 1.2.2
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 12
+Depends: xapp-thumbnailers-common, dcraw
+Priority: optional
+Section: gnome
+Filename: pool/main/x/xapp-thumbnailers/xapp-raw-thumbnailer_1.2.2_all.deb
+Size: 2760
+SHA256: 7d2856ee28311e648f0e2613ac90626531b27549311fee9c5ba3d248b1200c64
+SHA1: 1f26954eee5941286900fc5ff375867e703ff9cb
+MD5sum: 918519400907f44768c24b5378c3eede
+Description: RAW thumbnailer
+ Produces thumbnails for RAW files.
+
+Package: xapp-symbolic-icons
+Version: 1.0.9
+Architecture: all
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Installed-Size: 1273
+Depends: python3
+Homepage: https://github.com/xapp-project/xapp-symbolic-icons
+Priority: optional
+Section: x11
+Filename: pool/main/x/xapp-symbolic-icons/xapp-symbolic-icons_1.0.9_all.deb
+Size: 136756
+SHA256: dd99f740af5f4d1c374f3116748ec8e8c6ca791d2ce666e711d7f735a1b52ba5
+SHA1: 8baeb2e5266e3efc6f3f894f44ab45072446df0e
+MD5sum: 876d23fe30f131da403537db408dc600
+Description: Set of symbolic icons for GTK applications
+ This package contains a set of symbolic icons which replaces the GNOME-specific
+ Adwaita set. All provided icons are prefixed with xsi- and places in
+ /usr/share/icons/hicolor. Icon names loosely follow the Adwaita names.
+
+Package: xapp-thumbnailers-common
+Source: xapp-thumbnailers
+Version: 1.2.2
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 16
+Depends: python3, python3-pil
+Priority: optional
+Section: gnome
+Filename: pool/main/x/xapp-thumbnailers/xapp-thumbnailers-common_1.2.2_all.deb
+Size: 3488
+SHA256: b8de4f63e0e001612ca00af1d79243fb0b186712b893a7b79e9bbcada935b29d
+SHA1: 7bd0e84d19a0d03e9cae0a45d39ead6d9bba1630
+MD5sum: 671379a523e5124c51546d9533babb1e
+Description: Common files for XApp thumbnailers
+ Common files for XApp thumbnailers.
+
+Package: xapp-vorbiscomment-thumbnailer
+Source: xapp-thumbnailers
+Version: 1.2.2
+Architecture: all
+Maintainer: Linux Mint <root@linuxmint.com>
+Installed-Size: 12
+Depends: xapp-thumbnailers-common, python3-mutagen
+Priority: optional
+Section: gnome
+Filename: pool/main/x/xapp-thumbnailers/xapp-vorbiscomment-thumbnailer_1.2.2_all.deb
+Size: 3012
+SHA256: ed539daa1147943fb86824ae0e8b6576bfff24efb540bb0ad4cf168f6173a8b7
+SHA1: a59de47ef9ce7b120713be10a5db1b1025332e4a
+MD5sum: 07dd41457747eaaca6e776d015ebcf0c
+Description: VorbisComment thumbnailer
+ Produces thumbnails for audio files with VorbisComment metadata,
+ such as FLAC and Ogg files.
+

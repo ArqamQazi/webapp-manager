@@ -1,0 +1,527 @@
+Package: appstream-glib-doc
+Source: appstream-glib
+Version: 0.7.18-2ubuntu1
+Architecture: all
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 1372
+Multi-Arch: foreign
+Homepage: https://github.com/hughsie/appstream-glib
+Priority: optional
+Section: doc
+Filename: pool/import/a/appstream-glib/appstream-glib-doc_0.7.18-2ubuntu1_all.deb
+Size: 78362
+SHA256: d42987aaa74661056cc327a9991ea26fc71ca92ed366ee565eccae0fde3be32f
+SHA1: 94571d41b393a8aed2077b570f26f2a83ef6a4b1
+MD5sum: ea11a5cede56485618a95ea3ec0a721e
+Description: Developer documentation for the libappstream-glib library
+ AppStream is a cross-distribution effort for creating and sharing
+ metadata about software components available in the package repositories
+ of a distribution.
+ .
+ This package provides developer documentation for the
+ libappstream-glib library.
+Original-Maintainer: PkgUtopia Team <team+pkgutopia-team@tracker.debian.org>
+
+Package: appstream-util
+Source: appstream-glib
+Version: 0.7.18-2ubuntu1
+Architecture: amd64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 801
+Depends: libappstream-glib8 (>= 0.7.16), libc6 (>= 2.34), libgdk-pixbuf-2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.58.0), libsoup2.4-1 (>= 2.52)
+Breaks: appdata-tools (<< 0.3.4)
+Replaces: appdata-tools (<< 0.3.4)
+Homepage: https://github.com/hughsie/appstream-glib
+Priority: optional
+Section: admin
+Filename: pool/import/a/appstream-glib/appstream-util_0.7.18-2ubuntu1_amd64.deb
+Size: 156452
+SHA256: d4e0bb5833e2a46e1cbf7ef9b6ba09676e8d0ed4f7546117f1552940a544ad72
+SHA1: 1dc7e7c563180d97511dad5ee44227506611d914
+MD5sum: b1f43492e8cca11f45e62f48d2f337f9
+Description: Utility to work with AppStream metadata
+ AppStream is a cross-distribution effort for creating and sharing
+ metadata about software components available in the package repositories
+ of a distribution.
+ .
+ This package provides an utility to work with AppStream metadata, which uses
+ libappstream-glib.
+ .
+ It also contains Autotools macros to easily integrate AppStream metadata into
+ an Autotools-based buildsystem, by running 'appstream-util' to validate the
+ files before installing them.
+Original-Maintainer: PkgUtopia Team <team+pkgutopia-team@tracker.debian.org>
+
+Package: boot-info
+Source: boot-repair
+Version: 4ppa200
+Architecture: all
+Maintainer: Yann Mrn <yannubuntu@protonmail.com>
+Installed-Size: 44
+Depends: boot-sav (>= 4ppa200)
+Homepage: https://launchpad.net/boot-info
+Priority: optional
+Section: admin
+Filename: pool/import/b/boot-repair/boot-info_4ppa200_all.deb
+Size: 10068
+SHA256: 37766862fd6e2131080b775cfa8ab8ad00d77139bd6a2058616333b84e73722f
+SHA1: 8d71562b182a71451dd52fe0edf73613cc3d5818
+MD5sum: cfda174214795eecfc250413e9cc63cb
+Description: Diagnose the boot of the computer
+ Boot-Info creates a report about your boot environment.
+ This can help diagnose boot issues, and find the best solution.
+ .
+ The report can be either opened in a text file, or uploaded
+ to a pastebin URL for easier sharing with people who help you.
+
+Package: boot-repair
+Version: 4ppa200
+Architecture: all
+Maintainer: Yann Mrn <yannubuntu@protonmail.com>
+Installed-Size: 63
+Depends: boot-sav (>= 4ppa200)
+Recommends: ntfsprogs | ntfs-3g (>= 1:2011.4.12AR.4)
+Homepage: https://launchpad.net/boot-repair
+Priority: optional
+Section: admin
+Filename: pool/import/b/boot-repair/boot-repair_4ppa200_all.deb
+Size: 15456
+SHA256: a1dc67543a45ad3169e16dd2190999891bd6ce3a8bb946514235e9c706995217
+SHA1: e2ad010ee10ecbce83f70712bf31299b384c098c
+MD5sum: 3f66c9fbdb5b4931916563a833ebd240
+Description: Graphical tool to repair boot problems
+ In some situation, you might loose access to one or several of
+ your operating systems, because of a buggy update, a bootloader
+ problem, or after installing a new OS (e.g. installing
+ Windows breaks Linux bootloader).
+ .
+ Boot-Repair is a graphical tool that will repair these problems,
+ generally by reinstalling GRUB, which then restores access to the
+ operating systems you had installed before the issue.
+ .
+ Boot-Repair also has advanced options to reinstall GRUB, add
+ kernel options, or restore a generic MBR.
+
+Package: boot-sav
+Source: boot-repair
+Version: 4ppa200
+Architecture: all
+Maintainer: Yann Mrn <yannubuntu@protonmail.com>
+Installed-Size: 2576
+Depends: gawk | mawk (>= 1.3.4), gettext-base, glade2script (>= 3.2.4~ppa23), lsb-release, parted, xdg-utils, xz-utils | xz-lzma | lzma, zenity
+Recommends: boot-sav-extra, efibootmgr, lshw, gdisk, mokutil, os-prober, pastebinit, syslinux-common | syslinux | mbr, zip
+Suggests: boot-info, boot-repair, cryptsetup, dmraid, lvm2, mdadm, os-uninstaller, zfsutils-linux
+Homepage: https://launchpad.net/boot-repair
+Priority: optional
+Section: admin
+Filename: pool/import/b/boot-repair/boot-sav_4ppa200_all.deb
+Size: 460668
+SHA256: 7c07198e81500de439db5fd960bb5277f498eece34c3e585394b972579c5bdde
+SHA1: 8f95b756c766834677b06b2006f8997c8337f733
+MD5sum: f908da7de2d313656ed41320028285b4
+Description: Librairies for Boot-Info, OS-uninstaller and Boot-repair
+ Common files for 3 tools related to boot:
+ Boot-Info,
+ OS-Uninstaller,
+ and Boot-Repair
+
+Package: boot-sav-extra
+Source: boot-repair
+Version: 4ppa200
+Architecture: all
+Maintainer: Yann Mrn <yannubuntu@protonmail.com>
+Installed-Size: 157
+Depends: boot-sav
+Homepage: https://launchpad.net/boot-repair
+Priority: optional
+Section: admin
+Filename: pool/import/b/boot-repair/boot-sav-extra_4ppa200_all.deb
+Size: 146096
+SHA256: 39c665d4b62c5b0f9677e578c1ba9d0c6bf187401a6444a1b926d66b96218cac
+SHA1: 2b07689d21c874544dd0f66f289faf6430bc670f
+MD5sum: d6b51a6895a601c8f130e43911d3f3c8
+Description: Extra librairies for OS-uninstaller and Boot-repair
+ Common files for 2 tools related to boot:
+ OS-Uninstaller,
+ and Boot-Repair
+
+Package: celluloid
+Version: 0.21-linuxmint1+vanessa
+Architecture: amd64
+Maintainer: Xu Zhen <xuzhen@fastmail.com>
+Installed-Size: 1041
+Depends: libc6 (>= 2.34), libcairo2 (>= 1.2.4), libepoxy0 (>= 1.0), libglib2.0-0 (>= 2.44), libgtk-3-0 (>= 3.22.23), libmpv1 (>= 0.29.0), libpango-1.0-0 (>= 1.14.0), libpangocairo-1.0-0 (>= 1.14.0), dconf-gsettings-backend | gsettings-backend, ffmpegthumbnailer
+Recommends: youtube-dl
+Breaks: gnome-mpv (<= 0.16)
+Replaces: gnome-mpv (<= 0.16)
+Homepage: https://github.com/gnome-mpv/gnome-mpv
+Priority: optional
+Section: video
+Filename: pool/import/c/celluloid/celluloid_0.21-linuxmint1+vanessa_amd64.deb
+Size: 235630
+SHA256: 4ee538c9b1ebfa6231952d2400cee0bcd637f62c6dac7d67246d76516251d901
+SHA1: 971ebfe72767c629816791b6b932e432902703be
+MD5sum: f569df8b2734ac9452d220a5cd8b0482
+Description: simple GTK+ frontend for mpv
+ Celluloid (formerly GNOME MPV) interacts with mpv via the client API exported
+ by libmpv, allowing access to mpv's powerful playback capabilities.
+
+Package: drawing
+Version: 1.0.2
+Architecture: all
+Maintainer: Romain F. T. <rrroschan@gmail.com>
+Installed-Size: 4970
+Depends: dconf-gsettings-backend | gsettings-backend, python3-gi (>= 3.30.0), python3-gi-cairo (>= 3.30.0), gir1.2-gtk-3.0 (>= 3.24.0)
+Homepage: https://maoschanz.github.io/drawing/
+Priority: optional
+Section: graphics
+Filename: pool/import/d/drawing/drawing_1.0.2_all.deb
+Size: 3370860
+SHA256: 3925d38d5135d505c727494fb7214227def6ad1741d008b59671b12013581469
+SHA1: d3b374a4fe754292c92e3dd3421556d0a363c2db
+MD5sum: d47adef88707068a19c1d0c1902963d2
+Description: Simple application to draw or edit pictures, for the GNOME desktop.
+ It includes tools such as Pencil, Selection, Shape, Text, Filter or Crop.
+
+Package: dropbox
+Version: 2020.03.04
+Architecture: amd64
+Maintainer: Dropbox <support@dropbox.com>
+Installed-Size: 331
+Depends: procps, python3-gi (>= 3.12), python3 (>= 3.4.0), libatk1.0-0 (>= 2.10), libc6 (>= 2.19), libcairo2 (>= 1.13), libglib2.0-0 (>= 2.40), libgtk-3-0 (>= 3.10.8), libpango1.0-0 (>= 1.36.3), lsb-release, gir1.2-gdkpixbuf-2.0 (>= 2.30.7), gir1.2-glib-2.0 (>= 1.40.0), gir1.2-gtk-3.0 (>= 3.10.8), gir1.2-pango-1.0 (>= 1.36.3)
+Suggests: nautilus (>= 3.10.1), python3-gpg (>= 1.8.0)
+Breaks: nautilus-dropbox
+Replaces: nautilus-dropbox
+Provides: nautilus-dropbox
+Homepage: https://www.dropbox.com/
+Priority: optional
+Section: gnome
+Filename: pool/import/d/dropbox/dropbox_2020.03.04_amd64.deb
+Size: 69360
+SHA256: e2ea3317e8e0e6dc9e1846f55f0bdfa74c178a0c729e7b1ac57b30bb12233c1b
+SHA1: 3ecaa3efd17c350018c42f4682b4e61f2d7cd5bb
+MD5sum: be8e45ec69d1ff0173af21322166962c
+Description: cloud synchronization engine - CLI and Nautilus extension
+ Dropbox is a free service that lets you bring your photos, docs, and videos
+ anywhere and share them easily.
+ .
+ This package provides a command-line tool and a Nautilus extension that
+ integrates the Dropbox web service with your GNOME Desktop.
+
+Package: gir1.2-appstreamglib-1.0
+Source: appstream-glib
+Version: 0.7.18-2ubuntu1
+Architecture: amd64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 98
+Depends: gir1.2-gdkpixbuf-2.0, gir1.2-glib-2.0 (>= 1.53), libappstream-glib8 (>= 0.7.18)
+Multi-Arch: same
+Homepage: https://github.com/hughsie/appstream-glib
+Priority: optional
+Section: introspection
+Filename: pool/import/a/appstream-glib/gir1.2-appstreamglib-1.0_0.7.18-2ubuntu1_amd64.deb
+Size: 23398
+SHA256: 62ce59f7f518ae0dcb6f77231ce6dcfd65dd5da34342fb8bab2c17f200863290
+SHA1: f8b4b898a4c719c02a04798012aa232bd789d318
+MD5sum: 394e9c48c59f8931df2b0bb939f1e79e
+Description: GObject introspection data for the libappstream-glib library
+ AppStream is a cross-distribution effort for creating and sharing
+ metadata about software components available in the package repositories
+ of a distribution.
+ .
+ This package contains introspection data for the libappstream-glib library.
+Original-Maintainer: PkgUtopia Team <team+pkgutopia-team@tracker.debian.org>
+
+Package: glade2script
+Version: 3.2.4~ppa23
+Architecture: all
+Maintainer: Yann MRN <yannubuntu@protonmail.com>
+Installed-Size: 9
+Depends: glade2script-python3 | glade2script-python2
+Homepage: https://launchpad.net/glade2script
+Priority: optional
+Section: devel
+Filename: pool/import/g/glade2script/glade2script_3.2.4~ppa23_all.deb
+Size: 2204
+SHA256: da01af7ca6683b1e47cb837b874864eed366017ab2fc1817a04fdebe53bc6eb7
+SHA1: 42ac21dbe4b7f50ad1f3c78ab718331f40b647cb
+MD5sum: 4ac90357f5851b1f61163fc4490b9011
+Description: Glade interface engine for scripts
+ Glade2script allows a script (Bash, Python or other) to display and
+ interact with a GUI (created with Glade).
+ .
+ Most of the opportunities offered by Gtk are available. A terminal
+ (vte) and/or webkit are integrable. One can also embed an external
+ application that supports it natively, like mplayer or gvim. A plugin
+ system was added to extend G2S capability.
+ .
+ Documentation, many examples, and an interface giving access to the
+ archive supports (simply install and run glade2script-doc).
+ .
+ Glade2script is used by several software, such as Boot-Repair,
+ OS-Uninstaller, Debeditor, DeskWall, GUnity, LaunchBash, Malokal,
+ mkv_extractor_gui, Screencastor, Sylaba2, Xee, Zenitor.
+ Glade2script allows a script (Bash, Python or other) to display and
+ interact with a GUI (created with Glade).
+
+Package: glade2script-python2
+Source: glade2script
+Version: 3.2.4~ppa23
+Architecture: all
+Maintainer: Yann MRN <yannubuntu@protonmail.com>
+Installed-Size: 198
+Depends: python2 | python, python2-gi | python-gi, gir1.2-gtk-3.0
+Recommends: gir1.2-notify-0.7
+Suggests: gir1.2-appindicator3-0.1
+Homepage: https://launchpad.net/glade2script
+Priority: optional
+Section: devel
+Filename: pool/import/g/glade2script/glade2script-python2_3.2.4~ppa23_all.deb
+Size: 35856
+SHA256: b455762e6511038e6dc7bfc8ffa2524f7f40cc98578b8d18f1164e17b9256411
+SHA1: 466af89095e132840d53bfe2bbb1b2d7d819bbdf
+MD5sum: 30b2cd4322196f49041322ce8e97ab61
+Description: Glade interface engine for scripts (Python2 version)
+ Python2 version of Glade2script for retrocompatibility purpose.
+ .
+ The python3 version is recommended when possible.
+
+Package: glade2script-python3
+Source: glade2script
+Version: 3.2.4~ppa23
+Architecture: all
+Maintainer: Yann MRN <yannubuntu@protonmail.com>
+Installed-Size: 199
+Depends: python3, python3-gi, gir1.2-gtk-3.0
+Recommends: gir1.2-notify-0.7
+Suggests: gir1.2-appindicator3-0.1
+Homepage: https://launchpad.net/glade2script
+Priority: optional
+Section: devel
+Filename: pool/import/g/glade2script/glade2script-python3_3.2.4~ppa23_all.deb
+Size: 35932
+SHA256: cd6856de89288725c8de4570fdb71aa026e018564b98454a4fe269de371edc5c
+SHA1: e0e81038aece845699a7bbd1ec3e453f70080f16
+MD5sum: 1f1cc01d825f494052fce350363678d3
+Description: Glade interface engine for scripts (Python3 version)
+ Glade2script allows a script (Bash, Python or other) to display and
+ interact with a GUI (created with Glade).
+
+Package: gnome-mpv
+Source: celluloid
+Version: 0.21-linuxmint1+vanessa
+Architecture: all
+Maintainer: Xu Zhen <xuzhen@fastmail.com>
+Installed-Size: 9
+Depends: celluloid
+Homepage: https://github.com/gnome-mpv/gnome-mpv
+Priority: optional
+Section: video
+Filename: pool/import/c/celluloid/gnome-mpv_0.21-linuxmint1+vanessa_all.deb
+Size: 2314
+SHA256: 4a12a58c9c8030f982e687a95fd479a5e81fc29faa94054a32966ecc44da6ae8
+SHA1: 31e7bb3e2ccfccb33db167f1a0fc4c8d439074c2
+MD5sum: 792c5232fec0790e14446a7e89f52351
+Description: transitional dummy package
+ This is a transitional dummy package, it can be safely removed.
+
+Package: google-earth-pro-stable
+Version: 7.3.6.9345-r0
+Architecture: amd64
+Maintainer: Google Earth Team <google-earth-support@google.com>
+Installed-Size: 249922
+Pre-Depends: dpkg (>= 1.14.0)
+Depends: libasound2, libc6, libcups2, libdbus-1-3, libfontconfig1, libfreetype6, libgcc1, libglib2.0-0, libglu1-mesa, libgstreamer1.0-0, libgstreamer-plugins-base1.0-0, libproxy1 | libproxy1v5, libsm6, libstdc++6, libx11-6, libx11-xcb1, libxcb1, libxext6, libxml2, libxrender1, libxtst6
+Priority: optional
+Section: net
+Filename: pool/import/g/google-earth-pro-stable/google-earth-pro-stable_7.3.6.9345-r0_amd64.deb
+Size: 57717580
+SHA256: 88e8b1a8e09f08c8daac8e21d803d19203a725e1ff8437a65dc8fba753a12c3e
+SHA1: 6cbf2770e545a6f2bec54e7cab5c9b8f2f86a9ee
+MD5sum: 0c801e2c22c42d47210bae598cbece1d
+Description: Explore, search and discover the planet
+ Google Earth lets you fly anywhere to see satellite imagery, 3D buildings, 3D trees, terrain, Street View, planets and much more.
+
+Package: libappstream-glib-dev
+Source: appstream-glib
+Version: 0.7.18-2ubuntu1
+Architecture: amd64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 1004
+Depends: gir1.2-appstreamglib-1.0 (= 0.7.18-2ubuntu1), libappstream-glib8 (= 0.7.18-2ubuntu1), libarchive-dev, libgcab-dev (>= 0.6), libgdk-pixbuf-2.0-dev | libgdk-pixbuf2.0-dev, libglib2.0-dev (>= 2.58.0), libsoup2.4-dev (>= 2.52), libyaml-dev, uuid-dev
+Multi-Arch: same
+Homepage: https://github.com/hughsie/appstream-glib
+Priority: optional
+Section: libdevel
+Filename: pool/import/a/appstream-glib/libappstream-glib-dev_0.7.18-2ubuntu1_amd64.deb
+Size: 70024
+SHA256: 5ab7ec220ec8d3e1b2ec2d5237123ee8f1fe9e2f88efe879df6c1d1a2c903fc7
+SHA1: 9fa9019abe3331052457b971cc8e989a28c37755
+MD5sum: c08920bc41d73d3d6ef979cd21ff7be3
+Description: GNOME library to access AppStream services (development files)
+ AppStream is a cross-distribution effort for creating and sharing
+ metadata about software components available in the package repositories
+ of a distribution.
+ .
+ This package contains development files necessary to develop
+ tools which use the libappstream-glib library.
+Original-Maintainer: PkgUtopia Team <team+pkgutopia-team@tracker.debian.org>
+
+Package: libappstream-glib8
+Source: appstream-glib
+Version: 0.7.18-2ubuntu1
+Architecture: amd64
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Installed-Size: 459
+Depends: libarchive13 (>= 3.0.4), libc6 (>= 2.14), libgdk-pixbuf-2.0-0 (>= 2.25.2), libglib2.0-0 (>= 2.58.0), libsoup2.4-1 (>= 2.52), libstemmer0d (>= 0+svn527), libuuid1 (>= 2.16), libyaml-0-2
+Multi-Arch: same
+Homepage: https://github.com/hughsie/appstream-glib
+Priority: optional
+Section: libs
+Filename: pool/import/a/appstream-glib/libappstream-glib8_0.7.18-2ubuntu1_amd64.deb
+Size: 155944
+SHA256: 6a3d4086ec656ae2a6d8b3667e1d1f4449c32f48c781b827684f81b5bc364cb4
+SHA1: cb34f81a94e6c938f18b8ce8b3cba7b872346f1a
+MD5sum: 386556b7863166c6fa59c4525937c518
+Description: GNOME library to access AppStream services
+ AppStream is a cross-distribution effort for creating and sharing
+ metadata about software components available in the package repositories
+ of a distribution.
+ .
+ This package contains a GObject-based library to read and write AppStream
+ XML metadata and retrieve additional data such as screenshots.
+ .
+ As opposed to libappstream, this library does not use an on-disk cache but
+ reads data directly from the XML or DEP-11 YAML files.
+Original-Maintainer: PkgUtopia Team <team+pkgutopia-team@tracker.debian.org>
+
+Package: libdvdcss2
+Source: libdvdcss
+Version: 1.4.2-dmo1
+Architecture: amd64
+Bugs: marillat@deb-multimedia.org
+Maintainer: Christian Marillat <marillat@deb-multimedia.org>
+Installed-Size: 86
+Depends: libc6 (>= 2.7)
+Replaces: libdvdcss-dev (<= 0.0.3-3), libdvdcss0 (<= 1.0.0-0.0), libdvdcss2-dev (<= 1.2.10-0.0)
+Provides: libdvdcss
+Multi-Arch: same
+Homepage: http://download.videolan.org/
+Priority: optional
+Section: libs
+Filename: pool/import/libd/libdvdcss/libdvdcss2_1.4.2-dmo1_amd64.deb
+Size: 56928
+SHA256: bc8acb583178f05c0e9b154ca743e3cb6d43498a6cc2e4ce44b866cf2be63088
+SHA1: e70bbcd7f55dc2a48bdfe9bdb995c2999093ce84
+MD5sum: 67ab0b600e04bacc1926d7d26ef6dd31
+Description: Simple foundation for reading DVDs - runtime libraries
+ To allow applications to access some of the more advanced features
+ of the DVD format.
+
+Package: os-uninstaller
+Source: boot-repair
+Version: 4ppa200
+Architecture: all
+Maintainer: Yann Mrn <yannubuntu@protonmail.com>
+Installed-Size: 62
+Depends: boot-sav (>= 4ppa200)
+Homepage: https://launchpad.net/os-uninstaller
+Priority: optional
+Section: admin
+Filename: pool/import/b/boot-repair/os-uninstaller_4ppa200_all.deb
+Size: 15600
+SHA256: fe76bc8af1ad5668b1352e092044c2a072d5d12cb44b41b1d6aa91f5157c2d25
+SHA1: dcc5823831e4e6fd93a70532846f91c13f258be9
+MD5sum: f422f20e677a90e86fab89dae434b1fe
+Description: Operating System Uninstaller
+ When you have several operating systems (Windows, MacOS, GNU/Linux ..)
+ installed on your computer, you may want to remove one of them.
+ .
+ OS-Uninstaller is a graphical tool that will let you choose the system
+ you want to remove, and uninstall it very easily. After your
+ confirmation, it will format the selected system, and update the
+ bootloader so that you will still access your other remaining systems.
+ .
+ OS-Uninstaller also has advanced options for OS formatting, and
+ bootloader updating.
+
+Package: skypeforlinux
+Version: 8.98.0.206
+Architecture: amd64
+Maintainer: Skype Technologies S.A. <info@skype.net>
+Installed-Size: 317727
+Depends: libasound2 (>= 1.0.16), libatk-bridge2.0-0 (>= 2.5.3), libatk1.0-0 (>= 2.2.0), libatspi2.0-0 (>= 2.9.90), libc6 (>= 2.17), libcairo2 (>= 1.6.0), libdrm2 (>= 2.4.38), libexpat1 (>= 2.0.1), libgbm1 (>= 17.1.0~rc2), libgcc1 (>= 1:3.0), libglib2.0-0 (>= 2.39.4), libgtk-3-0 (>= 3.9.10), libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.22), libpango-1.0-0 (>= 1.14.0), libsecret-1-0 (>= 0.18), libx11-6 (>= 2:1.4.99.1), libxcb1 (>= 1.9.2), libxcomposite1 (>= 1:0.3-1), libxdamage1 (>= 1:1.1), libxext6, libxfixes3, libxkbcommon0 (>= 0.5.0), libxrandr2, gnome-keyring, apt-transport-https, libfontconfig1 (>= 2.11.0), libdbus-1-3 (>= 1.6.18), libstdc++6 (>= 4.8.1), libatomic1
+Homepage: https://www.skype.com
+Priority: extra
+Section: non-free/net
+Filename: pool/import/s/skypeforlinux/skypeforlinux_8.98.0.206_amd64.deb
+Size: 125269498
+SHA256: 80bc8fa9b2d334b8031f74cc32862dff372cdf6418b1ab23479323434b4afad1
+SHA1: 31503df21960922b350a9c0ae7a4f6164b1b0aa0
+MD5sum: a259f899031dd73ad4093c0a61e00954
+Description: Skype keeps the world talking, for free.
+ Skype keeps you together. Call, message and share with others.
+  * It's free to download and join.
+  * Call, instant message and send photos and documents to anyone else on Skype.
+  * Easily text message anywhere in the world.
+  * Get your friends together on a group call.
+ And that's just the start...
+
+Package: spotify-client
+Version: 1:1.2.63.394.g126b0d89
+Architecture: amd64
+Depends: libc6 (>= 2.30), libasound2, libatk-bridge2.0-0, libatomic1, libgbm1, libglib2.0-0, libgtk-3-0, libnss3, libxshmfence1, libxss1, libxtst6, xdg-utils, libayatana-appindicator3-1
+Recommends: libavcodec58 | libavcodec-extra58 | libavcodec57 | libavcodec-extra57 | libavcodec-ffmpeg56 | libavcodec-ffmpeg-extra56 | libavcodec54 | libavcodec-extra-54, libavformat58 | libavformat57 | libavformat-ffmpeg56 | libavformat54
+Suggests: libnotify4
+Maintainer: Spotify <tux@spotify.com>
+Priority: optional
+Section: sound
+Filename: pool/import/s/spotify-client/spotify-client_1.2.63.394.g126b0d89_amd64.deb
+Size: 147984434
+SHA256: 99c229f829ccb9c2a188be80d1241d2b8c8fd35f1e8d773438c0f612d68e940e
+SHA1: 368a64a72c850f1d901201f1bec01e9b9ce84695
+MD5sum: a27994e079061e9e8595cf40487cd69f
+Description: Spotify streaming music client
+Homepage: https://www.spotify.com
+License: https://www.spotify.com/legal/end-user-agreement
+
+Package: touchegg
+Version: 2.0.16+victoria
+Architecture: amd64
+Maintainer: José Expósito <jose.exposito89@gmail.com>
+Installed-Size: 362
+Depends: libc6 (>= 2.34), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.3.1), libglib2.0-0 (>= 2.68.0), libgtk-3-0 (>= 3.19.12), libinput10 (>= 0.21.0), libpugixml1v5 (>= 1.4), libstdc++6 (>= 11), libudev1 (>= 183), libx11-6, libxi6 (>= 2:1.2.99.4), libxrandr2 (>= 2:1.2.99.2), libxtst6
+Homepage: https://github.com/JoseExposito/touchegg
+Priority: optional
+Section: misc
+Filename: pool/import/t/touchegg/touchegg_2.0.16+victoria_amd64.deb
+Size: 113620
+SHA256: 6bcb6c602030ca3da2ed00474f0909c8a99ce0c51c4cfcb1bd549d4d3850fcd5
+SHA1: 9492e691c3b79273d4c4beb9ad9fe4d6393bf487
+MD5sum: 6d5599520e44e0b84b23be93cd6c5ea3
+Description: Multi-touch gesture recognizer
+ Touchégg is an app that runs in the background and transform the gestures you
+ make in your touchpad into visible actions in your desktop.
+ For example, you can swipe up with 3 fingers to maximize a window or swipe left
+ with 4 finger to switch to the next desktop.
+
+Package: webp-pixbuf-loader
+Version: 0.0.5-5
+Architecture: amd64
+Maintainer: David Heidelberg <david@ixit.cz>
+Installed-Size: 47
+Depends: libc6 (>= 2.14), libgdk-pixbuf-2.0-0 (>= 2.38.1), libglib2.0-0 (>= 2.37.3), libwebp7, libwebpdemux2
+Homepage: https://github.com/aruiz/webp-pixbuf-loader/
+Priority: optional
+Section: gnome
+Filename: pool/import/w/webp-pixbuf-loader/webp-pixbuf-loader_0.0.5-5_amd64.deb
+Size: 11272
+SHA256: b457f373e5f6852f0bca609dd10a885aa87499e94a133b111353a4a4c9b8dca6
+SHA1: 956e3b448cc09cfde5044d52adc014f3d0b34669
+MD5sum: 4eacd7e78cfc709f6a54ea387dfd17e7
+Description: WebP Image format GdkPixbuf loader
+ webp-pixbuf-loader integrates libwebp library into GDK image processing
+ framework, so GDK based application can use WEBP format natively.
+ .
+ This allows GTK applications preview and load pictures in WEBP format.
+

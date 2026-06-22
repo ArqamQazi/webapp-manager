@@ -1,0 +1,158 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: xapp-symbolic-icons
+Upstream-Contact: https://github.com/xapp-project/xapp-symbolic-icons
+Source: https://github.com/xapp-project/xapp-symbolic-icons
+
+
+Files:
+ icons/symbolic/xsi-applications-electronics-symbolic.svg
+ icons/symbolic/xsi-applications-education-symbolic.svg
+Copyright:
+ © Ionicons contributors
+License: MIT
+Source: https://github.com/ionic-team/ionicons
+Comment: Icons may include modifications.
+
+
+Files:
+ icons/symbolic/xsi-preferences-symbolic.svg
+Copyright:
+ © Will Kelly
+License: MIT
+Source: https://ikono.will-kelly.co.uk
+Comment: Ikono Bold Line Icons. Icons may include modifications. https://www.svgrepo.com/author/Will%20Kelly/.
+
+
+Files:
+ icons/symbolic/xsi-applications-development-symbolic.svg
+Copyright:
+ © Denali Design
+License: MIT
+Source: https://github.com/denali-design/denali-icons
+Comment: Denali Icons. Icons may include modifications. https://www.svgrepo.com/author/Denali%20Design/.
+
+
+Files:
+ icons/symbolic/xsi-boot-menu-symbolic.svg
+Copyright:
+ © Akveo team
+License: MIT
+Source: https://github.com/akveo/eva-icons
+Comment: Eva Icons. Icons may include modifications. https://staging.svgrepo.com/author/Eva%20Icons/.
+
+
+Files:
+ icons/symbolic/xsi-applications-wine-symbolic.svg
+Copyright:
+ © phosphor-icons
+License: MIT
+Source: https://github.com/phosphor-icons/web
+Comment: Phosphor Icons. Icons may include modifications. https://staging.svgrepo.com/author/phosphor/.
+
+
+Files:
+ icons/symbolic/xsi-applications-office-symbolic.svg
+Copyright:
+ © Siemens AG
+License: MIT
+Source: https://github.com/siemens/ix-icons
+Comment: Siemens Industrial Experience Icons. Icons may include modifications. https://www.svgrepo.com/author/Siemens/.
+
+
+Files:
+ icons/symbolic/xsi-applications-other-symbolic.svg
+ icons/symbolic/xsi-git-pr-symbolic.svg
+ icons/symbolic/xsi-git-symbolic.svg
+ icons/symbolic/xsi-github-symbolic.svg
+Copyright:
+ © GitLab Inc.
+License: MIT
+Source: https://gitlab.com/gitlab-org/gitlab-services/design.gitlab.com/-/tree/main/packages/gitlab-svgs
+Comment: gitlab-svgs. Icons may include modifications. https://www.svgrepo.com/collection/gitlab-interface-icons/.
+
+
+Files:
+ icons/symbolic/xsi-applications-internet.svg
+ icons/symbolic/xsi-group-symbolic.svg
+ icons/symbolic/xsi-cpu-symbolic.svg
+ icons/symbolic/xsi-ram-symbolic.svg
+ icons/symbolic/xsi-temperature-symbolic.svg
+ icons/symbolic/xsi-user-favorites-symbolic.svg
+Copyright:
+ None
+License: CC0
+Comment: Public domain license. No copyright.
+
+
+Files:
+ icons/symbolic/xsi-power-profile-balanced-symbolic.svg
+ icons/symbolic/xsi-power-profile-performance-symbolic.svg
+ icons/symbolic/xsi-power-profile-power-symbolic.svg
+Copyright:
+ © Yaru Contributors
+License: CC-BY-SA-4.0
+Source: https://github.com/ubuntu/yaru
+Comment: Derived from the Yaru icon theme; icons may include modifications.
+
+
+Files: icons/symbolic/*
+Copyright:
+ © GNOME Project
+License: LGPL-3
+Comment: Derived from the Adwaita Icon Theme; icons may include modifications.
+
+
+Files:
+ debian/*
+ icons/*.py
+ icons/*.in
+Copyright:
+ © xapp-symbolic-icons
+License: LGPL-3
+
+
+License: LGPL-3
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License as published
+ by the Free Software Foundation; version 3 of the License.
+ .
+ On Debian systems, the complete text of the GNU Lesser General Public
+ License version 3 can be found in
+ /usr/share/common-licenses/LGPL-3.
+
+
+License: MIT
+ Permission is hereby granted, free of charge, to any person obtaining a
+ copy of this software and associated documentation files (the "Software"),
+ to deal in the Software without restriction, including without limitation
+ the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ and/or sell copies of the Software, and to permit persons to whom the
+ Software is furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ DEALINGS IN THE SOFTWARE.
+
+
+License: CC0
+ Creative Commons CC0 1.0 Universal
+ .
+ For the full license text, see:
+ https://creativecommons.org/publicdomain/zero/1.0/
+
+
+License: CC-BY-SA-4.0
+ Creative Commons Attribution-ShareAlike 4.0 International
+ .
+ This work is licensed under the Creative Commons Attribution-ShareAlike
+ 4.0 International License.
+ .
+ For the full license text, see:
+ https://creativecommons.org/licenses/by-sa/4.0/
