@@ -27,7 +27,7 @@ setproctitle.setproctitle("webapp-manager")
 
 # i18n
 APP = 'webapp-manager'
-LOCALE_DIR = "/usr/share/locale"
+LOCALE_DIR = os.environ.get("APPDIR", "") + "/usr/share/locale"
 locale.bindtextdomain(APP, LOCALE_DIR)
 gettext.bindtextdomain(APP, LOCALE_DIR)
 gettext.textdomain(APP)
@@ -67,7 +67,7 @@ class WebAppManagerWindow:
         self.icon_theme = Gtk.IconTheme.get_default()
 
         # Set the Glade file
-        gladefile = "/usr/share/webapp-manager/webapp-manager.ui"
+        gladefile = os.environ.get("APPDIR", "") + "/usr/share/webapp-manager/webapp-manager.ui"
         self.builder = Gtk.Builder()
         self.builder.set_translation_domain(APP)
         self.builder.add_from_file(gladefile)
@@ -220,7 +220,7 @@ class WebAppManagerWindow:
         cell.set_property("surface", surface)
 
     def open_keyboard_shortcuts(self, widget):
-        gladefile = "/usr/share/webapp-manager/shortcuts.ui"
+        gladefile = os.environ.get("APPDIR", "") + "/usr/share/webapp-manager/shortcuts.ui"
         builder = Gtk.Builder()
         builder.set_translation_domain(APP)
         builder.add_from_file(gladefile)

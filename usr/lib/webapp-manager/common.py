@@ -42,7 +42,7 @@ def idle(func):
 
 # i18n
 APP = 'webapp-manager'
-LOCALE_DIR = "/usr/share/locale"
+LOCALE_DIR = os.environ.get("APPDIR", "") + "/usr/share/locale"
 locale.bindtextdomain(APP, LOCALE_DIR)
 gettext.bindtextdomain(APP, LOCALE_DIR)
 gettext.textdomain(APP)
