@@ -238,6 +238,7 @@ class WebAppManager:
                 Browser(BROWSER_TYPE_CHROMIUM, "Chromium (Snap)", "chromium", "/snap/bin/chromium"),
                 Browser(BROWSER_TYPE_CHROMIUM, "Chromium (Bin)", "chromium-bin", "/usr/bin/chromium-bin-browser"),
                 Browser(BROWSER_TYPE_CHROMIUM, "Ungoogled Chromium", "ungoogled-chromium", "/usr/bin/ungoogled-chromium"),
+                Browser(BROWSER_TYPE_CHROMIUM, "Brave Origin", "brave-origin", "/usr/bin/brave-origin"),
                 Browser(BROWSER_TYPE_EPIPHANY, "Epiphany", "epiphany", "/usr/bin/epiphany"),
                 Browser(BROWSER_TYPE_FIREFOX,  "LibreWolf", "librewolf", "/usr/bin/librewolf"),
                 Browser(BROWSER_TYPE_LIBREWOLF_FLATPAK,  "LibreWolf (Flatpak)", "/var/lib/flatpak/exports/bin/io.gitlab.librewolf-community", "/var/lib/flatpak/exports/bin/io.gitlab.librewolf-community"),
@@ -368,7 +369,7 @@ class WebAppManager:
 
 
     def get_exec_string(self, browser, codename, custom_parameters, icon, isolate_profile, navbar, privatewindow, url):
-        if browser.browser_type in [BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_ZEN_FLATPAK]:
+        if browser.browser_type in [BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_ZEN_FLATPAK, BROWSER_TYPE_WATERFOX_FLATPAK]:
             # Firefox based
             if browser.browser_type == BROWSER_TYPE_FIREFOX:
                 firefox_profiles_dir = FIREFOX_PROFILES_DIR
@@ -376,6 +377,8 @@ class WebAppManager:
                 firefox_profiles_dir = FIREFOX_FLATPAK_PROFILES_DIR
             elif browser.browser_type == BROWSER_TYPE_ZEN_FLATPAK:
                 firefox_profiles_dir = ZEN_FLATPAK_PROFILES_DIR
+            elif browser.browser_type == BROWSER_TYPE_WATERFOX_FLATPAK:
+                firefox_profiles_dir = WATERFOX_FLATPAK_PROFILES_DIR
             else:
                 firefox_profiles_dir = FIREFOX_SNAP_PROFILES_DIR
             firefox_profile_path = os.path.join(firefox_profiles_dir, codename)
