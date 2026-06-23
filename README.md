@@ -58,3 +58,21 @@ Press <kbd>Ctrl</kbd>+<kbd>N</kbd> to open a new window.
 Navigate to https://chrome.google.com/webstore/category/extensions
 
 Now add the extension.
+
+Build Process
+=============
+
+To compile the translation files, you can use:
+```bash
+make
+```
+
+To build a debian package:
+```bash
+dpkg-buildpackage -us -uc
+```
+
+To build the AppImage, ensure you have the required dependencies and run:
+```bash
+./appimage-builder-x86_64.AppImage --recipe AppImageBuilder.yml
+```
