@@ -369,7 +369,7 @@ class WebAppManager:
 
 
     def get_exec_string(self, browser, codename, custom_parameters, icon, isolate_profile, navbar, privatewindow, url):
-        if browser.browser_type in [BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_ZEN_FLATPAK, BROWSER_TYPE_WATERFOX_FLATPAK]:
+        if browser.browser_type in [BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_ZEN_FLATPAK, BROWSER_TYPE_WATERFOX_FLATPAK, BROWSER_TYPE_LIBREWOLF_FLATPAK, BROWSER_TYPE_FLOORP_FLATPAK]:
             # Firefox based
             if browser.browser_type == BROWSER_TYPE_FIREFOX:
                 firefox_profiles_dir = FIREFOX_PROFILES_DIR
@@ -379,46 +379,12 @@ class WebAppManager:
                 firefox_profiles_dir = ZEN_FLATPAK_PROFILES_DIR
             elif browser.browser_type == BROWSER_TYPE_WATERFOX_FLATPAK:
                 firefox_profiles_dir = WATERFOX_FLATPAK_PROFILES_DIR
+            elif browser.browser_type == BROWSER_TYPE_LIBREWOLF_FLATPAK:
+                firefox_profiles_dir = LIBREWOLF_FLATPAK_PROFILES_DIR
+            elif browser.browser_type == BROWSER_TYPE_FLOORP_FLATPAK:
+                firefox_profiles_dir = FLOORP_FLATPAK_PROFILES_DIR
             else:
                 firefox_profiles_dir = FIREFOX_SNAP_PROFILES_DIR
-            firefox_profile_path = os.path.join(firefox_profiles_dir, codename)
-            exec_string = ("sh -c 'XAPP_FORCE_GTKWINDOW_ICON=\"" + icon + "\" " + browser.exec_path +
-                           " --class WebApp-" + codename +
-                           " --name WebApp-" + codename +
-                           " --profile " + firefox_profile_path +
-                           " --no-remote")
-            if privatewindow:
-                exec_string += " --private-window"
-            if custom_parameters:
-                exec_string += " {}".format(custom_parameters)
-            exec_string += " \"" + url + "\"" + "'"
-            # Create a Firefox profile
-            shutil.copytree('/usr/share/webapp-manager/firefox/profile', firefox_profile_path, dirs_exist_ok = True)
-            if navbar:
-                shutil.copy('/usr/share/webapp-manager/firefox/userChrome-with-navbar.css',
-                            os.path.join(firefox_profile_path, "chrome", "userChrome.css"))
-        elif browser.browser_type == BROWSER_TYPE_LIBREWOLF_FLATPAK:
-            # LibreWolf flatpak
-            firefox_profiles_dir = LIBREWOLF_FLATPAK_PROFILES_DIR
-            firefox_profile_path = os.path.join(firefox_profiles_dir, codename)
-            exec_string = ("sh -c 'XAPP_FORCE_GTKWINDOW_ICON=\"" + icon + "\" " + browser.exec_path +
-                           " --class WebApp-" + codename +
-                           " --name WebApp-" + codename +
-                           " --profile " + firefox_profile_path +
-                           " --no-remote")
-            if privatewindow:
-                exec_string += " --private-window"
-            if custom_parameters:
-                exec_string += " {}".format(custom_parameters)
-            exec_string += " \"" + url + "\"" + "'"
-            # Create a Firefox profile
-            shutil.copytree('/usr/share/webapp-manager/firefox/profile', firefox_profile_path, dirs_exist_ok = True)
-            if navbar:
-                shutil.copy('/usr/share/webapp-manager/firefox/userChrome-with-navbar.css',
-                            os.path.join(firefox_profile_path, "chrome", "userChrome.css"))
-        elif browser.browser_type == BROWSER_TYPE_FLOORP_FLATPAK:
-            # Floorp flatpak
-            firefox_profiles_dir = FLOORP_FLATPAK_PROFILES_DIR
             firefox_profile_path = os.path.join(firefox_profiles_dir, codename)
             exec_string = ("sh -c 'XAPP_FORCE_GTKWINDOW_ICON=\"" + icon + "\" " + browser.exec_path +
                            " --class WebApp-" + codename +
