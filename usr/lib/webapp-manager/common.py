@@ -408,9 +408,9 @@ class WebAppManager:
                 exec_string += " {}".format(custom_parameters)
             exec_string += " \"" + url + "\"" + "'"
             # Create a Firefox profile
-            shutil.copytree('/usr/share/webapp-manager/firefox/profile', firefox_profile_path, dirs_exist_ok = True)
+            shutil.copytree(os.environ.get("APPDIR", "") + '/usr/share/webapp-manager/firefox/profile', firefox_profile_path, dirs_exist_ok = True)
             if navbar:
-                shutil.copy('/usr/share/webapp-manager/firefox/userChrome-with-navbar.css',
+                shutil.copy(os.environ.get("APPDIR", "") + '/usr/share/webapp-manager/firefox/userChrome-with-navbar.css',
                             os.path.join(firefox_profile_path, "chrome", "userChrome.css"))
         elif browser.browser_type == BROWSER_TYPE_EPIPHANY:
             # Epiphany based
