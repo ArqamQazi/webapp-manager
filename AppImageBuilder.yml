@@ -7,7 +7,7 @@ AppDir:
     id: com.linuxmint.webapp-manager
     name: WebApp Manager
     icon: webapp-manager
-    version: 1.3.4
+    version: 1.4.8
     exec: usr/bin/python3
     exec_args: "$APPDIR/usr/lib/webapp-manager/webapp-manager.py $@"
 
@@ -32,13 +32,16 @@ AppDir:
       - xapp-symbolic-icons
       - xapps-common
       - gir1.2-gtk-3.0
-      - webapp-manager
       - librsvg2-common
       - adwaita-icon-theme
       - hicolor-icon-theme
     exclude:
       - dpkg
 
+  after_bundle: |
+    cp -r usr/* AppDir/usr/
+    cp -r etc/* AppDir/etc/
+    
   test:
     ubuntu:
       image: appimagecrafters/tests-env:ubuntu-22.04
