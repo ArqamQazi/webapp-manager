@@ -1,3 +1,11 @@
+webapp-manager (1.4.8) zena; urgency=medium
+
+  * Fix WM_CLASS being set to webapp-manager.py
+  * Fix firefox profile template paths for AppImage compatibility
+  * Fix UI paths for AppImage compatibility using APPDIR
+
+ -- ArqamQazi <arqamqazi549@gmail.com>  Wed, 24 Jun 2026 10:45:00 +0530
+
 webapp-manager (1.4.7) zena; urgency=medium
 
   * Fix profile and UI issues for Waterfox, LibreWolf, and Floorp Flatpaks
