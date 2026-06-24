@@ -18,12 +18,14 @@ warnings.filterwarnings("ignore")
 
 gi.require_version("Gtk", "3.0")
 gi.require_version('XApp', '1.0')
-from gi.repository import Gtk, Gdk, Gio, XApp, GdkPixbuf
+from gi.repository import Gtk, Gdk, Gio, XApp, GdkPixbuf, GLib
 
 #   3. Local application/library specific imports.
 from common import _async, idle, WebAppManager, download_favicon, ICONS_DIR, BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_ZEN_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_WATERFOX_FLATPAK, BROWSER_TYPE_LIBREWOLF_FLATPAK, BROWSER_TYPE_FLOORP_FLATPAK
 
 setproctitle.setproctitle("webapp-manager")
+GLib.set_prgname("webapp-manager")
+Gdk.set_program_class("Webapp-manager")
 
 # i18n
 APP = 'webapp-manager'
