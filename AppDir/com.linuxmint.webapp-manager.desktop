@@ -1,6 +1,6 @@
 [Desktop Entry]
 X-AppImage-Arch=x86_64
-X-AppImage-Version=1.3.4
+X-AppImage-Version=1.4.8
 X-AppImage-Name=WebApp Manager
 Name=WebApp Manager
 Exec=usr/bin/python3

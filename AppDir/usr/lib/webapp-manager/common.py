@@ -42,7 +42,7 @@ def idle(func):
 
 # i18n
 APP = 'webapp-manager'
-LOCALE_DIR = "/usr/share/locale"
+LOCALE_DIR = os.environ.get("APPDIR", "") + "/usr/share/locale"
 locale.bindtextdomain(APP, LOCALE_DIR)
 gettext.bindtextdomain(APP, LOCALE_DIR)
 gettext.textdomain(APP)
@@ -59,9 +59,45 @@ LIBREWOLF_FLATPAK_PROFILES_DIR = os.path.expanduser("~/.var/app/io.gitlab.librew
 WATERFOX_FLATPAK_PROFILES_DIR = os.path.expanduser("~/.var/app/net.waterfox.waterfox/data")
 FLOORP_FLATPAK_PROFILES_DIR = os.path.expanduser("~/.var/app/one.ablaze.floorp/data")
 EPIPHANY_PROFILES_DIR = os.path.join(ICE_DIR, "epiphany")
+EPIPHANY_DESKTOP_DIR = os.path.expanduser("~/.local/share/xdg-desktop-portal/applications/")
 FALKON_PROFILES_DIR = os.path.join(ICE_DIR, "falkon")
+ZEN_FLATPAK_PROFILES_DIR = os.path.expanduser("~/.var/app/app.zen_browser.zen/data/ice/zen/")
 ICONS_DIR = os.path.join(ICE_DIR, "icons")
-BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_LIBREWOLF_FLATPAK, BROWSER_TYPE_WATERFOX_FLATPAK, BROWSER_TYPE_FLOORP_FLATPAK, BROWSER_TYPE_CHROMIUM, BROWSER_TYPE_EPIPHANY, BROWSER_TYPE_FALKON = range(9)
+BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_LIBREWOLF_FLATPAK, BROWSER_TYPE_WATERFOX_FLATPAK, BROWSER_TYPE_FLOORP_FLATPAK, BROWSER_TYPE_CHROMIUM, BROWSER_TYPE_EPIPHANY, BROWSER_TYPE_FALKON, BROWSER_TYPE_ZEN_FLATPAK = range(10)
+
+def get_chromium_class(url, codename=None, mode="codename"):
+    """
+    Generate the correct StartupWMClass for Chromium.
+    Modes:
+        'wayland':  chrome-{domain}__{path}-{profile}
+        'x11':      {domain}__{path} (without trailing underscores)
+        'codename': WebApp-{codename}
+    """
+    if mode == "codename":
+        if not codename:
+            raise ValueError("codename must be provided when mode is 'codename'")
+        return f"WebApp-{codename}"
+
+    parsed = urllib.parse.urlparse(url)
+    domain = parsed.netloc
+    if ':' in domain:
+        domain = domain.split(':')[0]
+
+    path = parsed.path
+    if path.startswith('/'):
+        path = path[1:]
+    
+    path = path.replace('/', '_')
+
+    if mode == "x11":
+        if path:
+            if path.endswith('_'):
+                path = path[:-1]
+            return f"{domain}__{path}"
+        else:
+            return domain
+
+    return f"chrome-{domain}__{path}-Default"
 
 class Browser:
 
@@ -80,6 +116,7 @@ class WebAppLauncher:
         self.codename = codename
         self.web_browser = None
         self.name = None
+        self.desc = None
         self.icon = None
         self.is_valid = False
         self.exec = None
@@ -102,6 +139,12 @@ class WebAppLauncher:
 
                 if "Name=" in line:
                     self.name = line.replace("Name=", "")
+                    continue
+
+                if "Comment=" in line:
+                    self.desc = line.replace("Comment=", "")
+                    if self.desc == _("Web App"):
+                        self.desc = ""
                     continue
 
                 if "Icon=" in line:
@@ -149,7 +192,7 @@ class WebAppLauncher:
 class WebAppManager:
 
     def __init__(self):
-        for directory in [ICE_DIR, APPS_DIR, PROFILES_DIR, FIREFOX_PROFILES_DIR, FIREFOX_FLATPAK_PROFILES_DIR, ICONS_DIR, EPIPHANY_PROFILES_DIR, FALKON_PROFILES_DIR]:
+        for directory in [ICE_DIR, APPS_DIR, PROFILES_DIR, FIREFOX_PROFILES_DIR, FIREFOX_FLATPAK_PROFILES_DIR, ICONS_DIR, EPIPHANY_PROFILES_DIR, EPIPHANY_DESKTOP_DIR, FALKON_PROFILES_DIR]:
             if not os.path.exists(directory):
                 os.makedirs(directory)
 
@@ -157,6 +200,8 @@ class WebAppManager:
         webapps = []
         for filename in os.listdir(APPS_DIR):
             if filename.lower().startswith("webapp-") and filename.endswith(".desktop"):
+                if filename.endswith("-x11.desktop") or filename.endswith("-wayland.desktop"):
+                    continue
                 path = os.path.join(APPS_DIR, filename)
                 codename = filename.replace("webapp-", "").replace("WebApp-", "").replace(".desktop", "")
                 if not os.path.isdir(path):
@@ -179,6 +224,8 @@ class WebAppManager:
                 Browser(BROWSER_TYPE_FIREFOX, "Firefox Extended Support Release", "firefox-esr", "/usr/bin/firefox-esr"),
                 Browser(BROWSER_TYPE_FIREFOX_FLATPAK, "Firefox (Flatpak)", "/var/lib/flatpak/exports/bin/org.mozilla.firefox", "/var/lib/flatpak/exports/bin/org.mozilla.firefox"),
                 Browser(BROWSER_TYPE_FIREFOX_FLATPAK, "Firefox (Flatpak)", ".local/share/flatpak/exports/bin/org.mozilla.firefox", ".local/share/flatpak/exports/bin/org.mozilla.firefox"),
+                Browser(BROWSER_TYPE_ZEN_FLATPAK, "Zen (Flatpak)", "/var/lib/flatpak/exports/bin/app.zen_browser.zen", "/var/lib/flatpak/exports/bin/app.zen_browser.zen"),
+                Browser(BROWSER_TYPE_ZEN_FLATPAK, "Zen (Flatpak)", ".local/share/flatpak/exports/bin/app.zen_browser.zen", ".local/share/flatpak/exports/bin/app.zen_browser.zen"),
                 Browser(BROWSER_TYPE_FIREFOX_SNAP, "Firefox (Snap)", "/snap/bin/firefox", "/snap/bin/firefox"),
                 Browser(BROWSER_TYPE_CHROMIUM, "Brave", "brave", "/usr/bin/brave"),
                 Browser(BROWSER_TYPE_CHROMIUM, "Brave Browser", "brave-browser", "/usr/bin/brave-browser"),
@@ -192,6 +239,7 @@ class WebAppManager:
                 Browser(BROWSER_TYPE_CHROMIUM, "Chromium (Snap)", "chromium", "/snap/bin/chromium"),
                 Browser(BROWSER_TYPE_CHROMIUM, "Chromium (Bin)", "chromium-bin", "/usr/bin/chromium-bin-browser"),
                 Browser(BROWSER_TYPE_CHROMIUM, "Ungoogled Chromium", "ungoogled-chromium", "/usr/bin/ungoogled-chromium"),
+                Browser(BROWSER_TYPE_CHROMIUM, "Brave Origin", "brave-origin", "/usr/bin/brave-origin"),
                 Browser(BROWSER_TYPE_EPIPHANY, "Epiphany", "epiphany", "/usr/bin/epiphany"),
                 Browser(BROWSER_TYPE_FIREFOX,  "LibreWolf", "librewolf", "/usr/bin/librewolf"),
                 Browser(BROWSER_TYPE_LIBREWOLF_FLATPAK,  "LibreWolf (Flatpak)", "/var/lib/flatpak/exports/bin/io.gitlab.librewolf-community", "/var/lib/flatpak/exports/bin/io.gitlab.librewolf-community"),
@@ -236,31 +284,50 @@ class WebAppManager:
     def delete_webbapp(self, webapp):
         shutil.rmtree(os.path.join(FIREFOX_PROFILES_DIR, webapp.codename), ignore_errors=True)
         shutil.rmtree(os.path.join(FIREFOX_FLATPAK_PROFILES_DIR, webapp.codename), ignore_errors=True)
+        shutil.rmtree(os.path.join(ZEN_FLATPAK_PROFILES_DIR, webapp.codename), ignore_errors=True)
+        shutil.rmtree(os.path.join(LIBREWOLF_FLATPAK_PROFILES_DIR, webapp.codename), ignore_errors=True)
+        shutil.rmtree(os.path.join(WATERFOX_FLATPAK_PROFILES_DIR, webapp.codename), ignore_errors=True)
+        shutil.rmtree(os.path.join(FLOORP_FLATPAK_PROFILES_DIR, webapp.codename), ignore_errors=True)
         shutil.rmtree(os.path.join(FIREFOX_SNAP_PROFILES_DIR, webapp.codename), ignore_errors=True)
         shutil.rmtree(os.path.join(PROFILES_DIR, webapp.codename), ignore_errors=True)
         # first remove symlinks then others
         if os.path.exists(webapp.path):
             os.remove(webapp.path)
-        epiphany_orig_prof_dir=os.path.join(os.path.expanduser("~/.local/share"), "org.gnome.Epiphany.WebApp-" + webapp.codename)
+        base_path = webapp.path.replace(".desktop", "")
+        for mode in ["x11", "wayland"]:
+            hidden_path = f"{base_path}-{mode}.desktop"
+            if os.path.exists(hidden_path):
+                os.remove(hidden_path)
+        epiphany_orig_prof_dir=os.path.join(os.path.expanduser("~/.local/share"), "org.gnome.Epiphany.WebApp_" + webapp.codename)
         if os.path.exists(epiphany_orig_prof_dir):
             os.remove(epiphany_orig_prof_dir)
-        shutil.rmtree(os.path.join(EPIPHANY_PROFILES_DIR, "org.gnome.Epiphany.WebApp-%s" % webapp.codename), ignore_errors=True)
+        shutil.rmtree(os.path.join(EPIPHANY_PROFILES_DIR, "org.gnome.Epiphany.WebApp_%s" % webapp.codename), ignore_errors=True)
+        epiphany_desktop_path = os.path.join(EPIPHANY_DESKTOP_DIR, "org.gnome.Epiphany.WebApp_%s.desktop" % webapp.codename)
+        if os.path.exists(epiphany_desktop_path):
+            os.remove(epiphany_desktop_path)
+        for mode in ["x11", "wayland"]:
+            hidden_epiphany = os.path.join(EPIPHANY_DESKTOP_DIR, "org.gnome.Epiphany.WebApp_%s-%s.desktop" % (webapp.codename, mode))
+            if os.path.exists(hidden_epiphany):
+                os.remove(hidden_epiphany)
         falkon_orig_prof_dir = os.path.join(os.path.expanduser("~/.config/falkon/profiles"), webapp.codename)
         if os.path.exists(falkon_orig_prof_dir):
             os.remove(falkon_orig_prof_dir)
         shutil.rmtree(os.path.join(FALKON_PROFILES_DIR, webapp.codename), ignore_errors=True)
 
-    def create_webapp(self, name, url, icon, category, browser, custom_parameters, isolate_profile=True, navbar=False, privatewindow=False):
-        # Generate a 4 digit random code (to prevent name collisions, so we can define multiple launchers with the same name)
-        random_code =  ''.join(choice(string.digits) for _ in range(4))
-        codename = "".join(filter(str.isalpha, name)) + random_code
+    def create_webapp(self, name, desc, url, icon, category, browser, custom_parameters, codename, isolate_profile=True, navbar=False, privatewindow=False, wm_mode="codename"):
         path = os.path.join(APPS_DIR, "WebApp-%s.desktop" % codename)
+
+        if not desc:
+            desc = _("Web App")
+
+        if wm_mode != "codename":
+            path = os.path.join(APPS_DIR, "WebApp-%s-%s.desktop" % (codename, wm_mode))
 
         with open(path, 'w') as desktop_file:
             desktop_file.write("[Desktop Entry]\n")
             desktop_file.write("Version=1.0\n")
             desktop_file.write("Name=%s\n" % name)
-            desktop_file.write("Comment=%s\n" % _("Web App"))
+            desktop_file.write("Comment=%s\n" % desc)
 
             exec_string = self.get_exec_string(browser, codename, custom_parameters, icon, isolate_profile, navbar,
                                                privatewindow, url)
@@ -270,9 +337,17 @@ class WebAppManager:
             desktop_file.write("X-MultipleArgs=false\n")
             desktop_file.write("Type=Application\n")
             desktop_file.write("Icon=%s\n" % icon)
-            desktop_file.write("Categories=GTK;%s;\n" % category)
+            desktop_file.write("Categories=GTK;WebApps;%s;\n" % category)
             desktop_file.write("MimeType=text/html;text/xml;application/xhtml_xml;\n")
-            desktop_file.write("StartupWMClass=WebApp-%s\n" % codename)
+            no_display = "false" if wm_mode == "codename" else "true"
+            desktop_file.write("NoDisplay=%s\n" % no_display)
+
+            if browser.browser_type == BROWSER_TYPE_CHROMIUM:
+                wm_class = get_chromium_class(url=url, codename=codename, mode=wm_mode)
+            else:
+                wm_class = "WebApp-%s" % codename
+
+            desktop_file.write("StartupWMClass=%s\n" % wm_class)
             desktop_file.write("StartupNotify=true\n")
             desktop_file.write("X-WebApp-Browser=%s\n" % browser.name)
             desktop_file.write("X-WebApp-URL=%s\n" % url)
@@ -283,14 +358,14 @@ class WebAppManager:
 
             if browser.browser_type == BROWSER_TYPE_EPIPHANY:
                 # Move the desktop file and create a symlink
-                epiphany_profile_path = os.path.join(EPIPHANY_PROFILES_DIR, "org.gnome.Epiphany.WebApp-" + codename)
-                new_path = os.path.join(epiphany_profile_path, "org.gnome.Epiphany.WebApp-%s.desktop" % codename)
-                os.makedirs(epiphany_profile_path)
+                epiphany_profile_path = os.path.join(EPIPHANY_PROFILES_DIR, "org.gnome.Epiphany.WebApp_" + codename)
+                if wm_mode != "codename":
+                    new_path = os.path.join(EPIPHANY_DESKTOP_DIR, "org.gnome.Epiphany.WebApp_%s-%s.desktop" % (codename, wm_mode))
+                else:
+                    new_path = os.path.join(EPIPHANY_DESKTOP_DIR, "org.gnome.Epiphany.WebApp_%s.desktop" % codename)
+                os.makedirs(epiphany_profile_path, exist_ok=True)
                 os.replace(path, new_path)
                 os.symlink(new_path, path)
-                # copy the icon to profile directory
-                new_icon=os.path.join(epiphany_profile_path, "app-icon.png")
-                shutil.copy(icon, new_icon)
                 # required for app mode. create an empty file .app
                 app_mode_file=os.path.join(epiphany_profile_path, ".app")
                 with open(app_mode_file, 'w') as fp:
@@ -305,12 +380,20 @@ class WebAppManager:
 
 
     def get_exec_string(self, browser, codename, custom_parameters, icon, isolate_profile, navbar, privatewindow, url):
-        if browser.browser_type in [BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP]:
+        if browser.browser_type in [BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_ZEN_FLATPAK, BROWSER_TYPE_WATERFOX_FLATPAK, BROWSER_TYPE_LIBREWOLF_FLATPAK, BROWSER_TYPE_FLOORP_FLATPAK]:
             # Firefox based
             if browser.browser_type == BROWSER_TYPE_FIREFOX:
                 firefox_profiles_dir = FIREFOX_PROFILES_DIR
             elif browser.browser_type == BROWSER_TYPE_FIREFOX_FLATPAK:
                 firefox_profiles_dir = FIREFOX_FLATPAK_PROFILES_DIR
+            elif browser.browser_type == BROWSER_TYPE_ZEN_FLATPAK:
+                firefox_profiles_dir = ZEN_FLATPAK_PROFILES_DIR
+            elif browser.browser_type == BROWSER_TYPE_WATERFOX_FLATPAK:
+                firefox_profiles_dir = WATERFOX_FLATPAK_PROFILES_DIR
+            elif browser.browser_type == BROWSER_TYPE_LIBREWOLF_FLATPAK:
+                firefox_profiles_dir = LIBREWOLF_FLATPAK_PROFILES_DIR
+            elif browser.browser_type == BROWSER_TYPE_FLOORP_FLATPAK:
+                firefox_profiles_dir = FLOORP_FLATPAK_PROFILES_DIR
             else:
                 firefox_profiles_dir = FIREFOX_SNAP_PROFILES_DIR
             firefox_profile_path = os.path.join(firefox_profiles_dir, codename)
@@ -325,55 +408,20 @@ class WebAppManager:
                 exec_string += " {}".format(custom_parameters)
             exec_string += " \"" + url + "\"" + "'"
             # Create a Firefox profile
-            shutil.copytree('/usr/share/webapp-manager/firefox/profile', firefox_profile_path, dirs_exist_ok = True)
+            shutil.copytree(os.environ.get("APPDIR", "") + '/usr/share/webapp-manager/firefox/profile', firefox_profile_path, dirs_exist_ok = True)
             if navbar:
-                shutil.copy('/usr/share/webapp-manager/firefox/userChrome-with-navbar.css',
-                            os.path.join(firefox_profile_path, "chrome", "userChrome.css"))
-        elif browser.browser_type == BROWSER_TYPE_LIBREWOLF_FLATPAK:
-            # LibreWolf flatpak
-            firefox_profiles_dir = LIBREWOLF_FLATPAK_PROFILES_DIR
-            firefox_profile_path = os.path.join(firefox_profiles_dir, codename)
-            exec_string = ("sh -c 'XAPP_FORCE_GTKWINDOW_ICON=\"" + icon + "\" " + browser.exec_path +
-                           " --class WebApp-" + codename +
-                           " --name WebApp-" + codename +
-                           " --profile " + firefox_profile_path +
-                           " --no-remote")
-            if privatewindow:
-                exec_string += " --private-window"
-            if custom_parameters:
-                exec_string += " {}".format(custom_parameters)
-            exec_string += " \"" + url + "\"" + "'"
-            # Create a Firefox profile
-            shutil.copytree('/usr/share/webapp-manager/firefox/profile', firefox_profile_path, dirs_exist_ok = True)
-            if navbar:
-                shutil.copy('/usr/share/webapp-manager/firefox/userChrome-with-navbar.css',
-                            os.path.join(firefox_profile_path, "chrome", "userChrome.css"))
-        elif browser.browser_type == BROWSER_TYPE_FLOORP_FLATPAK:
-            # Floorp flatpak
-            firefox_profiles_dir = FLOORP_FLATPAK_PROFILES_DIR
-            firefox_profile_path = os.path.join(firefox_profiles_dir, codename)
-            exec_string = ("sh -c 'XAPP_FORCE_GTKWINDOW_ICON=\"" + icon + "\" " + browser.exec_path +
-                           " --class WebApp-" + codename +
-                           " --name WebApp-" + codename +
-                           " --profile " + firefox_profile_path +
-                           " --no-remote")
-            if privatewindow:
-                exec_string += " --private-window"
-            if custom_parameters:
-                exec_string += " {}".format(custom_parameters)
-            exec_string += " \"" + url + "\"" + "'"
-            # Create a Firefox profile
-            shutil.copytree('/usr/share/webapp-manager/firefox/profile', firefox_profile_path, dirs_exist_ok = True)
-            if navbar:
-                shutil.copy('/usr/share/webapp-manager/firefox/userChrome-with-navbar.css',
+                shutil.copy(os.environ.get("APPDIR", "") + '/usr/share/webapp-manager/firefox/userChrome-with-navbar.css',
                             os.path.join(firefox_profile_path, "chrome", "userChrome.css"))
         elif browser.browser_type == BROWSER_TYPE_EPIPHANY:
             # Epiphany based
-            epiphany_profile_path = os.path.join(EPIPHANY_PROFILES_DIR, "org.gnome.Epiphany.WebApp-" + codename)
+            epiphany_profile_path = os.path.join(EPIPHANY_PROFILES_DIR, "org.gnome.Epiphany.WebApp_" + codename)
             # Create symlink of profile dir at ~/.local/share
             epiphany_orig_prof_dir = os.path.join(os.path.expanduser("~/.local/share"),
-                                                  "org.gnome.Epiphany.WebApp-" + codename)
-            os.symlink(epiphany_profile_path, epiphany_orig_prof_dir)
+                                                  "org.gnome.Epiphany.WebApp_" + codename)
+            try:
+                os.symlink(epiphany_profile_path, epiphany_orig_prof_dir)
+            except FileExistsError:
+                pass
             exec_string = browser.exec_path
             exec_string += " --application-mode "
             exec_string += " --profile=\"" + epiphany_orig_prof_dir + "\""
@@ -393,6 +441,8 @@ class WebAppManager:
             exec_string += " --no-remote " + url
         else:
             # Chromium based
+            # TODO: only use --class if it is x11 (if chrome is launch after unisolated chrome webapp then chrome will be affected by --class variable on wayland)
+            # As for X11, WM_CLASS has two parts so the same problem won't occur
             if isolate_profile:
                 profile_path = os.path.join(PROFILES_DIR, codename)
                 exec_string = (browser.exec_path +
@@ -421,14 +471,20 @@ class WebAppManager:
 
         return exec_string
 
-    def edit_webapp(self, path, name, browser, url, icon, category, custom_parameters, codename, isolate_profile, navbar, privatewindow):
+    def edit_webapp(self, path, name, desc, browser, url, icon, category, custom_parameters, codename, isolate_profile, navbar, privatewindow, wm_mode="codename"):
+        if not desc:
+            desc = _("Web App")
+
         config = configparser.RawConfigParser()
         config.optionxform = str
         config.read(path)
         config.set("Desktop Entry", "Name", name)
         config.set("Desktop Entry", "Icon", icon)
-        config.set("Desktop Entry", "Comment", _("Web App"))
-        config.set("Desktop Entry", "Categories", "GTK;%s;" % category)
+        config.set("Desktop Entry", "Comment", desc)
+        config.set("Desktop Entry", "Categories", "GTK;WebApps;%s;" % category)
+        no_display = "false" if wm_mode == "codename" else "true"
+        config.set("Desktop Entry", "NoDisplay", no_display)
+ 
 
         try:
             # This will raise an exception on legacy apps which
@@ -443,6 +499,13 @@ class WebAppManager:
             config.set("Desktop Entry", "X-WebApp-Isolated", bool_to_string(isolate_profile))
             config.set("Desktop Entry", "X-WebApp-Navbar", bool_to_string(navbar))
             config.set("Desktop Entry", "X-WebApp-PrivateWindow", bool_to_string(privatewindow))
+
+            if browser.browser_type == BROWSER_TYPE_CHROMIUM:
+                wm_class = get_chromium_class(url=url, codename=codename, mode=wm_mode)
+            else:
+                wm_class = "WebApp-%s" % codename
+
+            config.set("Desktop Entry", "StartupWMClass", wm_class)
 
         except:
             print("This WebApp was created with an old version of WebApp Manager. Its URL cannot be edited.")
@@ -479,14 +542,14 @@ def download_image(root_url: str, link: str) -> Optional[PIL.Image.Image]:
         print(link)
         return None
 
-def _find_link_favicon(soup, iconformat):
+def _find_link_favicon(soup, iconformat, url):
     items = soup.find_all("link", {"rel": iconformat})
     for item in items:
         link = item.get("href")
         if link:
             yield link
 
-def _find_meta_content(soup, iconformat):
+def _find_meta_content(soup, iconformat, url):
     item = soup.find("meta", {"name": iconformat})
     if not item:
         return
@@ -494,15 +557,22 @@ def _find_meta_content(soup, iconformat):
     if link:
         yield link
 
-def _find_property(soup, iconformat):
+def _find_property(soup, iconformat, url):
     items = soup.find_all("meta", {"property": iconformat})
     for item in items:
         link = item.get("content")
         if link:
             yield link
 
-def _find_url(_soup, iconformat):
+def _find_url(_soup, iconformat, url):
     yield iconformat
+
+def _find_google_api_favicon(_soup, iconformat, url):
+    url = urllib.parse.quote(url, safe='')
+    #response = requests.get("https://www.google.com/s2/favicons?sz=32&domain=%s" % url, timeout=3)
+    #link = response.url
+    link = "https://www.google.com/s2/favicons?sz=32&domain=%s" % url
+    yield link
 
 
 def download_favicon(url):
@@ -510,6 +580,7 @@ def download_favicon(url):
     url = normalize_url(url)
     (scheme, netloc, path, _, _, _) = urllib.parse.urlparse(url)
     root_url = "%s://%s" % (scheme, netloc)
+    api_url = "%s%s" % (netloc, path)
 
     # Check HTML and /favicon.ico
     try:
@@ -528,11 +599,12 @@ def download_favicon(url):
                 ("msapplication-square70x70logo", _find_meta_content),
                 ("og:image", _find_property),
                 ("favicon.ico", _find_url),
+                ("google-api", _find_google_api_favicon),
             ]
 
             # icons defined in the HTML
             for (iconformat, getter) in iconformats:
-                for link in getter(soup, iconformat):
+                for link in getter(soup, iconformat, api_url):
                     image = download_image(root_url, link)
                     if image is not None:
                         t = tempfile.NamedTemporaryFile(suffix=".png", delete=False)

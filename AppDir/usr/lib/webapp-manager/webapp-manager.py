@@ -18,16 +18,18 @@ warnings.filterwarnings("ignore")
 
 gi.require_version("Gtk", "3.0")
 gi.require_version('XApp', '1.0')
-from gi.repository import Gtk, Gdk, Gio, XApp, GdkPixbuf
+from gi.repository import Gtk, Gdk, Gio, XApp, GdkPixbuf, GLib
 
 #   3. Local application/library specific imports.
-from common import _async, idle, WebAppManager, download_favicon, ICONS_DIR, BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP
+from common import _async, idle, WebAppManager, download_favicon, ICONS_DIR, BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_ZEN_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_WATERFOX_FLATPAK, BROWSER_TYPE_LIBREWOLF_FLATPAK, BROWSER_TYPE_FLOORP_FLATPAK
 
 setproctitle.setproctitle("webapp-manager")
+GLib.set_prgname("webapp-manager")
+Gdk.set_program_class("Webapp-manager")
 
 # i18n
 APP = 'webapp-manager'
-LOCALE_DIR = "/usr/share/locale"
+LOCALE_DIR = os.environ.get("APPDIR", "") + "/usr/share/locale"
 locale.bindtextdomain(APP, LOCALE_DIR)
 gettext.bindtextdomain(APP, LOCALE_DIR)
 gettext.textdomain(APP)
@@ -67,7 +69,7 @@ class WebAppManagerWindow:
         self.icon_theme = Gtk.IconTheme.get_default()
 
         # Set the Glade file
-        gladefile = "/usr/share/webapp-manager/webapp-manager.ui"
+        gladefile = os.environ.get("APPDIR", "") + "/usr/share/webapp-manager/webapp-manager.ui"
         self.builder = Gtk.Builder()
         self.builder.set_translation_domain(APP)
         self.builder.add_from_file(gladefile)
@@ -89,6 +91,7 @@ class WebAppManagerWindow:
         self.run_button = self.builder.get_object("run_button")
         self.ok_button = self.builder.get_object("ok_button")
         self.name_entry = self.builder.get_object("name_entry")
+        self.desc_entry = self.builder.get_object("desc_entry")
         self.url_entry = self.builder.get_object("url_entry")
         self.url_label = self.builder.get_object("url_label")
         self.customparameters_entry = self.builder.get_object("customparameters_entry")
@@ -102,9 +105,6 @@ class WebAppManagerWindow:
         self.favicon_stack = self.builder.get_object("favicon_stack")
         self.browser_combo = self.builder.get_object("browser_combo")
         self.browser_label = self.builder.get_object("browser_label")
-
-        # Widgets which are in the add page but not the edit page
-        self.add_specific_widgets = [self.browser_label, self.browser_combo]
 
         # Widget signals
         self.add_button.connect("clicked", self.on_add_button)
@@ -125,21 +125,21 @@ class WebAppManagerWindow:
         menu = self.builder.get_object("main_menu")
         item = Gtk.ImageMenuItem()
         item.set_image(
-            Gtk.Image.new_from_icon_name("preferences-desktop-keyboard-shortcuts-symbolic", Gtk.IconSize.MENU))
+            Gtk.Image.new_from_icon_name("xsi-keyboard-shortcuts-symbolic", Gtk.IconSize.MENU))
         item.set_label(_("Keyboard Shortcuts"))
         item.connect("activate", self.open_keyboard_shortcuts)
         key, mod = Gtk.accelerator_parse("<Control>K")
         item.add_accelerator("activate", accel_group, key, mod, Gtk.AccelFlags.VISIBLE)
         menu.append(item)
         item = Gtk.ImageMenuItem()
-        item.set_image(Gtk.Image.new_from_icon_name("help-about-symbolic", Gtk.IconSize.MENU))
+        item.set_image(Gtk.Image.new_from_icon_name("xsi-help-about-symbolic", Gtk.IconSize.MENU))
         item.set_label(_("About"))
         item.connect("activate", self.open_about)
         key, mod = Gtk.accelerator_parse("F1")
         item.add_accelerator("activate", accel_group, key, mod, Gtk.AccelFlags.VISIBLE)
         menu.append(item)
         item = Gtk.ImageMenuItem(label=_("Quit"))
-        image = Gtk.Image.new_from_icon_name("application-exit-symbolic", Gtk.IconSize.MENU)
+        image = Gtk.Image.new_from_icon_name("xsi-exit-symbolic", Gtk.IconSize.MENU)
         item.set_image(image)
         item.connect('activate', self.on_menu_quit)
         key, mod = Gtk.accelerator_parse("<Control>Q")
@@ -176,7 +176,6 @@ class WebAppManagerWindow:
 
         # Combox box
         category_model = Gtk.ListStore(str, str)  # CATEGORY_ID, CATEGORY_NAME
-        category_model.append(["WebApps", _("Web")])
         category_model.append(["Network", _("Internet")])
         category_model.append(["Utility", _("Accessories")])
         category_model.append(["Game", _("Games")])
@@ -223,7 +222,7 @@ class WebAppManagerWindow:
         cell.set_property("surface", surface)
 
     def open_keyboard_shortcuts(self, widget):
-        gladefile = "/usr/share/webapp-manager/shortcuts.ui"
+        gladefile = os.environ.get("APPDIR", "") + "/usr/share/webapp-manager/shortcuts.ui"
         builder = Gtk.Builder()
         builder.set_translation_domain(APP)
         builder.add_from_file(gladefile)
@@ -237,18 +236,8 @@ class WebAppManagerWindow:
         dlg.set_title(_("About"))
         dlg.set_program_name(_("Web Apps"))
         dlg.set_comments(_("Run websites as if they were apps"))
-        try:
-            h = open('/usr/share/common-licenses/GPL', encoding="utf-8")
-            s = h.readlines()
-            gpl = ""
-            for line in s:
-                gpl += line
-            h.close()
-            dlg.set_license(gpl)
-        except Exception as e:
-            print(e)
-
-        dlg.set_version("1.4.0")
+        dlg.set_license_type(Gtk.License.GPL_3_0)
+        dlg.set_version("__DEB_VERSION__")
         dlg.set_icon_name("webapp-manager")
         dlg.set_logo_icon_name("webapp-manager")
         dlg.set_website("https://www.github.com/linuxmint/webapp-manager")
@@ -313,6 +302,7 @@ class WebAppManagerWindow:
         category = self.category_combo.get_model()[self.category_combo.get_active()][CATEGORY_ID]
         browser = self.browser_combo.get_model()[self.browser_combo.get_active()][BROWSER_OBJ]
         name = self.name_entry.get_text()
+        desc = self.desc_entry.get_text().strip()
         url = self.get_url()
         isolate_profile = self.isolated_switch.get_active()
         navbar = self.navbar_switch.get_active()
@@ -325,16 +315,37 @@ class WebAppManagerWindow:
             new_path = os.path.join(ICONS_DIR, filename)
             shutil.copyfile(icon, new_path)
             icon = new_path
+
+        modes = ["codename", "x11", "wayland"]
+
         if self.edit_mode:
-            self.manager.edit_webapp(self.selected_webapp.path, name, browser, url, icon, category, custom_parameters, self.selected_webapp.codename, isolate_profile, navbar, privatewindow)
+            self.manager.edit_webapp(self.selected_webapp.path, name, desc, browser, url, icon, category, custom_parameters, self.selected_webapp.codename, isolate_profile, navbar, privatewindow, wm_mode="codename")
+            base_path = self.selected_webapp.path.replace(".desktop", "")
+            
+            for hidden_mode in ["x11", "wayland"]:
+                target_path = f"{base_path}-{hidden_mode}.desktop"
+                
+                # Edit them if they exist, create them if they don't (for backwards compatibility)
+                if os.path.exists(target_path):
+                    self.manager.edit_webapp(target_path, name, desc, browser, url, icon, category, custom_parameters, self.selected_webapp.codename, isolate_profile, navbar, privatewindow, wm_mode=hidden_mode)
+                else:
+                    self.manager.create_webapp(name, desc, url, icon, category, browser, custom_parameters, codename=self.selected_webapp.codename, isolate_profile=isolate_profile, navbar=navbar, privatewindow=privatewindow, wm_mode=hidden_mode)
+
             self.load_webapps()
         else:
-            self.manager.create_webapp(name, url, icon, category, browser, custom_parameters, isolate_profile, navbar,
-                                       privatewindow)
+            import string
+            from random import choice
+            random_code = ''.join(choice(string.digits) for _ in range(4))
+            base_codename = "".join(filter(str.isalpha, name)) + random_code
+            
+            for mode in modes:
+                self.manager.create_webapp(name, desc, url, icon, category, browser, custom_parameters, codename=base_codename, isolate_profile=isolate_profile, navbar=navbar, privatewindow=privatewindow, wm_mode=mode)
+           
             self.load_webapps()
 
     def on_add_button(self, widget):
         self.name_entry.set_text("")
+        self.desc_entry.set_text("")
         self.url_entry.set_text("")
         self.customparameters_entry.set_text("")
         self.icon_chooser.set_icon("webapp-manager")
@@ -343,8 +354,8 @@ class WebAppManagerWindow:
         self.isolated_switch.set_active(True)
         self.navbar_switch.set_active(False)
         self.privatewindow_switch.set_active(False)
-        for widget in self.add_specific_widgets:
-            widget.show()
+        self.browser_label.show()
+        self.browser_combo.show()
         self.show_hide_browser_widgets()
         self.stack.set_visible_child_name("add_page")
         self.headerbar.set_subtitle(_("Add a New Web App"))
@@ -355,6 +366,7 @@ class WebAppManagerWindow:
     def on_edit_button(self, widget):
         if self.selected_webapp is not None:
             self.name_entry.set_text(self.selected_webapp.name)
+            self.desc_entry.set_text(self.selected_webapp.desc)
             self.icon_chooser.set_icon(self.selected_webapp.icon)
             self.url_entry.set_text(self.selected_webapp.url)
             self.customparameters_entry.set_text(self.selected_webapp.custom_parameters)
@@ -362,8 +374,15 @@ class WebAppManagerWindow:
             self.isolated_switch.set_active(self.selected_webapp.isolate_profile)
             self.privatewindow_switch.set_active(self.selected_webapp.privatewindow)
 
-            web_browsers = map(lambda i: i[0], self.browser_combo.get_model())
-            selected_browser_index = [idx for idx, x in enumerate(web_browsers) if x.name == self.selected_webapp.web_browser][0]
+            web_browsers = list(map(lambda i: i[0], self.browser_combo.get_model()))
+            matching_browsers = [idx for idx, x in enumerate(web_browsers) if x.name == self.selected_webapp.web_browser]
+
+            if matching_browsers:
+                selected_browser_index = matching_browsers[0]
+            else:
+                selected_browser_index = 0
+
+            self.browser_combo.set_active(selected_browser_index)
             self.browser_combo.set_active(selected_browser_index)
             self.on_browser_changed(self.selected_webapp)
 
@@ -376,8 +395,8 @@ class WebAppManagerWindow:
                     break
                 iter = model.iter_next(iter)
             self.show_hide_browser_widgets()
-            for widget in self.add_specific_widgets:
-                widget.hide()
+            self.browser_label.show()
+            self.browser_combo.show()
             self.stack.set_visible_child_name("add_page")
             self.headerbar.set_subtitle(_("Edit Web App"))
             self.edit_mode = True
@@ -452,7 +471,7 @@ class WebAppManagerWindow:
 
     def show_hide_browser_widgets(self):
         browser = self.browser_combo.get_model()[self.browser_combo.get_active()][BROWSER_OBJ]
-        if browser.browser_type in [BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP]:
+        if browser.browser_type in [BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_ZEN_FLATPAK, BROWSER_TYPE_WATERFOX_FLATPAK, BROWSER_TYPE_LIBREWOLF_FLATPAK, BROWSER_TYPE_FLOORP_FLATPAK]:
             self.isolated_label.hide()
             self.isolated_switch.hide()
             self.navbar_label.show()
