@@ -1,3 +1,9 @@
+webapp-manager (1.4.7) zena; urgency=medium
+
+  * Fix profile and UI issues for Waterfox, LibreWolf, and Floorp Flatpaks
+
+ -- ArqamQazi <arqamqazi549@gmail.com>  Tue, 23 Jun 2026 12:45:00 +0530
+
 webapp-manager (1.4.6) zena; urgency=medium
 
   * l10n: Update translations
@@ -24,17 +30,7 @@ webapp-manager (1.4.4) zena; urgency=medium
  -- Clement Lefebvre <root@linuxmint.com>  Thu, 11 Dec 2025 15:25:59 +0000
 
 webapp-manager (1.4.3) zara; urgency=medium
-
-  * l10n: Update translations
-  * l10n: Update files
-
- -- Clement Lefebvre <root@linuxmint.com>  Tue, 26 Aug 2025 18:03:51 +0200
-
-webapp-manager (1.4.2) zara; urgency=medium
-
-  * l10n: Update translations
-  * l10n: Update files
-
+* l10n: Update translations l10n: Update files -- Clement Lefebvre <root@linuxmint.com>  Tue, 26 Aug 2025 18:03:51 +0200 webapp-manager (1.4.2) zara; urgency=medium l10n: Update translations l10n: Update files
  -- Clement Lefebvre <root@linuxmint.com>  Thu, 31 Jul 2025 12:34:41 +0200
 
 webapp-manager (1.4.1) zara; urgency=medium

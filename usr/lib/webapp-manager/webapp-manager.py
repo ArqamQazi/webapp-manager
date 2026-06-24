@@ -18,16 +18,18 @@ warnings.filterwarnings("ignore")
 
 gi.require_version("Gtk", "3.0")
 gi.require_version('XApp', '1.0')
-from gi.repository import Gtk, Gdk, Gio, XApp, GdkPixbuf
+from gi.repository import Gtk, Gdk, Gio, XApp, GdkPixbuf, GLib
 
 #   3. Local application/library specific imports.
-from common import _async, idle, WebAppManager, download_favicon, ICONS_DIR, BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_ZEN_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_WATERFOX_FLATPAK
+from common import _async, idle, WebAppManager, download_favicon, ICONS_DIR, BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_ZEN_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_WATERFOX_FLATPAK, BROWSER_TYPE_LIBREWOLF_FLATPAK, BROWSER_TYPE_FLOORP_FLATPAK
 
 setproctitle.setproctitle("webapp-manager")
+GLib.set_prgname("webapp-manager")
+Gdk.set_program_class("Webapp-manager")
 
 # i18n
 APP = 'webapp-manager'
-LOCALE_DIR = "/usr/share/locale"
+LOCALE_DIR = os.environ.get("APPDIR", "") + "/usr/share/locale"
 locale.bindtextdomain(APP, LOCALE_DIR)
 gettext.bindtextdomain(APP, LOCALE_DIR)
 gettext.textdomain(APP)
@@ -67,7 +69,7 @@ class WebAppManagerWindow:
         self.icon_theme = Gtk.IconTheme.get_default()
 
         # Set the Glade file
-        gladefile = "/usr/share/webapp-manager/webapp-manager.ui"
+        gladefile = os.environ.get("APPDIR", "") + "/usr/share/webapp-manager/webapp-manager.ui"
         self.builder = Gtk.Builder()
         self.builder.set_translation_domain(APP)
         self.builder.add_from_file(gladefile)
@@ -220,7 +222,7 @@ class WebAppManagerWindow:
         cell.set_property("surface", surface)
 
     def open_keyboard_shortcuts(self, widget):
-        gladefile = "/usr/share/webapp-manager/shortcuts.ui"
+        gladefile = os.environ.get("APPDIR", "") + "/usr/share/webapp-manager/shortcuts.ui"
         builder = Gtk.Builder()
         builder.set_translation_domain(APP)
         builder.add_from_file(gladefile)
@@ -469,7 +471,7 @@ class WebAppManagerWindow:
 
     def show_hide_browser_widgets(self):
         browser = self.browser_combo.get_model()[self.browser_combo.get_active()][BROWSER_OBJ]
-        if browser.browser_type in [BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_ZEN_FLATPAK, BROWSER_TYPE_WATERFOX_FLATPAK]:
+        if browser.browser_type in [BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_ZEN_FLATPAK, BROWSER_TYPE_WATERFOX_FLATPAK, BROWSER_TYPE_LIBREWOLF_FLATPAK, BROWSER_TYPE_FLOORP_FLATPAK]:
             self.isolated_label.hide()
             self.isolated_switch.hide()
             self.navbar_label.show()
