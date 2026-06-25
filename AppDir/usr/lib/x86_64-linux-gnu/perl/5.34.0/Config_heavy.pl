@@ -75,7 +75,7 @@ sub header_files {
 #
 ## Package name      : perl5
 ## Source directory  : /dummy/build/dir
-## Configuration time: Fri Jul 25 17:26:40 UTC 2025
+## Configuration time: Tue Jun 23 08:11:00 UTC 2026
 ## Configured by     : Ubuntu
 ## Target system     : linux localhost 4.19.0 #1 smp debian 4.19.0 x86_64 gnulinux 
 #
@@ -233,7 +233,7 @@ ccsymbols=''
 ccversion=''
 cf_by='Ubuntu'
 cf_email='perl@packages.debian.org'
-cf_time='Fri Jul 25 17:26:40 UTC 2025'
+cf_time='Tue Jun 23 08:11:00 UTC 2026'
 charbits='8'
 charsize='1'
 chgrp=''

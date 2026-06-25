@@ -2,9 +2,9 @@
     eval 'exec /usr/bin/perl -S $0 ${1+"$@"}'
 	if 0; # ^ Run only under a shell
 
-my $config_tag1 = '5.34.0 - Fri Jul 25 17:26:40 UTC 2025';
+my $config_tag1 = '5.34.0 - Tue Jun 23 08:11:00 UTC 2026';
 
-my $patchlevel_date = 1753464400;
+my $patchlevel_date = 1782202260;
 my @patches = Config::local_patches();
 my $patch_tags = join "", map /(\S+)/ ? "+$1 " : (), @patches;
 

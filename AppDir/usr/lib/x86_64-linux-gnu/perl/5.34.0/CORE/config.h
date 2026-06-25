@@ -9,7 +9,7 @@
 
 /* Package name      : perl5
  * Source directory  : /dummy/build/dir
- * Configuration time: Fri Jul 25 17:26:40 UTC 2025
+ * Configuration time: Tue Jun 23 08:11:00 UTC 2026
  * Configured by     : Ubuntu
  * Target system     : linux localhost 4.19.0 #1 smp debian 4.19.0 x86_64 gnulinux 
  */
@@ -5286,5 +5286,5 @@
  */
 #define Uid_t uid_t		/* UID type */
 
-#define PERL_BUILD_DATE "Jul 25 2025 17:26:40"
+#define PERL_BUILD_DATE "Jun 23 2026 08:11:00"
 #endif
