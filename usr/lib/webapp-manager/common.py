@@ -330,7 +330,7 @@ class WebAppManager:
             desktop_file.write("Comment=%s\n" % desc)
 
             exec_string = self.get_exec_string(browser, codename, custom_parameters, icon, isolate_profile, navbar,
-                                               privatewindow, url)
+                                               privatewindow, url, wm_mode)
 
             desktop_file.write("Exec=%s\n" % exec_string)
             desktop_file.write("Terminal=false\n")
@@ -367,11 +367,12 @@ class WebAppManager:
                 os.replace(path, new_path)
                 os.symlink(new_path, path)
                 # required for app mode. create an empty file .app
-                app_mode_file=os.path.join(epiphany_profile_path, ".app")
-                with open(app_mode_file, 'w') as fp:
-                    pass
+                if wm_mode == "codename":
+                   app_mode_file=os.path.join(epiphany_profile_path, ".app")
+                   with open(app_mode_file, 'w') as fp:
+                       pass
 
-            if browser.browser_type == BROWSER_TYPE_FALKON:
+            if browser.browser_type == BROWSER_TYPE_FALKON and wm_mode == "codename":
                 falkon_profile_path = os.path.join(FALKON_PROFILES_DIR, codename)
                 os.makedirs(falkon_profile_path)
                 # Create symlink of profile dir at ~/.config/falkon/profiles
@@ -379,7 +380,7 @@ class WebAppManager:
                 os.symlink(falkon_profile_path, falkon_orig_prof_dir)
 
 
-    def get_exec_string(self, browser, codename, custom_parameters, icon, isolate_profile, navbar, privatewindow, url):
+    def get_exec_string(self, browser, codename, custom_parameters, icon, isolate_profile, navbar, privatewindow, url, wm_mode="codename"):
         if browser.browser_type in [BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_ZEN_FLATPAK, BROWSER_TYPE_WATERFOX_FLATPAK, BROWSER_TYPE_LIBREWOLF_FLATPAK, BROWSER_TYPE_FLOORP_FLATPAK]:
             # Firefox based
             if browser.browser_type == BROWSER_TYPE_FIREFOX:
@@ -408,20 +409,22 @@ class WebAppManager:
                 exec_string += " {}".format(custom_parameters)
             exec_string += " \"" + url + "\"" + "'"
             # Create a Firefox profile
-            shutil.copytree(os.environ.get("APPDIR", "") + '/usr/share/webapp-manager/firefox/profile', firefox_profile_path, dirs_exist_ok = True)
-            if navbar:
-                shutil.copy(os.environ.get("APPDIR", "") + '/usr/share/webapp-manager/firefox/userChrome-with-navbar.css',
-                            os.path.join(firefox_profile_path, "chrome", "userChrome.css"))
+            if wm_mode == "codename" and not os.path.exists(firefox_profile_path):
+                shutil.copytree(os.environ.get("APPDIR", "") + '/usr/share/webapp-manager/firefox/profile', firefox_profile_path, dirs_exist_ok = True)
+                if navbar:
+                    shutil.copy(os.environ.get("APPDIR", "") + '/usr/share/webapp-manager/firefox/userChrome-with-navbar.css',
+                                os.path.join(firefox_profile_path, "chrome", "userChrome.css"))
         elif browser.browser_type == BROWSER_TYPE_EPIPHANY:
             # Epiphany based
             epiphany_profile_path = os.path.join(EPIPHANY_PROFILES_DIR, "org.gnome.Epiphany.WebApp_" + codename)
             # Create symlink of profile dir at ~/.local/share
             epiphany_orig_prof_dir = os.path.join(os.path.expanduser("~/.local/share"),
                                                   "org.gnome.Epiphany.WebApp_" + codename)
-            try:
-                os.symlink(epiphany_profile_path, epiphany_orig_prof_dir)
-            except FileExistsError:
-                pass
+            if wm_mode == "codename":
+               try:
+                   os.symlink(epiphany_profile_path, epiphany_orig_prof_dir)
+               except FileExistsError:
+                   pass
             exec_string = browser.exec_path
             exec_string += " --application-mode "
             exec_string += " --profile=\"" + epiphany_orig_prof_dir + "\""
@@ -490,7 +493,7 @@ class WebAppManager:
             # This will raise an exception on legacy apps which
             # have no X-WebApp-URL and X-WebApp-Browser
 
-            exec_line = self.get_exec_string(browser, codename, custom_parameters, icon, isolate_profile, navbar, privatewindow, url)
+            exec_line = self.get_exec_string(browser, codename, custom_parameters, icon, isolate_profile, navbar, privatewindow, url, wm_mode)
 
             config.set("Desktop Entry", "Exec", exec_line)
             config.set("Desktop Entry", "X-WebApp-Browser", browser.name)
@@ -507,7 +510,7 @@ class WebAppManager:
 
             config.set("Desktop Entry", "StartupWMClass", wm_class)
 
-        except:
+        except Exception:
             print("This WebApp was created with an old version of WebApp Manager. Its URL cannot be edited.")
 
         with open(path, 'w') as configfile:
