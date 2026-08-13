@@ -24,7 +24,7 @@ import tldextract
 warnings.filterwarnings("ignore")
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, Gio, GdkPixbuf, GLib
+from gi.repository import Gtk, Gdk, Gio, GdkPixbuf, GLib, GObject
 try:
     gi.require_version('XApp', '1.0')
     from gi.repository import XApp
@@ -53,28 +53,77 @@ BROWSER_OBJ, BROWSER_NAME = range(2)
 
 
 class StandaloneIconChooserButton(Gtk.Button):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.set_always_show_image(True)
         self.image = Gtk.Image()
         self.set_image(self.image)
-        self.icon = "webapp-manager"
-        self.connect("clicked", self.on_clicked)
         
-    def set_icon(self, icon_name):
-        self.icon = icon_name
-        if icon_name and os.path.exists(icon_name):
+        self._icon_size = Gtk.IconSize.DIALOG
+        self._icon = ""
+        self._category = ""
+        self.dialog = None
+        
+        self.set_hexpand(False)
+        self.set_vexpand(False)
+        self.set_halign(Gtk.Align.CENTER)
+        self.set_valign(Gtk.Align.CENTER)
+        
+        self.connect("clicked", self.on_clicked)
+        self.set_icon("unknown")
+
+    @GObject.Property(type=int, default=Gtk.IconSize.DIALOG)
+    def icon_size(self):
+        return self._icon_size
+
+    @icon_size.setter
+    def icon_size(self, value):
+        self.set_icon_size(value)
+
+    @GObject.Property(type=str, default="")
+    def icon(self):
+        return self._icon
+
+    @icon.setter
+    def icon(self, value):
+        self.set_icon(value)
+        
+    @GObject.Property(type=str, default="")
+    def category(self):
+        return self._category
+
+    @category.setter
+    def category(self, value):
+        self.set_default_category(value)
+
+    def set_icon_size(self, icon_size):
+        self._icon_size = Gtk.IconSize.DIALOG if icon_size == -1 else icon_size
+        if self._icon:
+            self.set_icon(self._icon)
+
+    def set_icon(self, icon):
+        self._icon = icon if icon else "unknown"
+        if "/" in self._icon and os.path.exists(self._icon):
+            success, width, height = Gtk.IconSize.lookup(self._icon_size)
+            if not success:
+                width, height = 48, 48
             try:
-                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(icon_name, 48, 48, True)
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(self._icon, width, height, True)
                 self.image.set_from_pixbuf(pixbuf)
             except Exception:
-                self.image.set_from_icon_name("image-missing", Gtk.IconSize.DIALOG)
+                self.image.set_from_icon_name("image-missing", self._icon_size)
         else:
-            self.image.set_from_icon_name(icon_name if icon_name else "webapp-manager", Gtk.IconSize.DIALOG)
+            self.image.set_from_icon_name(self._icon, self._icon_size)
 
     def get_icon(self):
-        return self.icon
+        return self._icon
         
+    def set_default_category(self, category):
+        self._category = category
+
+    def get_dialog(self):
+        return None
+
     def on_clicked(self, widget):
         dialog = Gtk.FileChooserDialog(
             title=_("Select an Icon"),
