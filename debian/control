@@ -7,16 +7,13 @@ Standards-Version: 3.9.5
 
 Package: webapp-manager
 Architecture: all
-Depends: gir1.2-xapp-1.0 (>= 1.4),
-         python3,
+Depends: python3,
          python3-gi,
          python3-configobj,
          python3-pil,
          python3-setproctitle,
          python3-tldextract,
          python3-gi-cairo,
-         xapp-symbolic-icons,
-         xapps-common,
          ${misc:Depends},
 Description: Web Application Manager
  Launch websites as if they were apps.
