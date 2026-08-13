@@ -28,7 +28,7 @@ from typing import Optional
 from gi.repository import GObject, GLib
 import PIL.Image
 import requests
-# Note: BeautifulSoup is an optional import supporting another way of getting a website's favicons.
+# Note: BeautifulSoup is vendored within this project to support parsing a website's favicons.
 
 
 # Used as a decorator to run things in the background
