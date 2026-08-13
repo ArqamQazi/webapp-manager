@@ -230,6 +230,8 @@ class WebAppManager:
         # type, name, exec, test
         return [Browser(BROWSER_TYPE_FIREFOX, "Firefox", "firefox", shutil.which("firefox") or ""),
                 Browser(BROWSER_TYPE_FIREFOX, "Firefox Developer Edition", "firefox-developer-edition", shutil.which("firefox-developer-edition") or ""),
+                Browser(BROWSER_TYPE_FIREFOX, "Firefox Developer Edition", "firefox-developer", shutil.which("firefox-developer") or ""),
+                Browser(BROWSER_TYPE_FIREFOX, "Firefox Developer Edition", "firefox-devedition", shutil.which("firefox-devedition") or ""),
                 Browser(BROWSER_TYPE_FIREFOX, "Firefox Nightly", "firefox-nightly", shutil.which("firefox-nightly") or ""),
                 Browser(BROWSER_TYPE_FIREFOX, "Firefox Extended Support Release", "firefox-esr", shutil.which("firefox-esr") or ""),
                 Browser(BROWSER_TYPE_FIREFOX_FLATPAK, "Firefox (Flatpak)", "/var/lib/flatpak/exports/bin/org.mozilla.firefox", "/var/lib/flatpak/exports/bin/org.mozilla.firefox"),
