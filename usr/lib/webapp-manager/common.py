@@ -249,6 +249,7 @@ class WebAppManager:
                 Browser(BROWSER_TYPE_CHROMIUM, "Chromium (Snap)", "chromium", "/snap/bin/chromium"),
                 Browser(BROWSER_TYPE_CHROMIUM, "Chromium (Bin)", "chromium-bin", shutil.which("chromium-bin-browser") or ""),
                 Browser(BROWSER_TYPE_CHROMIUM, "Ungoogled Chromium", "ungoogled-chromium", shutil.which("ungoogled-chromium") or ""),
+                Browser(BROWSER_TYPE_CHROMIUM, "Helium", "helium", shutil.which("helium") or ""),
                 Browser(BROWSER_TYPE_CHROMIUM, "Brave Origin", "brave-origin", shutil.which("brave-origin") or ""),
                 Browser(BROWSER_TYPE_EPIPHANY, "Epiphany", "epiphany", shutil.which("epiphany") or ""),
                 Browser(BROWSER_TYPE_FIREFOX,  "LibreWolf", "librewolf", shutil.which("librewolf") or ""),
