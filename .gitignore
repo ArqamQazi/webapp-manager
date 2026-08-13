@@ -7,3 +7,4 @@ debian/*substvar*
 debian/*debhelper*
 debian/files
 usr/share/locale/
+gschemas.compiled

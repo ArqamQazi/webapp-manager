@@ -10,6 +10,12 @@ from random import choice
 import shutil
 import string
 import sys
+
+def get_base_dir():
+    if getattr(sys, 'frozen', False):
+        return sys._MEIPASS
+    return os.environ.get("APPDIR", "") + sys.prefix
+
 import tempfile
 import urllib.error
 import urllib.parse
@@ -19,7 +25,7 @@ import traceback
 from typing import Optional
 
 #   2. Related third party imports.
-from gi.repository import GObject
+from gi.repository import GObject, GLib
 import PIL.Image
 import requests
 # Note: BeautifulSoup is an optional import supporting another way of getting a website's favicons.
@@ -42,26 +48,30 @@ def idle(func):
 
 # i18n
 APP = 'webapp-manager'
-LOCALE_DIR = os.environ.get("APPDIR", "") + "/usr/share/locale"
+LOCALE_DIR = get_base_dir() + "/share/locale"
 locale.bindtextdomain(APP, LOCALE_DIR)
 gettext.bindtextdomain(APP, LOCALE_DIR)
 gettext.textdomain(APP)
 _ = gettext.gettext
 
 # Constants
-ICE_DIR = os.path.expanduser("~/.local/share/ice")
-APPS_DIR = os.path.expanduser("~/.local/share/applications")
+# Note on XDG Base Directories:
+# - GLib.get_home_dir() resolves to ~ (e.g., /home/user)
+# - GLib.get_user_data_dir() resolves to ~/.local/share
+# - GLib.get_user_config_dir() resolves to ~/.config
+ICE_DIR = os.path.join(GLib.get_user_data_dir(), "ice")
+APPS_DIR = os.path.join(GLib.get_user_data_dir(), "applications")
 PROFILES_DIR = os.path.join(ICE_DIR, "profiles")
 FIREFOX_PROFILES_DIR = os.path.join(ICE_DIR, "firefox")
-FIREFOX_FLATPAK_PROFILES_DIR = os.path.expanduser("~/.var/app/org.mozilla.firefox/data/ice/firefox")
-FIREFOX_SNAP_PROFILES_DIR = os.path.expanduser("~/snap/firefox/common/.mozilla/firefox")
-LIBREWOLF_FLATPAK_PROFILES_DIR = os.path.expanduser("~/.var/app/io.gitlab.librewolf-community/data/ice/librewolf")
-WATERFOX_FLATPAK_PROFILES_DIR = os.path.expanduser("~/.var/app/net.waterfox.waterfox/data")
-FLOORP_FLATPAK_PROFILES_DIR = os.path.expanduser("~/.var/app/one.ablaze.floorp/data")
+FIREFOX_FLATPAK_PROFILES_DIR = os.path.join(GLib.get_home_dir(), ".var/app/org.mozilla.firefox/data/ice/firefox")
+FIREFOX_SNAP_PROFILES_DIR = os.path.join(GLib.get_home_dir(), "snap/firefox/common/.mozilla/firefox")
+LIBREWOLF_FLATPAK_PROFILES_DIR = os.path.join(GLib.get_home_dir(), ".var/app/io.gitlab.librewolf-community/data/ice/librewolf")
+WATERFOX_FLATPAK_PROFILES_DIR = os.path.join(GLib.get_home_dir(), ".var/app/net.waterfox.waterfox/data")
+FLOORP_FLATPAK_PROFILES_DIR = os.path.join(GLib.get_home_dir(), ".var/app/one.ablaze.floorp/data")
 EPIPHANY_PROFILES_DIR = os.path.join(ICE_DIR, "epiphany")
-EPIPHANY_DESKTOP_DIR = os.path.expanduser("~/.local/share/xdg-desktop-portal/applications/")
+EPIPHANY_DESKTOP_DIR = os.path.join(GLib.get_user_data_dir(), "xdg-desktop-portal", "applications/")
 FALKON_PROFILES_DIR = os.path.join(ICE_DIR, "falkon")
-ZEN_FLATPAK_PROFILES_DIR = os.path.expanduser("~/.var/app/app.zen_browser.zen/data/ice/zen/")
+ZEN_FLATPAK_PROFILES_DIR = os.path.join(GLib.get_home_dir(), ".var/app/app.zen_browser.zen/data/ice/zen/")
 ICONS_DIR = os.path.join(ICE_DIR, "icons")
 BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_LIBREWOLF_FLATPAK, BROWSER_TYPE_WATERFOX_FLATPAK, BROWSER_TYPE_FLOORP_FLATPAK, BROWSER_TYPE_CHROMIUM, BROWSER_TYPE_EPIPHANY, BROWSER_TYPE_FALKON, BROWSER_TYPE_ZEN_FLATPAK = range(10)
 
@@ -218,67 +228,67 @@ class WebAppManager:
     @staticmethod
     def get_supported_browsers():
         # type, name, exec, test
-        return [Browser(BROWSER_TYPE_FIREFOX, "Firefox", "firefox", "/usr/bin/firefox"),
-                Browser(BROWSER_TYPE_FIREFOX, "Firefox Developer Edition", "firefox-developer-edition", "/usr/bin/firefox-developer-edition"),
-                Browser(BROWSER_TYPE_FIREFOX, "Firefox Nightly", "firefox-nightly", "/usr/bin/firefox-nightly"),
-                Browser(BROWSER_TYPE_FIREFOX, "Firefox Extended Support Release", "firefox-esr", "/usr/bin/firefox-esr"),
+        return [Browser(BROWSER_TYPE_FIREFOX, "Firefox", "firefox", shutil.which("firefox") or ""),
+                Browser(BROWSER_TYPE_FIREFOX, "Firefox Developer Edition", "firefox-developer-edition", shutil.which("firefox-developer-edition") or ""),
+                Browser(BROWSER_TYPE_FIREFOX, "Firefox Nightly", "firefox-nightly", shutil.which("firefox-nightly") or ""),
+                Browser(BROWSER_TYPE_FIREFOX, "Firefox Extended Support Release", "firefox-esr", shutil.which("firefox-esr") or ""),
                 Browser(BROWSER_TYPE_FIREFOX_FLATPAK, "Firefox (Flatpak)", "/var/lib/flatpak/exports/bin/org.mozilla.firefox", "/var/lib/flatpak/exports/bin/org.mozilla.firefox"),
-                Browser(BROWSER_TYPE_FIREFOX_FLATPAK, "Firefox (Flatpak)", ".local/share/flatpak/exports/bin/org.mozilla.firefox", ".local/share/flatpak/exports/bin/org.mozilla.firefox"),
+                Browser(BROWSER_TYPE_FIREFOX_FLATPAK, "Firefox (Flatpak)", ".local/share/flatpak/exports/bin/org.mozilla.firefox", os.path.join(GLib.get_user_data_dir(), "flatpak/exports/bin/org.mozilla.firefox")),
                 Browser(BROWSER_TYPE_ZEN_FLATPAK, "Zen (Flatpak)", "/var/lib/flatpak/exports/bin/app.zen_browser.zen", "/var/lib/flatpak/exports/bin/app.zen_browser.zen"),
-                Browser(BROWSER_TYPE_ZEN_FLATPAK, "Zen (Flatpak)", ".local/share/flatpak/exports/bin/app.zen_browser.zen", ".local/share/flatpak/exports/bin/app.zen_browser.zen"),
+                Browser(BROWSER_TYPE_ZEN_FLATPAK, "Zen (Flatpak)", ".local/share/flatpak/exports/bin/app.zen_browser.zen", os.path.join(GLib.get_user_data_dir(), "flatpak/exports/bin/app.zen_browser.zen")),
                 Browser(BROWSER_TYPE_FIREFOX_SNAP, "Firefox (Snap)", "/snap/bin/firefox", "/snap/bin/firefox"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Brave", "brave", "/usr/bin/brave"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Brave Browser", "brave-browser", "/usr/bin/brave-browser"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Brave (Bin)", "brave-bin", "/usr/bin/brave-bin"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Chrome", "google-chrome-stable", "/usr/bin/google-chrome-stable"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Chrome (Beta)", "google-chrome-beta", "/usr/bin/google-chrome-beta"),
+                Browser(BROWSER_TYPE_CHROMIUM, "Brave", "brave", shutil.which("brave") or ""),
+                Browser(BROWSER_TYPE_CHROMIUM, "Brave Browser", "brave-browser", shutil.which("brave-browser") or ""),
+                Browser(BROWSER_TYPE_CHROMIUM, "Brave (Bin)", "brave-bin", shutil.which("brave-bin") or ""),
+                Browser(BROWSER_TYPE_CHROMIUM, "Chrome", "google-chrome-stable", shutil.which("google-chrome-stable") or ""),
+                Browser(BROWSER_TYPE_CHROMIUM, "Chrome (Beta)", "google-chrome-beta", shutil.which("google-chrome-beta") or ""),
                 Browser(BROWSER_TYPE_CHROMIUM, "Chrome (Flatpak)", "/var/lib/flatpak/exports/bin/com.google.Chrome", "/var/lib/flatpak/exports/bin/com.google.Chrome"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Chrome (Flatpak)", ".local/share/flatpak/exports/bin/com.google.Chrome", ".local/share/flatpak/exports/bin/com.google.Chrome"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Chromium", "chromium", "/usr/bin/chromium"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Chromium (chromium-browser)", "chromium-browser", "/usr/bin/chromium-browser"),
+                Browser(BROWSER_TYPE_CHROMIUM, "Chrome (Flatpak)", ".local/share/flatpak/exports/bin/com.google.Chrome", os.path.join(GLib.get_user_data_dir(), "flatpak/exports/bin/com.google.Chrome")),
+                Browser(BROWSER_TYPE_CHROMIUM, "Chromium", "chromium", shutil.which("chromium") or ""),
+                Browser(BROWSER_TYPE_CHROMIUM, "Chromium (chromium-browser)", "chromium-browser", shutil.which("chromium-browser") or ""),
                 Browser(BROWSER_TYPE_CHROMIUM, "Chromium (Snap)", "chromium", "/snap/bin/chromium"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Chromium (Bin)", "chromium-bin", "/usr/bin/chromium-bin-browser"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Ungoogled Chromium", "ungoogled-chromium", "/usr/bin/ungoogled-chromium"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Brave Origin", "brave-origin", "/usr/bin/brave-origin"),
-                Browser(BROWSER_TYPE_EPIPHANY, "Epiphany", "epiphany", "/usr/bin/epiphany"),
-                Browser(BROWSER_TYPE_FIREFOX,  "LibreWolf", "librewolf", "/usr/bin/librewolf"),
+                Browser(BROWSER_TYPE_CHROMIUM, "Chromium (Bin)", "chromium-bin", shutil.which("chromium-bin-browser") or ""),
+                Browser(BROWSER_TYPE_CHROMIUM, "Ungoogled Chromium", "ungoogled-chromium", shutil.which("ungoogled-chromium") or ""),
+                Browser(BROWSER_TYPE_CHROMIUM, "Brave Origin", "brave-origin", shutil.which("brave-origin") or ""),
+                Browser(BROWSER_TYPE_EPIPHANY, "Epiphany", "epiphany", shutil.which("epiphany") or ""),
+                Browser(BROWSER_TYPE_FIREFOX,  "LibreWolf", "librewolf", shutil.which("librewolf") or ""),
                 Browser(BROWSER_TYPE_LIBREWOLF_FLATPAK,  "LibreWolf (Flatpak)", "/var/lib/flatpak/exports/bin/io.gitlab.librewolf-community", "/var/lib/flatpak/exports/bin/io.gitlab.librewolf-community"),
-                Browser(BROWSER_TYPE_LIBREWOLF_FLATPAK,  "LibreWolf (Flatpak)", ".local/share/flatpak/exports/bin/io.gitlab.librewolf-community", ".local/share/flatpak/exports/bin/io.gitlab.librewolf-community"),
-                Browser(BROWSER_TYPE_FIREFOX,  "Waterfox", "waterfox", "/usr/bin/waterfox"),
-                Browser(BROWSER_TYPE_FIREFOX,  "Waterfox Current", "waterfox-current", "/usr/bin/waterfox-current"),
-                Browser(BROWSER_TYPE_FIREFOX,  "Waterfox Classic", "waterfox-classic", "/usr/bin/waterfox-classic"),
-                Browser(BROWSER_TYPE_FIREFOX,  "Waterfox 3rd Generation", "waterfox-g3", "/usr/bin/waterfox-g3"),
-                Browser(BROWSER_TYPE_FIREFOX,  "Waterfox 4th Generation", "waterfox-g4", "/usr/bin/waterfox-g4"),
-                Browser(BROWSER_TYPE_FIREFOX,  "Floorp", "floorp", "/usr/bin/floorp"),
+                Browser(BROWSER_TYPE_LIBREWOLF_FLATPAK,  "LibreWolf (Flatpak)", ".local/share/flatpak/exports/bin/io.gitlab.librewolf-community", os.path.join(GLib.get_user_data_dir(), "flatpak/exports/bin/io.gitlab.librewolf-community")),
+                Browser(BROWSER_TYPE_FIREFOX,  "Waterfox", "waterfox", shutil.which("waterfox") or ""),
+                Browser(BROWSER_TYPE_FIREFOX,  "Waterfox Current", "waterfox-current", shutil.which("waterfox-current") or ""),
+                Browser(BROWSER_TYPE_FIREFOX,  "Waterfox Classic", "waterfox-classic", shutil.which("waterfox-classic") or ""),
+                Browser(BROWSER_TYPE_FIREFOX,  "Waterfox 3rd Generation", "waterfox-g3", shutil.which("waterfox-g3") or ""),
+                Browser(BROWSER_TYPE_FIREFOX,  "Waterfox 4th Generation", "waterfox-g4", shutil.which("waterfox-g4") or ""),
+                Browser(BROWSER_TYPE_FIREFOX,  "Floorp", "floorp", shutil.which("floorp") or ""),
                 Browser(BROWSER_TYPE_WATERFOX_FLATPAK, "Waterfox (Flatpak)", "/var/lib/flatpak/exports/bin/net.waterfox.waterfox", "/var/lib/flatpak/exports/bin/net.waterfox.waterfox"),
-                Browser(BROWSER_TYPE_WATERFOX_FLATPAK, "Waterfox (Flatpak)", ".local/share/flatpak/exports/bin/net.waterfox.waterfox", ".local/share/flatpak/exports/bin/net.waterfox.waterfox"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Vivaldi", "vivaldi-stable", "/usr/bin/vivaldi-stable"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Vivaldi Snapshot", "vivaldi-snapshot", "/usr/bin/vivaldi-snapshot"),
+                Browser(BROWSER_TYPE_WATERFOX_FLATPAK, "Waterfox (Flatpak)", ".local/share/flatpak/exports/bin/net.waterfox.waterfox", os.path.join(GLib.get_user_data_dir(), "flatpak/exports/bin/net.waterfox.waterfox")),
+                Browser(BROWSER_TYPE_CHROMIUM, "Vivaldi", "vivaldi-stable", shutil.which("vivaldi-stable") or ""),
+                Browser(BROWSER_TYPE_CHROMIUM, "Vivaldi Snapshot", "vivaldi-snapshot", shutil.which("vivaldi-snapshot") or ""),
                 Browser(BROWSER_TYPE_CHROMIUM, "Vivaldi (Flatpak)", "/var/lib/flatpak/exports/bin/com.vivaldi.Vivaldi", "/var/lib/flatpak/exports/bin/com.vivaldi.Vivaldi"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Vivaldi (Flatpak)", ".local/share/flatpak/exports/bin/com.vivaldi.Vivaldi", ".local/share/flatpak/exports/bin/com.vivaldi.Vivaldi"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Microsoft Edge", "microsoft-edge-stable", "/usr/bin/microsoft-edge-stable"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Microsoft Edge Beta", "microsoft-edge-beta", "/usr/bin/microsoft-edge-beta"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Microsoft Edge Dev", "microsoft-edge-dev", "/usr/bin/microsoft-edge-dev"),
-                Browser(BROWSER_TYPE_CHROMIUM, "FlashPeak Slimjet", "flashpeak-slimjet", "/usr/bin/flashpeak-slimjet"),
+                Browser(BROWSER_TYPE_CHROMIUM, "Vivaldi (Flatpak)", ".local/share/flatpak/exports/bin/com.vivaldi.Vivaldi", os.path.join(GLib.get_user_data_dir(), "flatpak/exports/bin/com.vivaldi.Vivaldi")),
+                Browser(BROWSER_TYPE_CHROMIUM, "Microsoft Edge", "microsoft-edge-stable", shutil.which("microsoft-edge-stable") or ""),
+                Browser(BROWSER_TYPE_CHROMIUM, "Microsoft Edge Beta", "microsoft-edge-beta", shutil.which("microsoft-edge-beta") or ""),
+                Browser(BROWSER_TYPE_CHROMIUM, "Microsoft Edge Dev", "microsoft-edge-dev", shutil.which("microsoft-edge-dev") or ""),
+                Browser(BROWSER_TYPE_CHROMIUM, "FlashPeak Slimjet", "flashpeak-slimjet", shutil.which("flashpeak-slimjet") or ""),
                 Browser(BROWSER_TYPE_CHROMIUM, "Ungoogled Chromium (Flatpak)", "/var/lib/flatpak/exports/bin/io.github.ungoogled_software.ungoogled_chromium", "/var/lib/flatpak/exports/bin/io.github.ungoogled_software.ungoogled_chromium"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Ungoogled Chromium (Flatpak)", ".local/share/flatpak/exports/bin/io.github.ungoogled_software.ungoogled_chromium", ".local/share/flatpak/exports/bin/io.github.ungoogled_software.ungoogled_chromium"),
+                Browser(BROWSER_TYPE_CHROMIUM, "Ungoogled Chromium (Flatpak)", ".local/share/flatpak/exports/bin/io.github.ungoogled_software.ungoogled_chromium", os.path.join(GLib.get_user_data_dir(), "flatpak/exports/bin/io.github.ungoogled_software.ungoogled_chromium")),
                 Browser(BROWSER_TYPE_CHROMIUM, "Chromium (Flatpak)", "/var/lib/flatpak/exports/bin/org.chromium.Chromium", "/var/lib/flatpak/exports/bin/org.chromium.Chromium"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Chromium (Flatpak)", ".local/share/flatpak/exports/bin/org.chromium.Chromium", ".local/share/flatpak/exports/bin/org.chromium.Chromium"),
-                Browser(BROWSER_TYPE_FALKON, "Falkon", "falkon", "/usr/bin/falkon"),
+                Browser(BROWSER_TYPE_CHROMIUM, "Chromium (Flatpak)", ".local/share/flatpak/exports/bin/org.chromium.Chromium", os.path.join(GLib.get_user_data_dir(), "flatpak/exports/bin/org.chromium.Chromium")),
+                Browser(BROWSER_TYPE_FALKON, "Falkon", "falkon", shutil.which("falkon") or ""),
                 Browser(BROWSER_TYPE_CHROMIUM, "Edge (Flatpak)", "/var/lib/flatpak/exports/bin/com.microsoft.Edge", "/var/lib/flatpak/exports/bin/com.microsoft.Edge"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Edge (Flatpak)", ".local/share/flatpak/exports/bin/com.microsoft.Edge", ".local/share/flatpak/exports/bin/com.microsoft.Edge"),
+                Browser(BROWSER_TYPE_CHROMIUM, "Edge (Flatpak)", ".local/share/flatpak/exports/bin/com.microsoft.Edge", os.path.join(GLib.get_user_data_dir(), "flatpak/exports/bin/com.microsoft.Edge")),
                 Browser(BROWSER_TYPE_CHROMIUM, "Brave (Flatpak)", "/var/lib/flatpak/exports/bin/com.brave.Browser", "/var/lib/flatpak/exports/bin/com.brave.Browser"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Brave (Flatpak)", ".local/share/flatpak/exports/bin/com.brave.Browser", ".local/share/flatpak/exports/bin/com.brave.Browser"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Yandex", "yandex-browser", "/usr/bin/yandex-browser"),
+                Browser(BROWSER_TYPE_CHROMIUM, "Brave (Flatpak)", ".local/share/flatpak/exports/bin/com.brave.Browser", os.path.join(GLib.get_user_data_dir(), "flatpak/exports/bin/com.brave.Browser")),
+                Browser(BROWSER_TYPE_CHROMIUM, "Yandex", "yandex-browser", shutil.which("yandex-browser") or ""),
                 Browser(BROWSER_TYPE_FALKON, "Falkon (Flatpak)", "/var/lib/flatpak/exports/bin/org.kde.falkon", "/var/lib/flatpak/exports/bin/org.kde.falkon"),
-                Browser(BROWSER_TYPE_FALKON, "Falkon (Flatpak)", ".local/share/flatpak/exports/bin/org.kde.falkon", ".local/share/flatpak/exports/bin/org.kde.falkon"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Naver Whale", "naver-whale-stable", "/usr/bin/naver-whale-stable"),
+                Browser(BROWSER_TYPE_FALKON, "Falkon (Flatpak)", ".local/share/flatpak/exports/bin/org.kde.falkon", os.path.join(GLib.get_user_data_dir(), "flatpak/exports/bin/org.kde.falkon")),
+                Browser(BROWSER_TYPE_CHROMIUM, "Naver Whale", "naver-whale-stable", shutil.which("naver-whale-stable") or ""),
                 Browser(BROWSER_TYPE_CHROMIUM, "Yandex (Flatpak)", "/var/lib/flatpak/exports/bin/ru.yandex.Browser", "/var/lib/flatpak/exports/bin/ru.yandex.Browser"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Yandex (Flatpak)", ".local/share/flatpak/exports/bin/ru.yandex.Browser", ".local/share/flatpak/exports/bin/ru.yandex.Browser"),
-                Browser(BROWSER_TYPE_CHROMIUM, "Thorium", "thorium-browser", "/usr/bin/thorium-browser"),
-                Browser(BROWSER_TYPE_FIREFOX, "Floorp", "floorp", "/usr/bin/floorp"),
+                Browser(BROWSER_TYPE_CHROMIUM, "Yandex (Flatpak)", ".local/share/flatpak/exports/bin/ru.yandex.Browser", os.path.join(GLib.get_user_data_dir(), "flatpak/exports/bin/ru.yandex.Browser")),
+                Browser(BROWSER_TYPE_CHROMIUM, "Thorium", "thorium-browser", shutil.which("thorium-browser") or ""),
+                Browser(BROWSER_TYPE_FIREFOX, "Floorp", "floorp", shutil.which("floorp") or ""),
                 Browser(BROWSER_TYPE_FLOORP_FLATPAK, "Floorp (Flatpak)", "/var/lib/flatpak/exports/bin/one.ablaze.floorp", "/var/lib/flatpak/exports/bin/one.ablaze.floorp"),
-                Browser(BROWSER_TYPE_FLOORP_FLATPAK, "Floorp (Flatpak)", ".local/share/flatpak/exports/bin/one.ablaze.floorp", ".local/share/flatpak/exports/bin/one.ablaze.floorp")
+                Browser(BROWSER_TYPE_FLOORP_FLATPAK, "Floorp (Flatpak)", ".local/share/flatpak/exports/bin/one.ablaze.floorp", os.path.join(GLib.get_user_data_dir(), "flatpak/exports/bin/one.ablaze.floorp"))
                 ]
 
     def delete_webbapp(self, webapp):
@@ -298,7 +308,7 @@ class WebAppManager:
             hidden_path = f"{base_path}-{mode}.desktop"
             if os.path.exists(hidden_path):
                 os.remove(hidden_path)
-        epiphany_orig_prof_dir=os.path.join(os.path.expanduser("~/.local/share"), "org.gnome.Epiphany.WebApp_" + webapp.codename)
+        epiphany_orig_prof_dir=os.path.join(GLib.get_user_data_dir(), "org.gnome.Epiphany.WebApp_" + webapp.codename)
         if os.path.exists(epiphany_orig_prof_dir):
             os.remove(epiphany_orig_prof_dir)
         shutil.rmtree(os.path.join(EPIPHANY_PROFILES_DIR, "org.gnome.Epiphany.WebApp_%s" % webapp.codename), ignore_errors=True)
@@ -309,7 +319,7 @@ class WebAppManager:
             hidden_epiphany = os.path.join(EPIPHANY_DESKTOP_DIR, "org.gnome.Epiphany.WebApp_%s-%s.desktop" % (webapp.codename, mode))
             if os.path.exists(hidden_epiphany):
                 os.remove(hidden_epiphany)
-        falkon_orig_prof_dir = os.path.join(os.path.expanduser("~/.config/falkon/profiles"), webapp.codename)
+        falkon_orig_prof_dir = os.path.join(GLib.get_user_config_dir(), "falkon", "profiles", webapp.codename)
         if os.path.exists(falkon_orig_prof_dir):
             os.remove(falkon_orig_prof_dir)
         shutil.rmtree(os.path.join(FALKON_PROFILES_DIR, webapp.codename), ignore_errors=True)
@@ -376,7 +386,7 @@ class WebAppManager:
                 falkon_profile_path = os.path.join(FALKON_PROFILES_DIR, codename)
                 os.makedirs(falkon_profile_path)
                 # Create symlink of profile dir at ~/.config/falkon/profiles
-                falkon_orig_prof_dir = os.path.join(os.path.expanduser("~/.config/falkon/profiles"), codename)
+                falkon_orig_prof_dir = os.path.join(GLib.get_user_config_dir(), "falkon", "profiles", codename)
                 os.symlink(falkon_profile_path, falkon_orig_prof_dir)
 
 
@@ -410,9 +420,9 @@ class WebAppManager:
             exec_string += " \"" + url + "\"" + "'"
             # Create a Firefox profile
             if wm_mode == "codename" and not os.path.exists(firefox_profile_path):
-                shutil.copytree(os.environ.get("APPDIR", "") + '/usr/share/webapp-manager/firefox/profile', firefox_profile_path, dirs_exist_ok = True)
+                shutil.copytree(get_base_dir() + '/share/webapp-manager/firefox/profile', firefox_profile_path, dirs_exist_ok = True)
                 if navbar:
-                    shutil.copy(os.environ.get("APPDIR", "") + '/usr/share/webapp-manager/firefox/userChrome-with-navbar.css',
+                    shutil.copy(get_base_dir() + '/share/webapp-manager/firefox/userChrome-with-navbar.css',
                                 os.path.join(firefox_profile_path, "chrome", "userChrome.css"))
         elif browser.browser_type == BROWSER_TYPE_EPIPHANY:
             # Epiphany based

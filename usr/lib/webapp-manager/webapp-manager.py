@@ -4,6 +4,13 @@
 import gettext
 import locale
 import os
+import sys
+
+def get_base_dir():
+    if getattr(sys, 'frozen', False):
+        return sys._MEIPASS
+    return os.environ.get("APPDIR", "") + sys.prefix
+
 import shutil
 import subprocess
 import warnings
@@ -17,8 +24,13 @@ import tldextract
 warnings.filterwarnings("ignore")
 
 gi.require_version("Gtk", "3.0")
-gi.require_version('XApp', '1.0')
-from gi.repository import Gtk, Gdk, Gio, XApp, GdkPixbuf, GLib
+from gi.repository import Gtk, Gdk, Gio, GdkPixbuf, GLib
+try:
+    gi.require_version('XApp', '1.0')
+    from gi.repository import XApp
+    HAS_XAPP = True
+except ValueError:
+    HAS_XAPP = False
 
 #   3. Local application/library specific imports.
 from common import _async, idle, WebAppManager, download_favicon, ICONS_DIR, BROWSER_TYPE_FIREFOX, BROWSER_TYPE_FIREFOX_FLATPAK, BROWSER_TYPE_ZEN_FLATPAK, BROWSER_TYPE_FIREFOX_SNAP, BROWSER_TYPE_WATERFOX_FLATPAK, BROWSER_TYPE_LIBREWOLF_FLATPAK, BROWSER_TYPE_FLOORP_FLATPAK
@@ -29,7 +41,7 @@ Gdk.set_program_class("Webapp-manager")
 
 # i18n
 APP = 'webapp-manager'
-LOCALE_DIR = os.environ.get("APPDIR", "") + "/usr/share/locale"
+LOCALE_DIR = get_base_dir() + "/share/locale"
 locale.bindtextdomain(APP, LOCALE_DIR)
 gettext.bindtextdomain(APP, LOCALE_DIR)
 gettext.textdomain(APP)
@@ -38,6 +50,57 @@ _ = gettext.gettext
 COL_ICON, COL_NAME, COL_BROWSER, COL_WEBAPP = range(4)
 CATEGORY_ID, CATEGORY_NAME = range(2)
 BROWSER_OBJ, BROWSER_NAME = range(2)
+
+
+class StandaloneIconChooserButton(Gtk.Button):
+    def __init__(self):
+        super().__init__()
+        self.set_always_show_image(True)
+        self.image = Gtk.Image()
+        self.set_image(self.image)
+        self.icon = "webapp-manager"
+        self.connect("clicked", self.on_clicked)
+        
+    def set_icon(self, icon_name):
+        self.icon = icon_name
+        if icon_name and os.path.exists(icon_name):
+            try:
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(icon_name, 48, 48, True)
+                self.image.set_from_pixbuf(pixbuf)
+            except Exception:
+                self.image.set_from_icon_name("image-missing", Gtk.IconSize.DIALOG)
+        else:
+            self.image.set_from_icon_name(icon_name if icon_name else "webapp-manager", Gtk.IconSize.DIALOG)
+
+    def get_icon(self):
+        return self.icon
+        
+    def on_clicked(self, widget):
+        dialog = Gtk.FileChooserDialog(
+            title=_("Select an Icon"),
+            parent=self.get_toplevel(),
+            action=Gtk.FileChooserAction.OPEN
+        )
+        dialog.add_buttons(
+            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+            Gtk.STOCK_OPEN, Gtk.ResponseType.OK
+        )
+        
+        filter_images = Gtk.FileFilter()
+        filter_images.set_name(_("Images"))
+        filter_images.add_mime_type("image/png")
+        filter_images.add_mime_type("image/jpeg")
+        filter_images.add_mime_type("image/svg+xml")
+        filter_images.add_mime_type("image/x-icon")
+        dialog.add_filter(filter_images)
+        
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            self.set_icon(dialog.get_filename())
+            
+        dialog.destroy()
+
+IconChooserButton = XApp.IconChooserButton if HAS_XAPP else StandaloneIconChooserButton
 
 
 class MyApplication(Gtk.Application):
@@ -67,17 +130,23 @@ class WebAppManagerWindow:
         self.manager = WebAppManager()
         self.selected_webapp = None
         self.icon_theme = Gtk.IconTheme.get_default()
+        if os.environ.get("APPDIR"):
+            self.icon_theme.append_search_path(os.environ.get("APPDIR") + sys.prefix + "/share/icons")
 
         # Set the Glade file
-        gladefile = os.environ.get("APPDIR", "") + "/usr/share/webapp-manager/webapp-manager.ui"
+        gladefile = get_base_dir() + "/share/webapp-manager/webapp-manager.ui"
         self.builder = Gtk.Builder()
         self.builder.set_translation_domain(APP)
-        self.builder.add_from_file(gladefile)
+        with open(gladefile, "r") as f:
+            ui_content = f.read()
+        if not HAS_XAPP:
+            ui_content = ui_content.replace('xsi-', '')
+        self.builder.add_from_string(ui_content)
         self.window = self.builder.get_object("main_window")
         self.window.set_title(_("Web Apps"))
         self.window.set_icon_name("webapp-manager")
         self.stack = self.builder.get_object("stack")
-        self.icon_chooser = XApp.IconChooserButton()
+        self.icon_chooser = IconChooserButton()
         self.builder.get_object("icon_button_box").pack_start(self.icon_chooser, 0, True, True)
         self.icon_chooser.set_icon("webapp-manager")
         self.icon_chooser.show()
@@ -222,7 +291,7 @@ class WebAppManagerWindow:
         cell.set_property("surface", surface)
 
     def open_keyboard_shortcuts(self, widget):
-        gladefile = os.environ.get("APPDIR", "") + "/usr/share/webapp-manager/shortcuts.ui"
+        gladefile = get_base_dir() + "/share/webapp-manager/shortcuts.ui"
         builder = Gtk.Builder()
         builder.set_translation_domain(APP)
         builder.add_from_file(gladefile)
