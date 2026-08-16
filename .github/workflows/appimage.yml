@@ -43,7 +43,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y debhelper dpkg-dev gettext python3-all python3-gi
+          sudo apt-get install -y debhelper dpkg-dev gettext python3-all python3-gi build-essential
       - name: Build DEB
         run: |
           dpkg-buildpackage -us -uc -b
