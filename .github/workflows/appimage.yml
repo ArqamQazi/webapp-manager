@@ -1,0 +1,77 @@
+name: Release
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+on:
+  release:
+    types: [published]
+  workflow_dispatch: {}
+
+jobs:
+  build-appimage:
+    name: "${{ matrix.name }} (${{ matrix.arch }})"
+    runs-on: ${{ matrix.runs-on }}
+    strategy:
+      matrix:
+        include:
+          - runs-on: ubuntu-latest
+            name: Build AppImage
+            arch: x86_64
+          - runs-on: ubuntu-24.04-arm
+            name: Build AppImage
+            arch: aarch64
+    container: ghcr.io/pkgforge-dev/archlinux:latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preparing Container
+        uses: pkgforge-dev/anylinux-setup-action@v2
+      - name: Install Dependencies
+        run: /bin/sh .github/scripts/get-dependencies.sh
+      - name: Make AppImage
+        run: /bin/sh .github/scripts/make-appimage.sh
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AppImage-${{ matrix.arch }}
+          path: dist
+
+  build-deb:
+    name: Build DEB
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y debhelper dpkg-dev gettext python3-all python3-gi
+      - name: Build DEB
+        run: |
+          dpkg-buildpackage -us -uc -b
+          mkdir dist-deb
+          mv ../*.deb dist-deb/
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Debian-Package
+          path: dist-deb/*.deb
+
+  release:
+    if: github.event_name == 'release'
+    needs: [build-appimage, build-deb]
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: AppImage-*
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: Debian-Package
+          path: deb-pkg
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            *.AppImage*
+            deb-pkg/*.deb

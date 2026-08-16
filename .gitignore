@@ -8,3 +8,9 @@ debian/*debhelper*
 debian/files
 usr/share/locale/
 gschemas.compiled
+*.deb
+*.[Aa]pp[Ii]mage
+*.[Aa]pp[Ii]mage
+AppDir/*
+dist/*
+squashfs-root
