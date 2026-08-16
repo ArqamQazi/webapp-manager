@@ -180,7 +180,7 @@ class WebAppManagerWindow:
         self.selected_webapp = None
         self.icon_theme = Gtk.IconTheme.get_default()
         if os.environ.get("APPDIR"):
-            self.icon_theme.append_search_path(os.environ.get("APPDIR") + sys.prefix + "/share/icons")
+            self.icon_theme.append_search_path(get_base_dir() + "/share/icons")
 
         # Set the Glade file
         gladefile = get_base_dir() + "/share/webapp-manager/webapp-manager.ui"
