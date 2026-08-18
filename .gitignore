@@ -14,3 +14,5 @@ gschemas.compiled
 AppDir/*
 dist/*
 squashfs-root
+get-debloated-pkgs
+quick-sharun

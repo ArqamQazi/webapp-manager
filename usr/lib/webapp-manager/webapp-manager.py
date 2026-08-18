@@ -16,9 +16,9 @@ import subprocess
 import warnings
 
 #   2. Related third party imports.
-import gi
 import setproctitle
 import tldextract
+import gi
 
 # Suppress GTK deprecation warnings
 warnings.filterwarnings("ignore")
