@@ -15,6 +15,11 @@ get-debloated-pkgs --add-common --prefer-nano
 #make-aur-package PACKAGENAME
 
 # If the application needs to be manually built that has to be done down here
+make buildmo
+sudo cp -a usr/* /usr/
+if [ -d "etc" ]; then
+  sudo cp -a etc/* /etc/
+fi
 
 # if you also have to make nightly releases check for DEVEL_RELEASE = 1
 #
