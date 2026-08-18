@@ -22,13 +22,13 @@ SHARUN="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/h
 wget "$SHARUN" -O ./quick-sharun
 chmod +x ./quick-sharun
 # Deploy dependencies
-./quick-sharun \
+quick-sharun \
   /usr/bin/webapp-manager \
   /usr/lib/webapp-manager \
   /usr/share/webapp-manager \
   /usr/lib/libgtk-3.so* \
   /usr/lib/libxapp.so*
 
-./quick-sharun --make-appimage
+quick-sharun --make-appimage
 
-./quick-sharun --simple-test ./dist/*.AppImage
+quick-sharun --simple-test ./dist/*.AppImage
