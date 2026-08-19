@@ -1,10 +1,2 @@
 #!/bin/sh
-if [ -n "$APPDIR" ]; then
-    if [ -x "$APPDIR/bin/webapp-manager.py" ]; then
-        exec "$APPDIR/bin/webapp-manager.py" "$@"
-    else
-        exec "$APPDIR/lib/webapp-manager/webapp-manager.py" "$@"
-    fi
-else
-    exec /usr/lib/webapp-manager/webapp-manager.py "$@"
-fi
+/usr/lib/webapp-manager/webapp-manager.py "$@"

@@ -14,7 +14,7 @@ import sys
 def get_base_dir():
     if getattr(sys, 'frozen', False):
         return sys._MEIPASS
-    return os.environ.get("APPDIR", "") + sys.prefix
+    return sys.prefix
 
 import tempfile
 import urllib.error

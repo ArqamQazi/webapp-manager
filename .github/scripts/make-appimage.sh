@@ -16,6 +16,7 @@ export DEPLOY_PYTHON=1
 export PATH_MAPPING='
 	/usr/share/webapp-manager:${SHARUN_DIR}/share/webapp-manager
 	/usr/share/locale:${SHARUN_DIR}/share/locale
+	/usr/lib/webapp-manager:${SHARUN_DIR}/lib/webapp-manager
 '
 SHARUN="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/quick-sharun.sh"
 
