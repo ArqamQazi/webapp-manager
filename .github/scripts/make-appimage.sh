@@ -30,6 +30,13 @@ quick-sharun \
   /usr/lib/libgtk-3.so* \
   /usr/lib/libxapp.so*
 
+# Fix the wrapper script to use dynamic AppImage paths (required for musl/Alpine compatibility where LD_PRELOAD fails)
+sed -i 's|/usr/lib/webapp-manager|${SHARUN_DIR}/lib/webapp-manager|g' ./AppDir/bin/webapp-manager
+
+if [ -f AppDir/bin/webapp-manager.py ]; then
+  mv AppDir/bin/webapp-manager.py AppDir/lib/webapp-manager/webapp-manager.py
+fi
+
 quick-sharun --make-appimage
 
 quick-sharun --simple-test ./dist/*.AppImage

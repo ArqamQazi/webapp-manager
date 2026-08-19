@@ -2,6 +2,7 @@
 set -eu
 
 ARCH=$(uname -m)
+DEBLOATED_URL="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/get-debloated-pkgs.sh"
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
@@ -9,11 +10,18 @@ sudo pacman -Syu --noconfirm base-devel wget gettext python python-gobject pytho
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-get-debloated-pkgs --add-common --prefer-nano
+if command -v get-debloated-pkgs >/dev/null 2>&1; then
+  get-debloated-pkgs --add-common --prefer-nano
+else
+  wget --retry-connrefused --tries=30 "$DEBLOATED_URL" -O /tmp/get-debloated-pkgs.sh
+  chmod +x /tmp/get-debloated-pkgs.sh
+  /tmp/get-debloated-pkgs.sh --add-common --prefer-nano
+fi
 
 # Comment this out if you need an AUR package
 #make-aur-package PACKAGENAME
 
+./test
 # If the application needs to be manually built that has to be done down here
 make buildmo
 sudo cp -a usr/* /usr/
