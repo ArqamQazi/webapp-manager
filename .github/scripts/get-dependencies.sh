@@ -6,7 +6,7 @@ DEBLOATED_URL="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-sudo pacman -Syu --noconfirm base-devel wget gettext python python-gobject python-configobj python-pillow python-setproctitle python-tldextract python-cairo gtk3 xapp
+sudo pacman -Syu --noconfirm base-devel wget gettext python python-gobject python-configobj python-pillow python-setproctitle python-tldextract python-cairo gtk3 xapp xorg-server-xvfb
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
@@ -21,7 +21,6 @@ fi
 # Comment this out if you need an AUR package
 #make-aur-package PACKAGENAME
 
-./test
 # If the application needs to be manually built that has to be done down here
 make buildmo
 # Remove the pre-compiled schema if it exists so we don't overwrite the system's registry
