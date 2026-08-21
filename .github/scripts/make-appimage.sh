@@ -37,6 +37,31 @@ if [ -f AppDir/bin/webapp-manager.py ]; then
   mv AppDir/bin/webapp-manager.py AppDir/lib/webapp-manager/webapp-manager.py
 fi
 
+echo "Bundling GSettings schemas..."
+mkdir -p "$PWD/AppDir/share/glib-2.0/schemas"
+cp -f /usr/share/glib-2.0/schemas/org.x.webapp-manager.gschema.xml "$PWD/AppDir/share/glib-2.0/schemas/"
+glib-compile-schemas "$PWD/AppDir/share/glib-2.0/schemas/"
+
+echo "Restoring toolkit locale files..."
+restore_locale_domain() {
+    domain=$1
+    if [ -d "po" ]; then
+        for file in po/*.po; do
+            [ -e "$file" ] || continue
+            lang=$(basename "$file" .po | sed 's/webapp-manager-//')
+            src="/usr/share/locale/$lang/LC_MESSAGES/$domain.mo"
+            dst="$PWD/AppDir/share/locale/$lang/LC_MESSAGES"
+            if [ -f "$src" ]; then
+                mkdir -p "$dst"
+                cp "$src" "$dst/"
+            fi
+        done
+    fi
+}
+for domain in gtk30 glib20 webapp-manager; do
+    restore_locale_domain "$domain"
+done
+
 quick-sharun --make-appimage
 
 quick-sharun --simple-test ./dist/*.AppImage

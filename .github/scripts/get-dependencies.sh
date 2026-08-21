@@ -24,10 +24,16 @@ fi
 ./test
 # If the application needs to be manually built that has to be done down here
 make buildmo
+# Remove the pre-compiled schema if it exists so we don't overwrite the system's registry
+rm -f usr/share/glib-2.0/schemas/gschemas.compiled
+
 sudo cp -a usr/* /usr/
 if [ -d "etc" ]; then
   sudo cp -a etc/* /etc/
 fi
+
+# Compile schemas on the system so quick-sharun can pick them up properly
+sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 
 # if you also have to make nightly releases check for DEVEL_RELEASE = 1
 #
