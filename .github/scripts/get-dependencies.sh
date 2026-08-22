@@ -6,7 +6,7 @@ DEBLOATED_URL="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-sudo pacman -Syu --noconfirm base-devel wget gettext python python-gobject python-configobj python-pillow python-setproctitle python-tldextract python-cairo gtk3 xapp xorg-server-xvfb
+sudo pacman -Syu --noconfirm base-devel wget gettext python python-gobject python-configobj python-pillow python-setproctitle python-tldextract python-cairo gtk3 xapp xorg-server-xvfb python-beautifulsoup4 python-soupsieve python-typing_extensions
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"

@@ -22,13 +22,21 @@ SHARUN="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/h
 
 wget "$SHARUN" -O ./quick-sharun
 chmod +x ./quick-sharun
+# Resolve python module paths
+BS4_PATH=$(python -c "import bs4; print(bs4.__path__[0])")
+SOUPSIEVE_PATH=$(python -c "import soupsieve; print(soupsieve.__path__[0])")
+TYPING_EXTENSIONS_PATH=$(python -c "import typing_extensions; print(typing_extensions.__file__)")
+
 # Deploy dependencies
 quick-sharun \
   /usr/bin/webapp-manager \
   /usr/lib/webapp-manager \
   /usr/share/webapp-manager \
   /usr/lib/libgtk-3.so* \
-  /usr/lib/libxapp.so*
+  /usr/lib/libxapp.so* \
+  "$BS4_PATH" \
+  "$SOUPSIEVE_PATH" \
+  "$TYPING_EXTENSIONS_PATH"
 
 # Fix the wrapper script to use dynamic AppImage paths (required for musl/Alpine compatibility where LD_PRELOAD fails)
 sed -i 's|/usr/lib/webapp-manager|${SHARUN_DIR}/lib/webapp-manager|g' ./AppDir/bin/webapp-manager
