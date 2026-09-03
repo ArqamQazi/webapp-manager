@@ -328,6 +328,7 @@ class WebAppManager:
         shutil.rmtree(os.path.join(FALKON_PROFILES_DIR, webapp.codename), ignore_errors=True)
 
     def create_webapp(self, name, desc, url, icon, category, browser, custom_parameters, codename, isolate_profile=True, navbar=False, privatewindow=False, wm_mode="codename"):
+        url = sanitize_url(url)
         path = os.path.join(APPS_DIR, "WebApp-%s.desktop" % codename)
 
         if not desc:
@@ -488,6 +489,7 @@ class WebAppManager:
         return exec_string
 
     def edit_webapp(self, path, name, desc, browser, url, icon, category, custom_parameters, codename, isolate_profile, navbar, privatewindow, wm_mode="codename"):
+        url = sanitize_url(url)
         if not desc:
             desc = _("Web App")
 
@@ -540,6 +542,16 @@ def normalize_url(url):
     if not netloc and path:
         return urllib.parse.urlunparse((scheme, path, "", "", "", ""))
     return urllib.parse.urlunparse((scheme, netloc, path, "", "", ""))
+
+def sanitize_url(url):
+    if not url:
+        return ""
+    if "://" not in url:
+        url = "http://%s" % url
+    parsed = urllib.parse.urlsplit(url)
+    path = urllib.parse.quote(parsed.path, safe="/%")
+    query = urllib.parse.quote(parsed.query, safe="=&?/%+:")
+    return urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, path, query, parsed.fragment))
 
 def download_image(root_url: str, link: str) -> Optional[PIL.Image.Image]:
     if "://" not in link:
