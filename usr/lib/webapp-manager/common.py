@@ -162,7 +162,7 @@ class WebAppLauncher:
                     continue
 
                 if "Exec=" in line:
-                    self.exec = line.replace("Exec=", "")
+                    self.exec = line.replace("Exec=", "").replace("%%", "%")
                     continue
 
                 if "Categories=" in line:
@@ -346,7 +346,8 @@ class WebAppManager:
             exec_string = self.get_exec_string(browser, codename, custom_parameters, icon, isolate_profile, navbar,
                                                privatewindow, url, wm_mode)
 
-            desktop_file.write("Exec=%s\n" % exec_string)
+            desktop_exec = exec_string.replace("%", "%%")
+            desktop_file.write("Exec=%s\n" % desktop_exec)
             desktop_file.write("Terminal=false\n")
             desktop_file.write("X-MultipleArgs=false\n")
             desktop_file.write("Type=Application\n")
@@ -510,7 +511,7 @@ class WebAppManager:
 
             exec_line = self.get_exec_string(browser, codename, custom_parameters, icon, isolate_profile, navbar, privatewindow, url, wm_mode)
 
-            config.set("Desktop Entry", "Exec", exec_line)
+            config.set("Desktop Entry", "Exec", exec_line.replace("%", "%%"))
             config.set("Desktop Entry", "X-WebApp-Browser", browser.name)
             config.set("Desktop Entry", "X-WebApp-URL", url)
             config.set("Desktop Entry", "X-WebApp-CustomParameters", custom_parameters)
